@@ -1,78 +1,131 @@
 #include "tsp.h"
-// basic code
+#include <new>
 
-typedef struct Rota {
-
- complex<double> coord;
- struct Source* next;
- struct ponto* sub;
-
-} rota;
-
-double diff_arg(complex<double> p, complex<double> q, complex<double> ref)
+// Adicionar class rota
+// Grafo 
+class point
 {
- return (arg(p-ref)-arg(q-ref));
-}
+ private:
+ std::complex<double> coord;
+ public:
 
-
-void ins_sort(rota* P, complex<double> p)
-{
- rota* Aux[2];
- double delta;
-
- Aux[0]=P;
-
- while(Aux[0]) {
-
-  delta=diff_arg(Aux[0]->coord, p, P->coord)*diff_arg(Aux[0]->next->coord, p, P->coord);
-
-  if(delta < 0);
-  else
-  if(delta = 0);
-  else
-  Aux[0]=Aux[0]->next;
+ point (double x=0, double y=0) {
+  coord.real(x);
+  coord.imag(y);
  }
 
-}
+ void set(double x, double y) {
+   coord.real(x);
+   coord.imag(y);
+ }
+
+ std::complex<double> Coord(void) {
+  return coord;
+ }
+
+ bool operator==(point P) {
+  return (coord==P.Coord());
+ }
+
+ void print(void) {
+  std::cout << coord;
+ }
+};
+
+// doble liked list
+class route
+{
+ private:
+ point p;
+ route* next;
+ route* prev;
+
+ public:
+// Constructor
+/*
+ route(double x, double y, route* R) {
+  p(x,y);
+  next=R->next;
+  prev=R;
+ }
+*/
+ route(double x, double y) {
+  p.set(x,y);
+  next=prev=this;
+ }
 
 /*
-void sort_points(ponto* P)
-{
- ponto* Aux[2];
- complex<double> aux[2];
-
- ponto* AUX[2];
-
- AUX[0]=new ponto;
-
- Aux[0]=P;
- AUX[0]->coord=Aux[0]->coord;
-
- while(Aux[0]) {
-  Aux[1]=Aux[0]->next; 
-  while(Aux[1]) {
-    aux[0]=Aux[1]->coord-P->coord;
-    if(aux[0].arg()<0) {
-     AUX[1]=new ponto;
-     AUX[0]
-    }
-   Aux[1]=Aux[1]->next;
-  }
-  Aux[0]=Aux[0]->next;
+ void set(double x, double y, route* R) {
+  p.set(x,y);
+  next=R->Next;
+  prev=R;
+ }
+*/
+// Return 
+ route* Next(void) {
+   return next;
  }
 
-}
-*/
+ route* Prev(void) {
+  return prev;
+ }
+
+ point P(void) {
+  return p;
+ }
+
+ void display(void) {
+  p.print();
+ }
+
+// Read
+ void print(void) {
+  route* aux=this;
+
+  if(aux!=NULL)
+  do {
+   aux->display();
+   aux=aux->Next();
+  } while(aux->next!=aux);
+ }
+
+// Struct
+ route* search_point(point P){
+  route* aux=this;
+
+  if(aux!=NULL)
+  do {
+   if(P==aux->P()) return aux;
+   aux=aux->Next();
+  } while(aux->Next!=aux);
+ }
+
+ void insert_point_next(point P) {
+  route aux[2];
+  aux[0]=new route;
+  aux[0]->set(P);
+
+  aux[1]=this;
+  // Pesquisar ponto com ângulo menor
+  while(aux[1]) {
+   
+  }
+ }
+
+// Algoritm
+
+};
 
 int main()
 {
- // Ordenar por ângulo
+ point p(1.0,2.0);
 
- // dado um conjunto de pontos em uma estrutura osdena-los em relação ao ângulo ao primeiro ponto
+// p.print(); 
+// std::cout << std::endl;
 
-
-
-
+ route r(1.2,1.0);
+ r.display();
 
  return 0;
 }
+
