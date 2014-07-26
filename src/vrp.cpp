@@ -108,7 +108,12 @@ class route
   aux[1]=this;
   // Pesquisar ponto com ângulo menor
   while(aux[1]) {
-   
+   if(arg(aux[1]->P().Coord())<arg(aux[0]->P().Coord())) {
+    aux[0]->set
+   }
+
+
+   aux[1]=aux[1]->Next();
   }
  }
 
