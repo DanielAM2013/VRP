@@ -1,0 +1,37 @@
+\documentclass[a4paper, 12pt]{article}
+\input{.format/preambulo.tex}
+
+\begin{document}
+
+\section{Algoritmo Formiga}
+
+ O primeiro sistema formiga para VRP foi desenhado muito recentemente por {\color{red} referência},
+o qual considera a versão mais elementar do problema: CVRP.
+
+ Para mais versões mais complexas de VRP, {\color{red} referência} tem desenvolvido um sistema de
+multiplas colonias de formigas para VRPTW (MACS-VRPTW) o qual é organizado com uma hierarquia de
+desenho de colonias artificais de formigas para sucessivamente otimizar uma função de multiplos
+objetivos: a primeira colonia minimiza o numero de veículos enquanto a segunda colonia minimiza a
+distância de viagem. Cooperação entre colonias é feita mudando informações através de atualização de
+feromônio.
+
+ Em {\color{red} referência} desenho, há duas fases básicas de sistemas de formigas: construção de
+veículos e atualização de trilha, O Algoritmo AS é explicado aqui.
+
+\subsection{ Algoritmo de Sistema de formigas}
+
+ Após inicializar o AS, os dois passos básicos de construção de rotas de veículos e atualização de
+trilha são repetidos para um número de iterações. Considerando a disposição inicial das formigas
+artificiais foi encotrado que o número de formigas poderia ser igual em cada cliente no inicio da
+iteração. O 2-opt-heuritica ( é explicada esplorando todas as permutações obtidas pela mudança de
+duas cidades) é usando para minimizar a rota de veículos geredas pelas formigas artificiais,
+consideravelmente melhorar a qualidade da solução. Além disso para esse avançar na pesquisa local
+tambem introduzimos uma listade de cadidatos para seleção de clientes os quais são determinados na
+fase de inicialização do algoritmo. Para cada localição $d_{ij}$ ordenamos $V-\{v_i\}$ 
+
+
+
+
+
+
+\end{document}
