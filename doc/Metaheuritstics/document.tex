@@ -42,16 +42,26 @@ pode ser descrita pelo seguinte algoritmo esquematico:
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Construção das rotas de veículos}
+\subsection{Construção da rota de veículos}
 
- Para resolver o VRP, as formigas artificiais constrões soluções por escolhas sucessivas de cidades
-para visitar, até que cada cidade tenha sido visitada. Sempre que a escolha de outra cidade
-liderarsse um solução impossivel por razões de capacidade de veículos ou comprimento total de rota,
-o deposito é escolhido e uma nova rota é iniciada. Para seleção de uma cidade, dois aspectos são
-levados em conta: qual bom foram as escolhas desta cidade, um informação que é quardada nas trilhas
-de feromônio $\tau_{ij}$ é associada com cada arco $(v_i, v_j)$, e qual promisora é a escolha desta
-cidade. Essa última medida de desejo, chamada visibilidade e denotada po $\eta_{ij}$, é a função de
-heuristica local mensionada acima.
+To solve the VRP, the artificial ants construct solutions by successively choosing cities to visit,
+until each city has been visited. Whenever the choice of another city would lead to an unfeasible
+solution for reasons of vehicle capacity or total route length, the depot is chosen and a new tour
+is started. For the selection of a (not yet visited) city, two aspects are taken into account: how
+good was the choice of that city, an information that is stored in the pheromone trails τij is
+associated with each arc (vi,vj), and how promising is the choice of that city. This latter measure
+of desirability, called visibility and denoted by ηij, is the local heuristic function mentioned
+above.
+
+ Para resolver o VRP, as formigas artificias constroem soluções escolhendo cidades sucessivas para
+visitas, até que cada cidade tenha sido visitada. Sempre que a escolha de outra cidade poder levar a
+uma solução impossivel para resolver do veículo capacitado ou de comprimento toal, o deposito é
+escolhido e uma nova rota é iniciada. Para a seleção de uma cidade, dois aspectos são levados em
+conta: qual boa foi a escolha desta cidade, um informação que é quardada nas trilhas de feromônio
+$\tau_{ij}$ é associada com cada arco $(v_i, v_j)$, e 
+
+
+
 
  Com $\Omega = \{ v_i \in V: v_j\textrm{ é possivel ser visitado} \} \cup \{v_0\}$, a cidade $v_j$ é
 selecionada para ser visitada com segue:
@@ -144,8 +154,47 @@ ter os efeitos de eliminação de subrotas.
 \end{itemize}
 
 
+ Uma restrição de caminho pode ser usada para propagar o tempo inicial do serviço de um cliente ao
+longo de cada rota de veículos. Neste caso, $q_{ij}$ é o tempo de serviço em $i$, mais o tempo de
+viagem para $j$.
 
+ Um serviço de tempo de janela simples ou multiplo poderia ser tomado restringindo fortemente o
+inicio da variável de serviço para cada visita. O inicio e o fom de cada dia de trabalho para cada
+veículo pode ser representada impondo a janela de tempo em $S$ e $E$.
 
+A method of modeling capacity constraints on vehicles is to propagate (via the path constraint) the
+free space in the vehicle along each vehicle route. To model Fi as the free space on arrival at
+visit i, qij is the change in free space associated with i visit. To indicate that all vehicles must
+not be overfilled at any time, constraints of the form Fi≥0∀i∈A are imposed. For vehicle k with
+capacity ck, the fixed point Fk=ck for k∈S can be set. Simultaneous pickups and deliveries can be
+modeled in a similar way, but this is not discussed here.
 
+ Um método de modelamento das restrições de capacidade em um veículo é propagar os espaços livres no
+veículo ao longo da rota do veículo. O modelo $F_i$ como o espaço livre na chegada de um visitante
+$i$, $q_{ij}$ é a mudança no espaço livre associado com o visitante $i$. Para indicar que todos os
+veículos devem ser sobrecarregados em algum tempo, restrições da forma $F_i \geq 0 \forall i \in A$
+são impostas. Para o veículo $k$ com capacidade $c_k$, o ponto fixo $F_k=c_k$ para $k \in S$ pode
+ser tomado. Simultâneas recepções e entregas podem ser modeladas num modo similar, mais isso não é
+discutido aqui.
 
+\subsection{Restrições de Tamanho}
+
+ Um dos benefícios da tecnica CP é que as restrições de tamanho pode ser incorporadas sobre o modelo
+com facilidade comparativa. Por exemplo, algumas visitas pode requerer equipamentos especiais, ou
+alguns veículos pode ser simplesmente muito grandes para entrar nas premissas. Assim, precisamos ser
+capazes de não permitir uma visita sendo feita por um veículo particular.
+
+ Modelamos isso por uma etiqueta de veículo $\tay_k$ para cada visitante $k$ de cada rota, usando
+uma restrição similar para a restrição de caminho para a qual $R_i = j\rightarrow \tau_j=\tau_i$ com
+$\tau_i = i$ para $i\in S$. Assim visitas de clientes servidos pelo veículo $k$ tem etiqueta $k$. O
+veículo $k$ é então esquecido pela visita $i$ feita impondo-se uma restrição da forma $\tau_i \neq
+k$. Um conjunção de tal expressão pode ser usada para excluir mais que um veículo.
+
+ O requerimento que duas visitas $i$ e $j$ devem ser feitas pelo mesmo veículo pode tambem ser
+especificada usando a etiqueta: $\tau_i = (\neq ) \tau_j.$
+
+ Melhorando um tamanho de capacidade para um veículode prove um exemplo final que demonstra um
+poderoso uso das etiquetas de veículos. Uma restrição de comprimento é diferente de uma restrição de
+capacidade já que esta não se acumular sobre uma rota. Se o visitante $i$ envolve bons de bens de
+comprimento $l$, e $L_k$ é o comprimento do veículo $k$, então a restrição $L(\tau_i) \geq l$i
 \end{document}
