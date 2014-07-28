@@ -105,7 +105,46 @@ restrições para reduzir o domínio de variáveis restritoras.
 
  Em cada nó na arvore de pesquisa, os mecanismos de propagação removem valores do domínio de
 variáveis restritoras que são inconsistentes com outras variáveis. Se o mecanismo de propagação
-remove todos os valores de uma variável, então não pode haver um solução nesta sub-árvore e a 
+remove todos os valores de uma variável, então não pode haver um solução nesta sub-árvore e a
+pesquisa de rastros faz uma decisão diferente no ponto de rastro. Rastreio é cronológigo: decisões
+podem somente ser desfeitas em ordem oposta a qual elas foram feitas. Contudo, os domínios as
+variáveis de restrição podem somente ser reduzidos com uma pesquisa descendete na árvore. O domínio
+de todas as variáveis de restriçã pode ser restaurado pelo rastro para um nó anterior, mas
+geralmente o aumento de domínios não é suportado. Isso tem implicações importantes para os meiors
+nos quais o VRP é resolvido.
+
+ No caso particular de resolver VRP, uma variável de decisão $R_i$ é associada com cada cliente
+vizitado $i$, representando a próxima vizita feita pelo mesmo veículo. Para cada veículo $k$, há
+visitas adicionais $S_k$ fazendo o inicio a rota, e $E_k$ fazendo o fim da rota. Para ler o fim do
+intinerário para um veículo $k$, iniciado em $S_K$ e seguindo o próximo ponteiro através de $E_k$.
+
+ O conjunto de clientes visitados será referenciado com $N$, a visita inicial com $S$, e a visita
+final com $E$. $A =_{def} N\cup S\cup E$ são todas as visitas. Observando $R$ como uma função, $R$
+aplica $N\cup S$ sobre $N\cup E$.
+
+ Modelar VRP é desejavel ter um tipo de restrição especial para distribuir restrições ao longo dos
+caminhos, As restrições são da forma $R_i = j \Rightarrow Q_j \geq Q_i + q_{ij}.$  
+
+ Assim, se o visitante $j$ segue imediatamente o visitante $i$, a quantidade $Q$ é acumulada. Por
+exemplo, tomando-se $q_{ij}$ iqual a o tempo de viágem entre $i$ e $j$ isto seria a o tempo de
+chegada em $j$. Tomando-se $q_{ij}$ como a demanda em $i$ que seria acumulada no veículo. Isso
+significa permitir outra restrição do mundo real ser expressa sucintamente.
+
+ Em cada caso um ponto fixo deve ser suplimido, por exemplo $Q_i = 0 \forall i\in S$ no caso de
+restrições de carga. Uma simples restrição deste tipo o qual restringe a limite superior tambem deve
+ter os efeitos de eliminação de subrotas.
+
+\subsection{Restrições para VRP}
+
+\subsection{Núcleo de restrições}
+
+\begin{itemize}
+\item Time: é restrito pelo dia de trabalho e pela tempo de entrega do cliente.
+\item Capacity: pode ser restrito em termos de peso, volume, número de lugares de pallet, etc.
+\end{itemize}
+
+
+
 
 
 
