@@ -33,7 +33,7 @@ pode ser descrita pelo seguinte algoritmo esquematico:
 
 \begin{enumerate}
 \item Inicialize
-\item Para $I^{\max}$ iterações faça:
+\item Para $I^\max$ iterações faça:
 
 \begin{enumerate}
 \item Para todas as formigas gerar um nova solução usando a Fórmula 1 e a lista de candidatos
@@ -42,70 +42,9 @@ pode ser descrita pelo seguinte algoritmo esquematico:
 \end{enumerate}
 \end{enumerate}
 
-\subsection{Construção das rotas de veículos}
-
- Para resolver o VRP, as formigas artificiais constrões soluções por escolhas sucessivas de cidades
-para visitar, até que cada cidade tenha sido visitada. Sempre que a escolha de outra cidade
-liderarsse um solução impossivel por razões de capacidade de veículos ou comprimento total de rota,
-o deposito é escolhido e uma nova rota é iniciada. Para seleção de uma cidade, dois aspectos são
-levados em conta: qual bom foram as escolhas desta cidade, um informação que é quardada nas trilhas
-de feromônio $\tau_{ij}$ é associada com cada arco $(v_i, v_j)$, e qual promisora é a escolha desta
-cidade. Essa última medida de desejo, chamada visibilidade e denotada po $\eta_{ij}$, é a função de
-heuristica local mensionada acima.
-
- Com $\Omega = \{ v_i \in V: v_j\textrm{ é possivel ser visitado} \} \cup \{v_0\}$, a cidade $v_j$ é
-selecionada para ser visitada com segue:
-
-\[p_{ij} = \left\{
-\begin{array}{ll}
-\frac{[\tau_{ij}]^\alpha[\eta_{ij}]^\beta}{\sum_{k\in\Omega[\tau_{ij}]^\alpha[\eta_{ij}]^\beta}}
-& \textrm{if } v_j \in \Omega\\
-0 & \textrm{caso contrário}
-\end{array}\right.\]
-
- Essa possibilidade de distribuição é inclinada pelos parâmetros $\alpha$ e $\beta$ que determinan a
-influência relativa das trilhas e a vizibilidade, respectivamente. A vizibilidade é determinada como
-a recíproca da distância, e a probabilidade de seleção é então extendida pela informação específica
-do problema. Aqui, a inclusão de poupaças e capacidade utilizam a liderança para melhorar
-resultados. De outra forma, o último é relativamente custoso em termos de tempo computacional e
-assim não usaremos neste paper. Assim, introduziremos os parâmetros $f$ e $g$, e usaremos os
-seguintes função paramétrica de economia para a visibilidade:
-
- \[\eta_{ij} = d_{i0}+d_{0j}-gd_{ij}+f|d_{i0}-d_{0j}|\]
-
-\subsection{Atualização de trilha}
-
- Após uma formiga artificial ter construido uma solução possivel, as trilhas de feromônio são
-sulcado(?) dependedo do valor objetico da solução. Essa regra de atualização é como segue:
-
-\[\tau^{new}_{ij} = p \tau^{old}_{ij} + \sum_{\mu=1}^{\sigma-1} \Delta\tau^{\mu}_{ij}+\sigma
-\Delta\tau^{*}_{ij}\]
-
- onde $p$ é a pesistência da trilha (com $0 \leq \rho \leq 1$, assim a evaporação da trilha é dada
-por $(1-\rho)$. Únicamente se o arco $(v_i, v_j)$ foi usado pela $\mu$-esima melhor formiga, a
-trilha de feromônuo é incrementada em $\Delta \tau_{ij}^\mu$ o qual é então igual a $(\sigma -
-\mu)/L_\mu$, e $0$ caso contrário. Além disso para que, todos os arcos pertençam a melhor solução
-é enfatizado com se $\sigma$ formiga elitista fossem usadas então. Assim, cada formiga elitista
-incrementa a intesidade da trilha em $\Delta \tau_{ij}^*$ que é igual a $1/L^*$ se o arco $(v_i,
-v_j)$ pertence a melhor solução, e $0$ caso contrário.
+\subsection{
 
 
-\section{Algoritmo de programação de restrições}
-
- A programação de restrições (CP) {\color{red} referência} é um paradigma para representar e
-resolver uma larga variedade de problemas. Problemas são expressos em termos de variáveis, domínios
-para estas variáveis e restrições entre as variáveis. Os problemas são então resolvidos usando
-tecnicas de pesquisa completa rais como depth-first search e branch e bound. A riqueza de linguagem
-usada para expressar problemas em CP faz este um candidato ideal para VRPs. Isso podessibilida a
-utilização de expressões mais gerais. Além disso expressões envolvendo a aritimética usual e
-operações lógicas, restrições simbólicas complexas podem ser usadas para descrever problemas. CP
-melhora a pesquisa usando propagação de restrições. Se os limites ou restrições de uma variável
-podem ser inferidos, ou são conjuntos testaveis, essas mudanças são "propagadas" através de todas as
-restrições para reduzir o domínio de variáveis restritoras.
-
- Em cada nó na arvore de pesquisa, os mecanismos de propagação removem valores do domínio de
-variáveis restritoras que são inconsistentes com outras variáveis. Se o mecanismo de propagação
-remove todos os valores de uma variável, então não pode haver um solução nesta sub-árvore e a 
 
 
 
