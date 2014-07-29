@@ -368,10 +368,54 @@ melhorias.
  A pesquisa secreta granular (GTS) é uma conceito de promessa muito aceita. Foi recentemente
 introduzida por {\color{red} referencia} e tem produzido resultados excelentes no VRP. A ideia
 essencial por trás do tronco do GTS vem da observação que as arestas longes de uma grafo somente tem
-uma probabilidade pequena se pertencem a uma solução ótima. Assim, eliminação de todos os ramos 
+uma probabilidade pequena se pertencem a uma solução ótima. Assim, eliminação de todos os ramos cujo
+comprimento excede uma granularidade limiar muitas soluções prometidas nunca serão consideradas pelo
+processo de pesquisa. Toch e Vigo sugerem usar $v = \beta \overline{c}$, onde $\beta$ é um parametro
+de vergação (?) tipicamente escolhido num intervalo $[1.0, 2.0]$, e $\overline{c}$ é um comprimento
+de ramo médio de uma solução obtida por uma heuristica rápida. Se $\beta \in [1.0, 2.0]$, então a
+porcentagem de ramos remanescentes no grafo tende a ser $10\%-20\%$ do alcance. Na prática o valor
+de $\beta$ é ajustado dinamicamente sempre que o incumbente não tem provado para um conjunto de
+iterações, e periódicamente decrescido para seu valor inicial. Visinhança de soluções são obtidas
+por faze um número limite de mudanças de ramos dentro da mesma rota ou entre duas rotas. O autor
+propõe um processo capacitado de examinar todas as possíveis mudanças num tempo $O(|E(v)|)$, onde
+$E=\{(i,j) \in E: c_{ij} \leq v\} \cap I$, e $I$ é um conjunto de ramos importantes tais com suas
+incidências para o deposito ou pertencendo a soluções de alta qualidade.
+
+\subsection{O procedimento de memória adaptativa}
+
+ Um dos mais interessantes desenvolvimentos que tem ocorrido na área de TS em anos recentes é o
+conceito de Memória Adaptativa desenvolvido por {\color{red} referência}. É largamente usado em TS,
+mais sua aplicabilidade não é limitada a este tipo de metaheuristica. Uma memória adaptativa é um
+reunião de soluções boas que é dinamicamente atualizado através do processo de pesquisa.
+Periodicamente, alguns elementos desta solução são extraidos da reunião e combinados diferentemente
+para produzir novas boas soluções. Quando selecionada esta rota, deve ser tomado cuidado ao incluir
+o mesmo cliente duas vezes na solução. Essa restrição significa que o processo de seleção
+frequentemente termina com uma solução parcial que tera de ser completa usando uma heuristica de
+construção. No exemplo ilustrado na figura abaixo, extraindo-se as rotas A, D e H de uma memória de
+duas solução resulta numa solução parcial. Rochar e Taillard mostraram que esta aplicação do
+processo de memória dinâmica pode melhorar a estratégia de pesquisa. Isso tem os abilitou a obter
+duas novas soluções melhores na 14 sentença padrão de comparação de VRP.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=5cm]{.images/RochatTaillard95.png}
+\end{figure}
 
 
-a
+\subsection{Kelly e Xu}
+
+ Neste caso, {\color{red} referência} considera a troca de vertices entre duas rotas, uma reposição
+global dos mesmos veículos de outras rotas, e melhoria local de rotas. A estratégia de reposição
+global resolve um modelo de fluxo de rede para otimizar realocação dado o número de vertices em
+diferentes rotas. Aproximações são desenvolvidas para calcular o ejeção e inserção de custo,
+levando-se a capacidade dos veículos em conta. Otimização de rotas são feitas por meio de 3-opt
+mudanças em uma rotina de melhoria TS. O algoritmo é governado por muitos parâmetros os quais são
+dinamicamente ajustados através de pesquisa. Uma reunião das melhores soluções é memorizado e
+periodicamente usado para reiniciar a pesquisa com novos valores de parâmetros. Sobretudo, esse
+algoritmo produz muitas das melhores soluções conhecidas em senteças de referência, mais está longe
+de dizer que ele não é tão efetivo quanto outras implementações de TS. Tende a requerer um esforço
+computacional carnudo e afinação propriamente seus muitos parametros podem ser problemáticos.
+
 
 
 \end{document}

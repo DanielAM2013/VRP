@@ -1,11 +1,12 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.31)  29 JUL 2014 10:29
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.7.3)  29 JUL 2014 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **document.tex
 (./document.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
+aded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -242,19 +243,24 @@ Now handling font encoding U ...
    defining Unicode char U+2423 (decimal 9251)
 ))
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2013/12/03 3.9h The Babel package
+Package: babel 2008/07/08 v3.8m The Babel package
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel-portuges/portuges.ldf
+(/usr/share/texlive/texmf-dist/tex/generic/babel/portuges.ldf
 Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2013/12/03 3.9h Babel common definitions
+File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Portuguese'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@portuges = a dialect from \language0
 Package babel Info: Making " an active character on input line 145.
-))
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
@@ -262,7 +268,7 @@ File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2013/01/14 v2.14 AMS math features
+Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -282,20 +288,20 @@ Package: amsbsy 1999/11/29 v1.2d
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count88
-LaTeX Info: Redefining \frac on input line 210.
+LaTeX Info: Redefining \frac on input line 211.
 \uproot@=\count89
 \leftroot@=\count90
-LaTeX Info: Redefining \overline on input line 306.
+LaTeX Info: Redefining \overline on input line 307.
 \classnum@=\count91
 \DOTSCASE@=\count92
-LaTeX Info: Redefining \ldots on input line 378.
-LaTeX Info: Redefining \dots on input line 381.
-LaTeX Info: Redefining \cdots on input line 466.
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
 \Mathstrutbox@=\box26
 \strutbox@=\box27
 \big@size=\dimen106
-LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \macc@depth=\count93
 \c@MaxMatrixCols=\count94
 \dotsspace@=\muskip10
@@ -316,18 +322,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \multlinegap=\skip44
 \multlinetaggap=\skip45
 \mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2665.
-LaTeX Info: Redefining \] on input line 2666.
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
+Package: amssymb 2009/06/22 v3.00
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
@@ -411,7 +417,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks23
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
@@ -456,9 +462,6 @@ Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
 Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
 Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
-Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
-)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
@@ -467,7 +470,7 @@ Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 \Hy@pagecounter=\count106
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -476,33 +479,32 @@ Now handling font encoding PD1 ...
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4443.
-Package hyperref Info: Link nesting OFF on input line 4448.
-Package hyperref Info: Hyper index ON on input line 4451.
-Package hyperref Info: Plain pages OFF on input line 4458.
-Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Hyper figures OFF on input line 4062.
+Package hyperref Info: Link nesting OFF on input line 4067.
+Package hyperref Info: Hyper index ON on input line 4070.
+Package hyperref Info: Plain pages OFF on input line 4077.
+Package hyperref Info: Backreferencing OFF on input line 4082.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4688.
+Package hyperref Info: Bookmarks ON on input line 4300.
 \c@Hy@tempcnt=\count108
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen126
+LaTeX Info: Redefining \url on input line 4653.
 \Fld@menulength=\count109
-\Field@Width=\dimen127
-\Fld@charsize=\dimen128
-Package hyperref Info: Hyper figures OFF on input line 6295.
-Package hyperref Info: Link nesting OFF on input line 6300.
-Package hyperref Info: Hyper index ON on input line 6303.
-Package hyperref Info: backreferencing OFF on input line 6310.
-Package hyperref Info: Link coloring OFF on input line 6315.
-Package hyperref Info: Link coloring with OCG OFF on input line 6320.
-Package hyperref Info: PDF/A mode OFF on input line 6325.
-LaTeX Info: Redefining \ref on input line 6365.
-LaTeX Info: Redefining \pageref on input line 6369.
+\Field@Width=\dimen126
+\Fld@charsize=\dimen127
+Package hyperref Info: Hyper figures OFF on input line 5773.
+Package hyperref Info: Link nesting OFF on input line 5778.
+Package hyperref Info: Hyper index ON on input line 5781.
+Package hyperref Info: backreferencing OFF on input line 5788.
+Package hyperref Info: Link coloring OFF on input line 5793.
+Package hyperref Info: Link coloring with OCG OFF on input line 5798.
+Package hyperref Info: PDF/A mode OFF on input line 5803.
+LaTeX Info: Redefining \ref on input line 5843.
+LaTeX Info: Redefining \pageref on input line 5847.
 \Hy@abspage=\count110
 \c@Item=\count111
 \c@Hfootnote=\count112
@@ -511,7 +513,7 @@ LaTeX Info: Redefining \pageref on input line 6369.
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
 \Fld@listcount=\count113
 \c@bookmark@seq@number=\count114
 
@@ -529,20 +531,20 @@ Package: graphpap 1994/08/09 v1.0c Standard LaTeX graphpap package (LL)
 Package: pst-plot 2011/06/05 v1.00 LaTeX wrapper for `pst-plot' (HV)
 
 (/usr/share/texlive/texmf-dist/tex/latex/pstricks/pstricks.sty
-Package: pstricks 2013/12/12 v0.60 LaTeX wrapper for `PSTricks' (RN,HV)
+Package: pstricks 2011/10/31 v0.52 LaTeX wrapper for `PSTricks' (RN,HV)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pstricks.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/pst-xkey.tex
 File: pst-xkey.tex 2005/11/25 v1.6 PSTricks specialization of xkeyval (HA)
 
 (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 \XKV@toks=\toks24
 \XKV@tempa@toks=\toks25
 \XKV@depth=\count115
-File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pst-fp.tex
 `pst-fp' v0.05, 2010/01/17 (hv)
@@ -556,35 +558,19 @@ File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
 \pstFP@regs=\count123
 \pstFP@times=\count124
 )
-(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks26
-)
-(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks27
-\pgfkeys@temptoks=\toks28
-
-(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks29
-))
-(/usr/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
-\pgffor@iter=\dimen129
-\pgffor@skip=\dimen130
-\pgffor@stack=\toks30
-\pgffor@toks=\toks31
-)
 \psLoopIndex=\count125
 
-`PSTricks' v2.51  <2014/02/03> (tvz)
-\pst@dima=\dimen131
-\pst@dimb=\dimen132
-\pst@dimc=\dimen133
-\pst@dimd=\dimen134
-\pst@dimg=\dimen135
-\pst@dimh=\dimen136
-\pst@dimm=\dimen137
-\pst@dimn=\dimen138
-\pst@dimo=\dimen139
-\pst@dimp=\dimen140
+`PSTricks' v2.29  <2012/06/04> (tvz)
+\pst@dima=\dimen128
+\pst@dimb=\dimen129
+\pst@dimc=\dimen130
+\pst@dimd=\dimen131
+\pst@dimg=\dimen132
+\pst@dimh=\dimen133
+\pst@dimm=\dimen134
+\pst@dimn=\dimen135
+\pst@dimo=\dimen136
+\pst@dimp=\dimen137
 \pst@hbox=\box29
 \pst@ibox=\box30
 \pst@boxg=\box31
@@ -599,31 +585,30 @@ File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
 \pst@cnto=\count134
 \pst@cntp=\count135
 \@zero=\count136
-\pst@toks=\toks32
+\pst@toks=\toks26
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pstricks.con)
-\psunit=\dimen141
-\psxunit=\dimen142
-\psyunit=\dimen143
+\psunit=\dimen138
+\psxunit=\dimen139
+\psyunit=\dimen140
 \pst@C@@rType=\count137
-\pslinewidth=\dimen144
-\psk@startLW=\dimen145
-\psk@endLW=\dimen146
-\pst@customdefs=\toks33
-\pslinearc=\dimen147
-\pst@symbolStep=\dimen148
-\pst@symbolWidth=\dimen149
-\pst@symbolLinewidth=\dimen150
-\everypsbox=\toks34
-\psframesep=\dimen151
-\pslabelsep=\dimen152
-\sh@wgridXunit=\dimen153
-\sh@wgridYunit=\dimen154
-\pst@shift=\dimen155
+\pslinewidth=\dimen141
+\psk@startLW=\dimen142
+\psk@endLW=\dimen143
+\pst@customdefs=\toks27
+\pslinearc=\dimen144
+\pst@symbolStep=\dimen145
+\pst@symbolWidth=\dimen146
+\pst@symbolLinewidth=\dimen147
+\everypsbox=\toks28
+\psframesep=\dimen148
+\pslabelsep=\dimen149
+\pst@shift=\dimen150
+\theoverlaybox=\box32
 )
-File: pstricks.tex 2014/02/03 v2.51 `PSTricks' (tvz,hv)
+File: pstricks.tex 2012/06/04 v2.29 `PSTricks' (tvz,hv)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pstricks/pst-fp.tex)
-File: pst-fp.tex 2014/02/03 v2.51 `PST-fp' (hv)
+File: pst-fp.tex 2012/06/04 v2.29 `PST-fp' (hv)
 
 (/usr/share/texmf/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
@@ -654,39 +639,38 @@ Package: multido 2004/05/17 package wrapper for PSTricks `multido.tex', (HV/RN)
  v1.42, 2010/05/14 <tvz>
 \multido@count=\count138
 \multidocount=\count139
-\multido@stuff=\toks35
+\multido@stuff=\toks29
 )
 File: multido.tex 2010/05/14 v1.42 `multido' (tvz,hv)
 )
 Package: pst-plot 2011/04/13 package wrapper for pst-plot.tex (hv)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pst-plot/pst-plot.tex
- v1.58, 2014/01/16 (tvz,hv)
-\pstRadUnit=\dimen156
-\pstRadUnitInv=\dimen157
+ v1.42, 2012/05/03 (tvz,hv)
+\pstRadUnit=\dimen151
+\pstRadUnitInv=\dimen152
 \pst@linecnt=\count140
-\RCD@file=\read1
-\psxlabelsep=\dimen158
-\psylabelsep=\dimen159
-\psk@subticksize=\dimen160
-\pst@xticksizeA=\dimen161
-\pst@xticksizeB=\dimen162
-\pst@xticksizeC=\dimen163
-\pst@yticksizeA=\dimen164
-\pst@yticksizeB=\dimen165
-\pst@yticksizeC=\dimen166
+\psxlabelsep=\dimen153
+\psylabelsep=\dimen154
+\psk@subticksize=\dimen155
+\pst@xticksizeA=\dimen156
+\pst@xticksizeB=\dimen157
+\pst@xticksizeC=\dimen158
+\pst@yticksizeA=\dimen159
+\pst@yticksizeB=\dimen160
+\pst@yticksizeC=\dimen161
 \@digitcounter=\count141
-\psk@llx=\dimen167
-\psk@lly=\dimen168
-\psk@urx=\dimen169
-\psk@ury=\dimen170
-\pst@xunit=\dimen171
-\pst@yunit=\dimen172
+\psk@llx=\dimen162
+\psk@lly=\dimen163
+\psk@urx=\dimen164
+\psk@ury=\dimen165
+\pst@xunit=\dimen166
+\pst@yunit=\dimen167
 )
-File: pst-plot.tex 2014/01/16 1.58 `pst-plot' (tvz,hv)
+File: pst-plot.tex 2012/05/03 1.42 `pst-plot' (tvz,hv)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pict2e/pict2e.sty
-Package: pict2e 2014/01/12 v0.2z Improved picture commands (HjG,RN,JT)
+Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
 
 (/usr/share/texlive/texmf-dist/tex/latex/pict2e/pict2e.cfg
 File: pict2e.cfg 2011/04/05 v0.1t pict2e configuration for teTeX/TeXLive
@@ -697,42 +681,42 @@ Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
 (/usr/share/texlive/texmf-dist/tex/latex/pict2e/p2e-pdftex.def
 File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
 )
-\pIIe@GRAPH=\toks36
-\@arclen=\dimen173
-\@arcrad=\dimen174
-\@tempdimd=\dimen175
+\pIIe@GRAPH=\toks30
+\@arclen=\dimen168
+\@arcrad=\dimen169
+\@tempdimd=\dimen170
 )
 (/usr/share/texlive/texmf-dist/tex/latex/curve2e/curve2e.sty
-Package: curve2e 2012/12/11 v.1.41 Extension package for pict2e
-\@tdA=\dimen176
-\@tdB=\dimen177
-\@tdC=\dimen178
-\@tdD=\dimen179
-\@tdE=\dimen180
-\@tdF=\dimen181
-\defaultlinewidth=\dimen182
+Package: curve2e 2012/03/05 v.1.40 Extension package for pict2e
+\@tdA=\dimen171
+\@tdB=\dimen172
+\@tdC=\dimen173
+\@tdD=\dimen174
+\@tdE=\dimen175
+\@tdF=\dimen176
+\defaultlinewidth=\dimen177
 )
 (/usr/share/texlive/texmf-dist/tex/latex/eepic/epic.sty
 Enhancements to Picture Environment. Version 1.2 - Released June 1, 1986
 \@@multicnt=\count142
 \d@lta=\count143
-\@delta=\dimen183
-\@@delta=\dimen184
+\@delta=\dimen178
+\@@delta=\dimen179
 \@gridcnt=\count144
 \@joinkind=\count145
-\@dotgap=\dimen185
-\@ddotgap=\dimen186
+\@dotgap=\dimen180
+\@ddotgap=\dimen181
 \@x@diff=\count146
 \@y@diff=\count147
-\x@diff=\dimen187
-\y@diff=\dimen188
-\@dotbox=\box32
+\x@diff=\dimen182
+\y@diff=\dimen183
+\@dotbox=\box33
 \num@segments=\count148
 \num@segmentsi=\count149
-\@datafile=\read2
+\@datafile=\read1
 ) (/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty
-Package: tocloft 2013/05/02 v2.3f parameterised ToC, etc., typesetting
-Package tocloft Info: The document has section divisions on input line 44.
+Package: tocloft 2010/10/13 v2.3e parameterised ToC, etc., typesetting
+Package tocloft Info: The document has section divisions on input line 43.
 \cftparskip=\skip47
 \cftbeforetoctitleskip=\skip48
 \cftaftertoctitleskip=\skip49
@@ -796,16 +780,16 @@ LaTeX Font Info:    ... okay on input line 4.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count159
-\scratchdimen=\dimen189
-\scratchbox=\box33
+\scratchdimen=\dimen184
+\scratchbox=\box34
 \nofMPsegments=\count160
 \nofMParguments=\count161
-\everyMPshowfont=\toks37
+\everyMPshowfont=\toks31
 \MPscratchCnt=\count162
-\MPscratchDim=\dimen190
+\MPscratchDim=\dimen185
 \MPnumerator=\count163
 \makeMPintoPDFobject=\count164
-\everyMPtoPDFconversion=\toks38
+\everyMPtoPDFconversion=\toks32
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -855,10 +839,10 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box34
+\AtBeginShipoutBox=\box35
 Package hyperref Info: Link coloring OFF on input line 4.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
@@ -873,50 +857,25 @@ LaTeX Info: Redefining \nameref on input line 4.
 \@outlinefile=\write3
 \openout3 = `document.out'.
 
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 6.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 21.
 LaTeX Font Info:    Try loading font information for U+msa on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 45.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 60.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 60.
- [1
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+) [1
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
 
 
-Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 77.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 94.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 116.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 116.
-
 [2]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 138.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 140.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 143.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
@@ -924,83 +883,50 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 143.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 163.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 163.
- [3]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 164.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 186.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 207.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 207.
- [4]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 219.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 231.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 258.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 258.
- [5]
+ [3] [4] [5]
 <.images/ga-pseudocode.png, id=92, 558.085pt x 274.02374pt>
 File: .images/ga-pseudocode.png Graphic file (type png)
 
 <use .images/ga-pseudocode.png>
 Package pdftex.def Info: .images/ga-pseudocode.png used on input line 272.
 (pdftex.def)             Requested size: 284.52756pt x 139.70844pt.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 296.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 296.
- [6 <./.images/ga-pseudocode.png>]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 297.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 333.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 333.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 333.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 333.
+ [6 <./.images/ga-pseudocode.png>] [7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 375.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 375.
 
 (./.output/document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 333.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 333.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 375.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 375.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 333.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 375.
  ) 
 Here is how much of TeX's memory you used:
- 11372 strings out of 493304
- 165304 string characters out of 6139871
- 313481 words of memory out of 5000000
- 14593 multiletter control sequences out of 15000+600000
- 13667 words of font info for 39 fonts, out of 8000000 for 9000
- 957 hyphenation exceptions out of 8191
- 46i,9n,53p,349b,404s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
-e/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/
-public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm
-1200.pfb>
-Output written on ./.output/document.pdf (7 pages, 201420 bytes).
+ 10523 strings out of 495059
+ 147658 string characters out of 3182031
+ 290711 words of memory out of 3000000
+ 13484 multiletter control sequences out of 15000+200000
+ 13667 words of font info for 39 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 41i,9n,51p,293b,400s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/daniel/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/
+daniel/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/daniel/.te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on ./.output/document.pdf (8 pages, 197295 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 134 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 142 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 
