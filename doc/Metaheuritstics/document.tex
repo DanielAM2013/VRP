@@ -329,5 +329,49 @@ consecutivos de $T$ iterações;
 \item $k_3$ de $T$ iterações tem sido executadas.
 \end{enumerate}
 
- 
+\section{Pesquisa Tabular}
+
+ O conceito básico de pesquisa tabular (TS) como descrito por {\color{red} referência} é uma
+meta-heurística enraigada por outras heurísticas. TS exprora o espaço de solução movento em cada
+iteração de uma solução $s$ para a melhro solução num subconjunto das suas vizinhanças $N(s)$.
+Contrariando aos métodos clássicos descendentes, a solução atual mode ser determinada de uma
+iteração para a próxima. Assim, para ciclos vazios, as soluções possuem alguns atributos de soluções
+exploradas recentemente que são declarados temporariamente secretos ou esquecidos. A duração que
+estes atributos permanecem secretos é chamado sua tabu-tenure e pode variar sobre diferentes
+intervalos de tempo. O estatos de segredo pode overridden se certas condições são encotradas; isso é
+chamados o critério de aspiração e acontece, por exemplo, quando a solução secreta é melhor que
+alguma solução vista previamente.
+
+ A tendencia de resolução apresentada de uma carta de curso, pode ser lamentavel como uma fonte de
+erro mais pode tambem prover uma fonte de ganho. O método de segredo opera neste modo como a esceção
+que cursos novos não são escolhidos randomicamente. Em vez de processos de pesquisa secreta acordada
+pela suposição que não há pontos em acerto (?) uma nova solução a menos que seja um caminho vazio já
+investigado. Isso garante novas regiões de um espaço de solução de problemas será investigada com
+uma meta de evitar o mínimo local e ultimamente encontrar a solução desejada.
+
+ A solução inicial é tipicamente criada com alguns heurísticas de inserção baratas. Após criada uma
+solução inicial, um trabalho dado é feito para melhora usando pesquisa local com um ou mais
+estruturas de vizinhanças e uma estratégia de aceitação melhor. Muitas das vizinhanças usada são
+conhecidas e foi previamente introduzidas no contesto de varias construções e heurísticas de
+melhorias.
+
+ Aqui, descreveremos três algoritmos diferentes para TS:
+
+\begin{itemize}
+\item Segredo granular
+\item O processo de memória adaptativa
+\item Kelly e Xu
+\end{itemize} 
+
+\subsection{Segredo granular}
+
+ A pesquisa secreta granular (GTS) é uma conceito de promessa muito aceita. Foi recentemente
+introduzida por {\color{red} referencia} e tem produzido resultados excelentes no VRP. A ideia
+essencial por trás do tronco do GTS vem da observação que as arestas longes de uma grafo somente tem
+uma probabilidade pequena se pertencem a uma solução ótima. Assim, eliminação de todos os ramos 
+
+
+a
+
+
 \end{document}
