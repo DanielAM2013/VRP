@@ -44,23 +44,14 @@ pode ser descrita pelo seguinte algoritmo esquematico:
 
 \subsection{Construção da rota de veículos}
 
-To solve the VRP, the artificial ants construct solutions by successively choosing cities to visit,
-until each city has been visited. Whenever the choice of another city would lead to an unfeasible
-solution for reasons of vehicle capacity or total route length, the depot is chosen and a new tour
-is started. For the selection of a (not yet visited) city, two aspects are taken into account: how
-good was the choice of that city, an information that is stored in the pheromone trails τij is
-associated with each arc (vi,vj), and how promising is the choice of that city. This latter measure
-of desirability, called visibility and denoted by ηij, is the local heuristic function mentioned
-above.
-
  Para resolver o VRP, as formigas artificias constroem soluções escolhendo cidades sucessivas para
 visitas, até que cada cidade tenha sido visitada. Sempre que a escolha de outra cidade poder levar a
 uma solução impossivel para resolver do veículo capacitado ou de comprimento toal, o deposito é
 escolhido e uma nova rota é iniciada. Para a seleção de uma cidade, dois aspectos são levados em
 conta: qual boa foi a escolha desta cidade, um informação que é quardada nas trilhas de feromônio
-$\tau_{ij}$ é associada com cada arco $(v_i, v_j)$, e 
-
-
+$\tau_{ij}$ é associada com cada arco $(v_i, v_j)$, e como prometido é a escolha desta cidade. Essa
+última medida de desidade, chamada visibilidade e denotada por $n_{ij}$, é a função de heuristica
+local mencionada acima.
 
 
  Com $\Omega = \{ v_i \in V: v_j\textrm{ é possivel ser visitado} \} \cup \{v_0\}$, a cidade $v_j$ é
@@ -162,13 +153,6 @@ viagem para $j$.
 inicio da variável de serviço para cada visita. O inicio e o fom de cada dia de trabalho para cada
 veículo pode ser representada impondo a janela de tempo em $S$ e $E$.
 
-A method of modeling capacity constraints on vehicles is to propagate (via the path constraint) the
-free space in the vehicle along each vehicle route. To model Fi as the free space on arrival at
-visit i, qij is the change in free space associated with i visit. To indicate that all vehicles must
-not be overfilled at any time, constraints of the form Fi≥0∀i∈A are imposed. For vehicle k with
-capacity ck, the fixed point Fk=ck for k∈S can be set. Simultaneous pickups and deliveries can be
-modeled in a similar way, but this is not discussed here.
-
  Um método de modelamento das restrições de capacidade em um veículo é propagar os espaços livres no
 veículo ao longo da rota do veículo. O modelo $F_i$ como o espaço livre na chegada de um visitante
 $i$, $q_{ij}$ é a mudança no espaço livre associado com o visitante $i$. Para indicar que todos os
@@ -184,7 +168,7 @@ com facilidade comparativa. Por exemplo, algumas visitas pode requerer equipamen
 alguns veículos pode ser simplesmente muito grandes para entrar nas premissas. Assim, precisamos ser
 capazes de não permitir uma visita sendo feita por um veículo particular.
 
- Modelamos isso por uma etiqueta de veículo $\tay_k$ para cada visitante $k$ de cada rota, usando
+ Modelamos isso por uma etiqueta de veículo $\tau_k$ para cada visitante $k$ de cada rota, usando
 uma restrição similar para a restrição de caminho para a qual $R_i = j\rightarrow \tau_j=\tau_i$ com
 $\tau_i = i$ para $i\in S$. Assim visitas de clientes servidos pelo veículo $k$ tem etiqueta $k$. O
 veículo $k$ é então esquecido pela visita $i$ feita impondo-se uma restrição da forma $\tau_i \neq
@@ -196,5 +180,154 @@ especificada usando a etiqueta: $\tau_i = (\neq ) \tau_j.$
  Melhorando um tamanho de capacidade para um veículode prove um exemplo final que demonstra um
 poderoso uso das etiquetas de veículos. Uma restrição de comprimento é diferente de uma restrição de
 capacidade já que esta não se acumular sobre uma rota. Se o visitante $i$ envolve bons de bens de
-comprimento $l$, e $L_k$ é o comprimento do veículo $k$, então a restrição $L(\tau_i) \geq l$i
+comprimento $l$, e $L_k$ é o comprimento do veículo $k$, então a restrição $L(\tau_i) \geq l$
+defini-se a restrição de comprimento.
+
+\subsection{Estratégia de pesquisa}
+
+ Soluções o problema CP são usualmente encontradas usando-se métodos completos tais como pesquisa de
+primeira-profundidade e branch e boud. Contudo, para o problema de roteamento de tamanhos práticos,
+métodos de pesquisa completa não podem produzir soluções em tempo curto e em periodos de tempo
+realizaveis. Em constrate, métodos de melhoramento iterativo tem provado muito sucesso nesta
+pespectiva. Métodos de melhoramento iterativo tem operam por mudar pequenas partes da solução, por
+exemplo movendo um vizitante de uma rota para outra. Esse tipo de operação envolve decisões de
+retração previas e fazer novas. Em contraste a pesquisa de primeira-profundidade, as restrições
+podem ser feitas em alguma ordem, não simplismente na ordem oposta em que a decisão foi tomada. Em
+geral a essencia deste tipo de implementação de mecanismo de retração não-cronológica em CP trabalha
+em alto nível.
+
+ Para superar este problema, o sistema CP é unicamente usado para checar a validade das soluções e
+determinar o valor das variáveis de restrição, não para pesquisar soluções. A pesquisa é feita por
+um processo iterativo de melhoramento. Quando o processo precisa checar a validade de uma solução
+potencial, é tomado o sistema CP. Como parte da checagem, a propagação de restrições usando todas as
+restrições sobre o lugar. Isso agrega valor à checagem de restrições,  como o método iterativo de 
+melhoria pode então tomar a vantagem do domínio reduzido para elevar a velocidade da pesquisa por
+melhorar a legalidade da checagem rapida.
+
+ A melhoria depende de duas representações da solução. Há uma representação passiva, a qual é o
+modelo contra o qual as novas soluções são construidas, e para o qual a (não necessariamente a
+melhor solução). A segunda é uma representação ativa que mantem as variáveis de restrição, e dentro
+das quais a propagação de restrições toma lugar. Variáveis de estado na representação ativa são (o
+domínio atual é salvo) antes  que alguma mudançao seja feita, então este domínio pode ser restaurado
+depois.
+
+ Quando o sistema CP propagação e checaguem de validade instantaneamente o conjunto das variáveis de
+decisão $R$ usando a iteratividade da representação passiva. As restrições então propagão as
+variáveis de restrição ( tais como tempo e variáveis de capacidade) tem seu domínio reduzido. Se
+alguma variável tem um valor ilegal, a solução é ilegal.
+
+\section{Recozimento Deterministico}
+
+ Recozimento deterministico opera num modo que é semelhante a SA, exceto que uma regra
+deterministica é usada para a aceitação do movimento. Duas implementações padrão desta técnica são
+limiar aceito {\color{red} referenciar} e registro para registro de viagem {\color{red} referencia}.
+
+ Ná iteração $t$ de um algoritmo de limiar aceito, a solução $x_{i+1}$ é aceita se $f(x_{i+1}) \leq
+f(x_i)+\theta_1$, onde $\theta_1$ é um parametro de controle usual. Na viagem de registro-a-registro
+um registro é a melhor solução $x_*$ encotrada durante a pesquisa. Na iteração $t$, a solução
+$x_{i+1}$ é aceita se $f(x_{i+1}) \leq \theta_2 f(x_i)$, onde $\theta_2$ é um parametro de controle
+usado fracamente maior que 1.
+
+\section{Algoritmo Genético}
+
+ Algoritmo genéticos são muito provavelmente as mais largemente conhecidas meteheuristics, hoje
+aceitando atenção comentável sobre todo o mundo. Algoritmos genéticos são processos computacionais
+que empregam os mecanismos naturais de seleção e genética natual para envolver soluções para
+problemas. O conceito básico foi desenvolvido por {\color{red} referenciar}, enquanto a praticidade
+do uso de GA para resolver problemas complexos foi demonstrada em {\color{red} referenciar} e
+{\color{red} referenciar}. GA envolve uma população de indivíduos codificados com cromossomos
+criando-se uma nova geração de prole por meio de um processo iterativo até algum critério de
+convergência ser encontrado. Tal critério poderia, por exemplo, referenciar o número máximo de
+gerações, a convergência para uma popução homogênea composta por indivíduos similares, ou dando uma
+solução ótima. O melhor cromossomo gerado é então decodificado, provendo a solução correspondente.
+
+ Algoritmos genéticos trabalham com uam população de candidatos a solução em vez de apenas uma
+simples solução, então ela faz um modo de pesquisa simultânea. Cada indivíduo repretena uma
+população de soluções potenciais para o problema. No GA original de Holland cada solução podia ser
+representada como uma string de bits, onde a interpretação do significado da string especifica o
+problema.
+
+ O critério de uma nova geração de indivíduos envolve três grandes passos ou fases:
+
+\begin{itemize}
+\item A fase de seleção consiste de uma escolha randômica de dois indivíduos parentes da população
+para propositos de acasalamento. A probabilidade da selecionar um membro de uma população é
+geramente proporcional a sua aptidão para enfatizar a qualidade genética enquanto a manutenção da
+diversidade genética. Aqui, aptidão referece a uma medida de lucro, utilidade ou bondade a ser
+máximizada enquanto explora o espaço de solução.
+\item O processo de recombinação ou reprodução faz uso da seleção de genes de parentes selecionados
+para produzir prole que formará a próxima geração.
+\item A mutação consiste de modificações randômicas de alguns genes de um indivíduo simples num
+tempo para fortalecer o espaço de soluções a explorar e assegurar, ou preservar, a diversidade
+genética. A ocorrência de mutações é associado geralmente com uma pequena probabilidade.
+\end{itemize}
+
+ Um nova geração é criada para repetir a seleção, processos de reprodução e mutação até todos os
+cromossomos na nova população substituir aqueles os antigos. Um balanço próprio entre a qualidade
+genética e a diversidade é assim necessário dentro de uma população  ordem para suportar pesquisas
+eficientes. Na figura abaixo podemos veo o pseudocodigo de um simples GA.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=10cm]{.images/ga-pseudocode.png}
+\end{figure}
+
+ Para resolver o VRP com GAs, é usual representar cada indivíduo por apenas um cromossomo, o qual é
+uma cadeia de inteiros, cada um deles representando um cliente ou um veículo. Então cada
+identificador de veículo  representa no cromossomo um separador entre duas rotas, e uma string de
+identificadores de strings, representa a sequência das entregas que um veículo deve cobrir dutante
+sua rota. Na figura abaixo podemos ver uma representação de uma possível solução pra VRP com 10
+clientes e 4 veículos. Cada rota inicia e termina no depósito. Se encontramos na solução dois
+identificadores de veículos não separados por algum idenfiticador de cliente, entedenmos que a rota
+é vazia, assim, não será necessário usar todos os veículos disponíveis.
+
+\[\underbrace{4-5-2}_{route1}-11-\underbrace{10-3-1}_{route2}-13-\underbrace{7-8-9}_{route3}-12-\underbrace{6}_{route4}\]
+
+
+
+ Uma típica função de aptidão  usada para resolver o VRP com GA é $f_{eval}(x) = f_{\max}-f(x),$
+onde $f(x)={total}_{distancia}(x)+\lambda sobre_{carga}(x)+ \mu sobre_{tempo}(x)$
+
+ Tanto a função de sobre carga quanto a função de sobre tempo  retornam o quanto de capacidade e
+sobre tempo o pode ser permitido. Se nenhuma das restrição da função são violádas, $f$ retorna a
+distância total da viágem. Em outros casos tanto capacidade e tempo são pesados com valores
+$\lambda$ e $\mu$. A melhor solução mode ter valores fechados para $f_{\max}$, enquanto a solução
+que quebra em alguma restrição verá penalizada seu valor de aptidão.
+
+\section{Cozimento Simulado}
+
+ O cozimento simulado (SA) é uma tecnica de relaxamento simulado, o qual tem sua origem na mecânica
+estatistica. É baseada numa analogia do processo de cozimento de sólidos, onde um sólido é
+esquentado à uma temperatura alta e gradualmente esfriado de modo a cristalizar numa configuração de
+baixa energia. SA pode ser visto como um meio de tentar para permitir uma dinâmica básica de
+escalada na colina para tambem ser abel a escape ótimo global de soluções de qualidade pobre. SA
+guia o pesquisa local original se $\Delta \leq 0$, onde $\Delta = f(x)-f(x_i)$. Permitir a pesquisa
+escapar um ótimo local, mover este crescimento os valores da função objetivo são aceitas com uma
+probabilidade $e^{-\Delta/T}$ se $\Delta > 0$, onde $T$ é uma paramentro chamado de "temperatura". O
+valor de $T$ varia de um valor relativamente grande para um valor pequeno próximo de zero. Esses
+valores são controlados por plano frio, o qual especifica o inicio, o valor de temperatura em cada
+estante do algoritmo.
+
+ Na iteração $t$ de um cozimento simulado, a solução é desenhada randomicamente em $N(x_i)$. Se
+$f(x) \leq f(x_i)$, então $x_{i+1}$ é tomado igual à x; caso contrário
+
+\[x_{i+1}=\begin{cases} 
+x & \text{with probability } p_{i}\\ 
+x_{i} & \text{with probability }1-p_{i} 
+\end{cases},\]
+
+ onde $p_i$ é usualmente uma função decrescente de $t$ e de $f(x)-f(x_i)$. É comum definir $p_i$
+como $e^{-\Delta/T}.$
+
+ Há três critérios comuns de parada:
+
+\begin{enumerate}
+\item O valor $f^*$ da incombencia $x^*$ não tem decrescimento de no mínimo $\pi_1\%$ para no mínimo
+$k_1$ ciclos consecutivos de $T$ iterações;
+\item O número de movimentos aceitos tem sido menor que $\pi_2\%$ de $T$ para $k_2$ ciclos
+consecutivos de $T$ iterações;
+\item $k_3$ de $T$ iterações tem sido executadas.
+\end{enumerate}
+
+ 
 \end{document}
