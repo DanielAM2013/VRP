@@ -3,6 +3,8 @@
 #include <complex>
 #include <cstdlib>
 #include <unistd.h>
+#include <vector>
+
 //#include <boost/tuple/tuple.hpp>
 //#include <gnuplot-iostream.h>
 
@@ -78,6 +80,8 @@ ponto* read_file_points(char* s) {
 
  return P;
 }
+// Calcula a distância de um ponto a uma rota
+// 
 
 double dist_route(ponto* route, complex<double> x, ponto** out) {
  
@@ -104,6 +108,7 @@ double dist_route(ponto* route, complex<double> x, ponto** out) {
 
  return dist[1];
 }
+
 
 void del(ponto** P, complex<double> DEL) {
  ponto* Aux;
@@ -265,3 +270,7 @@ double create_route(ponto** route, ponto** P)
 
  return perc;
 }
+
+
+
+
