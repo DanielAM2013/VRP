@@ -161,11 +161,7 @@ double point_closer(ponto* route, ponto **P, ponto **out, ponto** nov)
   dist[0]=dist_route(route, Aux[0]->coord, &Aux[1]);
 
   if(dist[0]<0) {
-/*
-   Aux[2]=Aux[0]->next;
-   del(P,Aux[0]->coord);
-   Aux[0]=Aux[2];
-*/
+ 
    Aux[0]=Aux[0]->next;
    continue;
   }
@@ -270,6 +266,64 @@ double create_route(ponto** route, ponto** P)
 
  return perc;
 }
+
+
+void tsp(ponto **R) {
+
+ double d[2];
+ aux = *R;
+
+ while(aux) {
+  d[1]=1e+30;
+  ponto *j;
+  ponto *i;
+  ponto *closer[2];
+
+  for( *i=aux->next; i!=NULL; i=i->next) {
+   for( *j=*R; j!=aux; j=j->next) {
+
+    d[0]=abs(*j->next-*i)+abs(*i-*j)-abs(*j->next-*j);
+
+    if(d[0]<d[1]) {
+     d[1]=d[0];
+     closer[0]=i;
+     closer[1]=j;
+    }
+   }
+   d[0]=abs(*j-*i)+abs(*i-*R)-abs(*j-*R);
+   if(d[0]<d[1]) {
+     d[1]=d[0];
+     closer[0]=i;
+     closer[1]=j;
+    }
+  }
+  
+  closer[1]->next->prev=closer[0];
+  closer[1]->prev->next=closer[0];
+    
+  closer[0]->next->prev=closer[1];
+  closer[0]->prev->next=closer[1];
+
+  aux=aux->next;
+ }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
