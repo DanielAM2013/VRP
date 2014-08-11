@@ -45,14 +45,9 @@ void print_list_duple(ponto* P)
 }
 
 
-ponto* read_file_points(char* s) {
+ponto* read_file_points(char s[]) {
 
- ifstream data(s);
-
- if(!data) {
-  cout << "Ascertain file " << s << endl;
-  return NULL;
- }
+ ifstream data(s, ifstream::in);
 
  ponto *P=NULL, *Aux, *swap;
  complex<double> coord;
@@ -177,17 +172,23 @@ double point_closer(ponto* route, ponto **P, ponto **out, ponto** nov)
  return dist[1];
 }
 
-void salve_file(ponto* route, char* name_file)
+void salve_file(ponto* route, char name_file[])
 {
  ponto* Aux;
- ofstream out(name_file);
+ ofstream out(name_file, ofstream::out);
 
  Aux=route;
+/*
  if(Aux==NULL) return;
  do {
-  out  << Aux->coord.real() << " " << Aux->coord.imag() << endl;
+  out << Aux->coord.real() << " " << Aux->coord.imag() << endl;
   Aux=Aux->next;
  } while(Aux!=route);
+*/
+ while(Aux!=NULL) {
+  out << Aux->coord.real() << " " << Aux->coord.imag() << endl;
+  Aux=Aux->next;
+ }
 }
 
 void gnuplot(ponto* route)
@@ -200,7 +201,7 @@ void gnuplot(ponto* route)
  system("gnuplot tsp.gn");
  cout << "digite: ";
  cin >> s;
- 
+
 }
 
 double create_route(ponto** route, ponto** P)
@@ -267,22 +268,20 @@ double create_route(ponto** route, ponto** P)
  return perc;
 }
 
+double tsp(ponto *R) {
 
-void tsp(ponto **R) {
+ double d[3];
+ d[2]=0;
 
- double d[2];
- aux = *R;
+ ponto *last=R;
+ while(last->next) {
+  ponto *closer[2]={NULL,NULL};
 
- while(aux) {
   d[1]=1e+30;
-  ponto *j;
-  ponto *i;
-  ponto *closer[2];
+  for( ponto *i=last->next; i!=NULL; i=i->next) {
+   for( ponto *j=R; j!=last; j=j->next) {
 
-  for( *i=aux->next; i!=NULL; i=i->next) {
-   for( *j=*R; j!=aux; j=j->next) {
-
-    d[0]=abs(*j->next-*i)+abs(*i-*j)-abs(*j->next-*j);
+    d[0]=abs(j->coord-i->coord)+abs(i->coord-j->next->coord)-abs(j->coord-j->next->coord);
 
     if(d[0]<d[1]) {
      d[1]=d[0];
@@ -290,41 +289,31 @@ void tsp(ponto **R) {
      closer[1]=j;
     }
    }
-   d[0]=abs(*j-*i)+abs(*i-*R)-abs(*j-*R);
+
+   d[0]=abs(last->coord-i->coord)+abs(i->coord-R->coord)-abs(last->coord-R->coord);
+
    if(d[0]<d[1]) {
-     d[1]=d[0];
-     closer[0]=i;
-     closer[1]=j;
-    }
+    d[1]=d[0];
+    closer[0]=i;
+    closer[1]=last;
+   }
   }
-  
-  closer[1]->next->prev=closer[0];
-  closer[1]->prev->next=closer[0];
-    
-  closer[0]->next->prev=closer[1];
-  closer[0]->prev->next=closer[1];
 
-  aux=aux->next;
+  d[2]+=d[1]; 
+
+   if(closer[0]->next)
+    closer[0]->next->prev=closer[0]->prev;
+   closer[0]->prev->next=closer[0]->next;
+
+   closer[0]->next=closer[1]->next;
+   closer[0]->prev=closer[1];
+
+   if(closer[1]->next) {
+    closer[1]->next->prev=closer[0];
+    closer[1]->next=closer[0];
+   }
+   if(closer[1]==last) last=last->next;
  }
+ return d[2];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

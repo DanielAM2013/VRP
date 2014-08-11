@@ -2,18 +2,14 @@
 
 int main()
 {
- ponto *P, *Aux[4];
- double perc=0;
- int i;
- char s[10]="dados.txt";
+ char in[]="dados.txt", out[]="saida.txt";
+ ponto *P=read_file_points(in), Aux[2];
 
- P=read_file_points(s);
-
+/*
  ponto* route=NULL;
 
  cout << create_route(&route, &P) << endl;
 
- char saida[10]="saida.txt";
  salve_file(route,saida);
 
  Aux[0]=route;
@@ -23,6 +19,17 @@ int main()
   Aux[0]=Aux[1];
 
  } while(Aux[0]!=route);
+*/
 
+ cout << tsp(P) << endl; 
+ salve_file(P,out);
+/*
+ Aux[0]=P;
+ while(Aux[0]!=NULL) {
+  Aux[1]=Aux[0]->next;
+  delete Aux[0];
+  Aux[0]=Aux[1];
+ }
+*/
  return 0;
 }

@@ -1,65 +1,36 @@
-#include <iostream>
-#include <fstream>
-#include <new>
-#include <complex>
-//using namespace std;
-
-/*
-Alg:
-
- *) Rotas iniciais 
- **) Varredura de rotas;
- ***) Mesclagem de rotas;
-
-*/
-
-/*
-double route_cust(route R);
-double subroute_cust(subroute r);
-void read_file(char a[]);
-*/
+#include "tsp.h"
 
 
-/*
-Estrutura:
+double vrp(ponto *R) {
 
- As rotas devem ser representadas por listas circulares duplamente encadeadas.
- Assim como a conboio.
+ double d[2]={1e+30,0};
 
-*/
+ // Enviar um veículo para cada ponto
+ 
 
-class rota 
-{
- private:
-  std::complex<double> coord;
-  rota* next;
-  rota* prev;
- public:
-  rota(double x=0, double y=0) {
-   coord.real()=x;
-   coord.imag()=y;
-  }
+ // Ordenar os pontos por ângulo e módulo
+ // Calcular o custo para esta situação
 
-  void display(void) {
-   rota* aux=this;
-   while(aux) {
-   }
-  }
+// while(std::abs(d[1]-d[0])>1e-2) {
+//  for( ponto *i=R; i->next!=NULL; i=i->next) {
+   // copiar R para aux
+   // mesclar rodas adjacentes
+   // Calcular custo
+   // Avaliar ordem do resultado e quardar poteiro para o primeiro elemento do par
+//  }
+  // Copiar aux para R
+// }
 
-};
+ return d[1];
+}
 
 
 int main()
 {
- char a[]="daniel";
-
-// Para todas os pares de rotas calcular custo do roteamento
- rota(1.2,1.2);
 
 
 
 
-
-
+	
  return 0;
 }
