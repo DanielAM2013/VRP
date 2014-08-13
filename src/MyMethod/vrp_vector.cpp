@@ -14,7 +14,7 @@ route read_file(char file[]) {
  return first;
 }
 
-double tsp(route R) {
+double tsp(route *R) {
 
  double d[3];
  d[2]=0;
@@ -23,17 +23,13 @@ double tsp(route R) {
  route::iterator closer[2];
  std::complex<double> aux;
 
- route::iterator last=R.begin();
- while(last+1!=R.end()) 
-// for( route::iterator last=R->begin(); last!=R->end(); ++last) 
+ route::iterator last=R->begin();
+ while(last+1!=R->end()) 
  {
 
   d[1]=1e+30;
-  for( route::iterator i=last+1; i!=R.end(); i++) {
-//   std::cout << "+" << *i << "->";
-   for( route::iterator j=R.begin(); j!=last; j++) {
-//    std::cout << *j;
-//    std::cout << *j << std::endl;
+  for( route::iterator i=last+1; i!=R->end(); i++) {
+   for( route::iterator j=R->begin(); j!=last; j++) {
     d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
     
     if(d[0]<d[1]) {
@@ -42,8 +38,7 @@ double tsp(route R) {
      closer[1]=j;
     }
    }
-//   std::cout << *last;
-   d[0]=std::abs(*last-*i)+std::abs(*i-*R.begin())-std::abs(*last-*R.begin());
+   d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
 
    if(d[0]<d[1]) {
     d[1]=d[0];
@@ -51,21 +46,13 @@ double tsp(route R) {
     closer[1]=last;
    }
   }
-//  std::cout << std::endl;
   aux=*closer[0];
-
-//  std::cout << *closer[1] << "<-" << *closer[0] << "|-|";
-//  for( route::iterator j=R->begin(); j!=R->end(); ++j)
-//   std::cout << *j;
-//  std::cout << std::endl;
 
   d[2]+=d[1];
 
-  R.erase(closer[0]);
+  R->erase(closer[0]);
 
-//  if(closer[1]==last) last+=1;
-//  std::cout << "|" << d[1] << std::endl;
-  R.insert(closer[1]+1, aux); 
+  R->insert(closer[1]+1, aux); 
   last++;
  }
  return d[2];
@@ -75,7 +62,6 @@ int main()
 {
 // Ler Arquivo
  char test[]="points.dat";
-
  route first=read_file(test); 
 
  int N=first.size();
@@ -109,11 +95,13 @@ int main()
   d[1]=cust(Aux);
   for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
    // Mesclar roca com a seguinte numa variável auxiliar
-   i->insert(aux.end(), (i+1)->begin()+1, (i+1)->end());
+   aux=route(*i);
+   aux.insert(aux.end(), (i+1)->begin()+1, (i+1)->end());
    // Aplicar o tsp
-   tsp(*i);
+   tsp(&aux);
    // Inserir rotas mescladas no train Aux
    Aux.erase(i+1);
+   *i=aux;
    // Avaliar roteamento
    d[0]=cust(Aux);
    // Ordenar custo
@@ -124,11 +112,13 @@ int main()
    Aux=train(second);
   }
 
-  (second.end()-1)->insert(aux.end(), (second.begin())->begin(), (second.begin())->end());
+  aux=route(*(second.end()-1));
+  aux.insert(aux.end(), (second.begin())->begin(), (second.begin())->end());
 
-  tsp(*(second.end()-1));
+  tsp(&aux);
   // Inserir rotas mescladas no train Aux
   Aux.erase(Aux.begin());
+  *(Aux.end()-1)=aux;
   // Avaliar roteamento
   d[0]=cust(Aux);
  // Ordenar custo
@@ -137,24 +127,15 @@ int main()
    Aux1=train(Aux);
   }
 
-  if(d[1]<d[2]) {
-   second=train(Aux1);
-/*
-   for( train::iterator i=Aux1.begin(); i!=Aux1.end(); i++) {
-    for( route::iterator j=i->begin(); j!=i->end(); j++)
-     std::cout << *j << " ";
-    std::cout << std::endl;
-   }
-*/
-  }
+  if(d[1]<d[2])  second=train(Aux1);
  }
-/*
+
  for( train::iterator i=second.begin(); i!=second.end(); i++) {
   for( route::iterator j=i->begin(); j!=i->end(); j++)
    std::cout << *j << "->";
   std::cout << std::endl;
  }
-*/
+
  std::cout << cust(second) << std::endl;
 
 
