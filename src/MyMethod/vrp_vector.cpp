@@ -96,12 +96,12 @@ int main()
   for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
    // Mesclar roca com a seguinte numa variável auxiliar
    aux=route(*i);
-   aux.insert(aux.end(), (i+1)->begin()+1, (i+1)->end());
+   i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
    // Aplicar o tsp
-   tsp(&aux);
+   tsp(&*i);
    // Inserir rotas mescladas no train Aux
    Aux.erase(i+1);
-   *i=aux;
+//   *i=aux;
    // Avaliar roteamento
    d[0]=cust(Aux);
    // Ordenar custo
@@ -112,13 +112,16 @@ int main()
    Aux=train(second);
   }
 
-  aux=route(*(second.end()-1));
-  aux.insert(aux.end(), (second.begin())->begin(), (second.begin())->end());
+  Aux=train(second);
 
-  tsp(&aux);
+  aux=route(*(second.end()-1));
+//  (Aux.end()-1)->insert((Aux.end()-1)->end(), (second.begin())->begin(), (second.begin())->end());
+  (Aux.end()-1)->insert((Aux.end()-1)->end(), (second.begin())->begin(), (second.begin())->end());
+
+  tsp(&*(Aux.end()-1));
   // Inserir rotas mescladas no train Aux
   Aux.erase(Aux.begin());
-  *(Aux.end()-1)=aux;
+//  *(Aux.end()-1)=aux;
   // Avaliar roteamento
   d[0]=cust(Aux);
  // Ordenar custo
