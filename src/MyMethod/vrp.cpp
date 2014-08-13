@@ -16,10 +16,8 @@ route read_file(char file[]) {
 }
 
 double tsp(route *R) {
-
  double d[3];
  d[2]=0;
-
 
  route::iterator closer[2];
  std::complex<double> aux;

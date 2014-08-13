@@ -53,3 +53,18 @@ double cust( train X) {
 */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
