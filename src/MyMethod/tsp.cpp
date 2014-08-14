@@ -5,39 +5,33 @@ double tsp(route *R) {
  d[2]=0;
 
  route::iterator closer[2];
- std::complex<double> aux;
 
- route::iterator last=R->begin();
- while(last+1!=R->end())
- {
-
+ for( route::iterator last=R->begin(); last+1!=R->end(); last++) {
   d[1]=1e+30;
   for( route::iterator i=last+1; i!=R->end(); i++) {
    for( route::iterator j=R->begin(); j!=last; j++) {
-    d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
 
+    d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
     if(d[0]<d[1]) {
      d[1]=d[0];
      closer[0]=i;
      closer[1]=j;
     }
    }
-   d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
 
+   d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
    if(d[0]<d[1]) {
     d[1]=d[0];
     closer[0]=i;
     closer[1]=last;
    }
   }
-  aux=*closer[0];
 
   d[2]+=d[1];
 
+  point aux=*closer[0];
   R->erase(closer[0]);
-
   R->insert(closer[1]+1, aux);
-  last++;
  }
  return d[2];
 }

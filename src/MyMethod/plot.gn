@@ -1,5 +1,4 @@
 set term postscript
 set output 'vrp.eps'
 set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 1.5
-filenames(n)= sprintf("%d.test", n)
-plot for [i=0:9] filenames(i) using 1:2 with linespoints ls 3 title ''
+plot for [fn in system("ls *.test")] fn using 1:2 with linespoints ls 3 title ''
