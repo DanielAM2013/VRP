@@ -1,12 +1,20 @@
 #include "tsp.h"
 
-
 double vrp(ponto *R) {
 
  double d[2]={1e+30,0};
 
- // Enviar um veículo para cada ponto
+ route *aux=new route;
+ aux->subroute=*R;
  
+ // Enviar um veículo para cada ponto
+ for( ponto *i=R->next; i!=NULL; i=i->next) {
+  aux=aux->next=new route;
+  aux->subroute=*i;
+ }
+
+
+
 
  // Ordenar os pontos por ângulo e módulo
  // Calcular o custo para esta situação

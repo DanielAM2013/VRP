@@ -17,6 +17,13 @@ typedef struct Ponto {
   struct Ponto* prev;
 } ponto;
 
+typedef struct Route {
+ ponto subroute; 
+
+ struct Route* next;
+ struct Route* prev;
+} route;
+
 void print_point(complex<double> c)
 {
   cout << "(" << c.real() << "," << c.imag() << ")" << endl;
@@ -316,4 +323,3 @@ double tsp(ponto *R) {
  }
  return d[2];
 }
-
