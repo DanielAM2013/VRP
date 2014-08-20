@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm *.test
+#rm *.test
 g++ vrp.cpp -o ../bin/vrp
 ../bin/vrp
 gnuplot plot.gn

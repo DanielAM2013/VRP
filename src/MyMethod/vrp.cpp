@@ -1,22 +1,17 @@
 #include "vrp.hpp"
 #include <sstream>
 
-<<<<<<< HEAD
-double vrp(ponto *R) {
-=======
 route read_file(char file[]) {
 
  std::ifstream data(file, std::ifstream::in);
  
  route first;
  point aux;
->>>>>>> 75fcc9c73386c63d5e1cef37ee76e73cf7849076
 
  while( data >> aux.real() >> aux.imag()) {
   first.push_back(aux);
  }
 
-<<<<<<< HEAD
  route *aux=new route;
  aux->subroute=*R;
  
@@ -26,12 +21,6 @@ route read_file(char file[]) {
   aux->subroute=*i;
  }
 
-
-
-=======
- return first;
-}
->>>>>>> 75fcc9c73386c63d5e1cef37ee76e73cf7849076
 
 void print_train(train T) 
 {
