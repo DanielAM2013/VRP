@@ -42,19 +42,8 @@ double tspR( route *R, int& n)
  route::iterator last=R->begin();
  for( route::iterator i=Aux.begin(); i!=Aux.end(); i++) {
   tspR(Aux, n-1);
-
  }
-
-
-
-
 }
-
-
-
-
-
-
 
 int main()
 {

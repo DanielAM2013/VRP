@@ -17,7 +17,7 @@ route read_file(char file[]) {
 
 void print_train(train T) 
 {
- std::cout << "---------------------------------------" << std::endl;
+// std::cout << "---------------------------------------" << std::endl;
  for( train::iterator i=T.begin(); i!=T.end(); i++) {
   for( route::iterator j=i->begin(); j!=i->end(); j++)
    std::cout << *j << " ";
@@ -38,7 +38,6 @@ void save_train( train T) {
   k++;
  }
 }
-
 
 int main()
 {
