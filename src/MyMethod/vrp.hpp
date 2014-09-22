@@ -32,11 +32,11 @@ double cust( train X) {
  return aux;
 */
 
- double k=1.4;
+ double k=1;
  for( int i=0; i<X.size(); i++) 
   aux+=pow(cust_route(X[i]),k); 
 
- return pow(aux,1/k);
+ return aux;
 
 /*
  double d[2]={0,cust_route(X[0])};
