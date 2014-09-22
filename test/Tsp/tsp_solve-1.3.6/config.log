@@ -1,0 +1,41 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+c++ -E
+gcc -o conftest -g -O conftest.c
+gcc -o conftest -g -O conftest.c
+gcc -o conftest -g -O conftest.c
+/tmp/cc11Ptfy.o: In function `t':
+/media/daniel/Disco-rw/VRP/test/Tsp/tsp_solve-1.3.6/configure:861: undefined reference to `aint'
+collect2: error: ld returned 1 exit status
+gcc -o conftest -g -O conftest.c
+gcc -o conftest -g -O conftest.c
+gcc -o conftest -g -O conftest.c
+gcc -o conftest -g -O conftest.c -lsocket
+/usr/bin/ld: cannot find -lsocket
+collect2: error: ld returned 1 exit status
+gcc -o conftest -g -O conftest.c
+c++ -E
+c++ -c -g -O conftest.C
+c++ -o conftest -g -O conftest.C
+c++ -c -g -O conftest.C
+c++ -c -g -O conftest.C
+configure: In function 'int t()':
+configure:1276:6: error: 'big' was not declared in this scope
+  not big endian
+      ^
+configure:1276:10: error: expected ';' before 'endian'
+  not big endian
+          ^
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E
+c++ -E

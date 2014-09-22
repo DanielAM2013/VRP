@@ -1,4 +1,4 @@
-set term postscript
+set term postscript size 30,30
 set output 'vrp.eps'
-set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 1.5
+set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 2
 plot for [fn in system("ls *.test")] fn using 1:2 with linespoints ls 3 title ''
