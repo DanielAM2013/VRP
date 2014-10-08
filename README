@@ -1,0 +1,30 @@
+neste momento já terminei uma aproximação para o TSP e para o VRP
+
+ Visão Geral do Projeto: Desenvolver/Reunir um conjunto de ferramentas computacionais de
+possicionamento de uma frota de veículos.
+
+ metas:
+  + Melhorar a aproximação para o TSP
+  + Apresentar uma aproximação para a realidade: apresentando um possível comportamento que as
+zaques poderiam ter numa situação de voo real.
+
+ Estruturação das pastas:
+  Linguagem/Organização/Método
+
+ caso haja mais de uma linguagem envolvida em uma tarefa deve-se criar uma pasta com o nome tools
+onde serão colocados os códigos fonte e será criado um link para o local onde este deve ser
+executado.
+
+ A cada método implementado deve ser guardar uma cópia de suas funções em um arquivo .hpp, e manter
+um fonte que possa gerar um executável que demonstre sua funcionalidade.
+
+ Não será permitida a mescla de códigos com seus arquivos de entrada e/ou saída. Para isso serão
+criadas pasta com o nome "input" e "output" para colocar as entradas e saídas.
+
+
+
+
+
+
+
+
