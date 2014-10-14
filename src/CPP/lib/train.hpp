@@ -1,17 +1,19 @@
 #include "route.hpp"
 #include <sstream>
 
-train::iterator next( train::iterator i, int k=1) {
- 
-// for ( int i=0; i<k; i++) {
-//  i++;
+train::iterator next( train::iterator i, int n=1) {
 
- return ++i;
+ train::iterator aux=i; 
+ for ( int k=0; k<n; k++)
+  aux++;
+
+ return aux;
 }
 
 train::iterator prev( train::iterator i) {
  return --i;
 }
+
 // Custo da frota
 double cust_train( train X, double k=1) {
  double aux=0;
@@ -35,8 +37,10 @@ void print( train T)
 train route2train( route R) {
 
  train Aux;
- for( route::iterator i=R.begin(); i!=R.end(); i++) {
+ point origin=*R.begin();
+ for( route::iterator i=next(R.begin()); i!=R.end(); i++) {
   route aux;
+  aux.push_back(origin);
   aux.push_back(*i);
   Aux.push_back(aux);
  }
@@ -73,9 +77,3 @@ void save_train( train T) {
   k++;
  }
 }
-
-
-
-
-
-
