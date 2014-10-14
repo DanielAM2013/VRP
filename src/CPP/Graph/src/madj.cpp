@@ -1,36 +1,38 @@
+// Representação de um grafo através de matrizes de adjacência
+// 
+
 #include "../lib/basic.hpp"
 
 #define INF (1e+30)
 using namespace std;
 
-typedef list<vertex> V;
-typedef list<weight> W;
-
 class madj
 {
  private:
-  vector<std::vector<weight> > E;
-  vector<std::vector<bool> > V;
+  vector<point> N;
+  vector<vector<weight> > E;
+  vector<vector<bool> > V;
   num dim;
+ protected:
+  
  public:
 
- // Inicializa a matriz de adjâcencia com "0"
  madj(num m=0) {
   dim=m;
-  V=vector<vector<bool> >(dim);
-  E=vector<vector<weight> >(dim);
-  
-  for( num i=0; i<dim; i++) {
+  V=vector<vector<bool> >(m);
+  E=vector<vector<weight> >(m);
+  N=vector<point>(m);
+  for( num i=0; i<m; i++) {
    V[i]=vector<bool>(dim);
    E[i]=vector<weight>(dim); 
-   for( num j=0; j<dim; j++) {
-    V[i][j]=false;
-    E[i][j]=INF;
-   }
   }
  }
 
- void insert_arc( vertex i, vertex j, weight w) {
+ madj( vector<point> P) {
+   geometric(P);
+ }
+
+ void insert_arc( vertex i, vertex j, weight w=INF) {
   V[i][j]=true;
   E[i][j]=w;
  }
@@ -40,31 +42,64 @@ class madj
   E[v][w]=INF;
  }
 
- void print(void) {
-  for( num i=0; i<dim; i++) {
-   for( num j=0; j<dim; j++) {
-    cout << "(" << V[i][j] << "," << E[i][j] << ")" << " ";
-   }
-   std::cout << std::endl;
+ void print(int choise=0) {
+  switch (choise) {
+   case 0:
+    for( num i=0; i<E.size(); i++) {
+     for( num j=0; j<E.size(); j++)
+      cout << V[i][j] << " ";
+     cout << endl;
+    }
+    break;
+   case 1:
+    for( num i=0; i<E.size(); i++) {
+     for( num j=0; j<E.size(); j++)
+      cout << " " << E[i][j];
+     cout << endl;
+    }
+    break;
+   case 2:
+    for( num i=0; i<N.size(); i++) {
+     for( num j=0; j<N.size(); j++) {
+      cout << "(" << V[i][j] << "," << E[i][j] << ")" << " ";
+     }
+     std::cout << std::endl;
+    }
+   break;
   }
  }
 
+ double dist( point x, point y) {
+  return abs(x-y);
+ }
+
+ void geometric( vector<point> P) {
+//  this->~madj();
+  *this=madj(P.size());
+  N=P;
+  for( num i=0; i<P.size(); i++) {
+   for( num j=0; j<P.size(); j++) {
+    E[i][j]=dist(P[i],P[j]);
+    V[i][j]=false;
+   }
+  }
+ }
+
+ num in_degree( vertex v) {
+  num aux=0;
+  for( num i=0; i<dim; i++) aux+=(num) V[i][v];
+  return aux;
+ }
+
+ num out_degree( vertex v) {
+  num aux=0;
+  for( num i=0; i<dim; i++) aux+=(num) V[v][i];
+  return aux;
+ }
+ 
 
 /*
- // Retorna os vértices que saem de "v"
- std::vector<vertex> outdeg( vertex v) {
-  std::vector<vertex> aux;
-  for( num i=0; i<size(N); i++) {
-   if( M[i]
-  }
-  return aux;
- }
 
- num indeg( vertex v) {
-  num aux=0;
-  for( num i=0; i<dim; i++) aux+=(num) M[i][v];
-  return aux;
- }
 
 // Sexta questão
  bool hasloop( void) {
@@ -251,25 +286,25 @@ void DFS( matriz_adj A, num i, std::vector<bool>& cache)
  friend class grafo;
 // friend bool in_loop( grafo, vertex, vector<bool>&);
 };
-
-
-
 /*
-
 int main()
 {
+ char file[]="points.dat";
+ vector<point> R=read(file);
 
- madj A(3);
- list<point> R;
+// for( num i=0; i<R.size(); i++) 
+//  cout << R[i];
+// cout << endl;
+
+ madj A;
+ A.geometric(R);
+
+
+// A.insert_arc(0,1);
+// cout << A.in_degree(0)  << " " << A.out_degree(0) << endl;
  
-
-
- A.insert_arc(0,1, 0.1);
- A.insert_arc(1,2, 0.2);
-
- A.print();
+ A.print(0);
 
  return 0;
 }
-
 */

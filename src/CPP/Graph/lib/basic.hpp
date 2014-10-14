@@ -1,16 +1,38 @@
 #include <iostream>
 #include <fstream>
-#include <list>
-#include <queue>
-#include <ctime>
-#include <algorithm>
 
+//#include <list>
+#include <queue>
+#include <vector>
+
+#include <ctime>
+
+#include <algorithm>
 #include <complex>
+
+using namespace std;
 
 typedef unsigned int num;
 typedef unsigned int vertex;
 typedef double weight;
 typedef std::complex<double> point;
+
+
+// Ler um arquivo e retornar um vector de point
+vector<point> read( char file[]) {
+ ifstream data( file, ifstream::in);
+ point aux;
+ vector<point> Aux;
+ while( data >> aux.real() >> aux.imag()) {
+  Aux.push_back(aux);
+ }
+ return Aux;
+}
+
+
+
+
+
 
 /*
 class edge

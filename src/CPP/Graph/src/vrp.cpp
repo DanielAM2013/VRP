@@ -13,32 +13,17 @@ class grafo {
    M=madj(n);
   }
 
-  void print( int i=0) {
-   if(i==0)
-    for( num k=0; k<size(); k++) {
-     for( num s=0; s<size(); s++)
-      cout << connected(k,s);
-     cout << endl;
-    }
-   else
-   for( num k=0; k<R.size(); k++)
-    cout << R[k] << " ";
-   cout << endl;
-  }
-
-  vector<point> read( char file[]) {
-   ifstream data( file, ifstream::in);
-   point aux;
-   vector<point> Aux;
-   while( data >> aux.real() >> aux.imag()) {
-    Aux.push_back(aux);
-   }
-   return Aux;
-  }
-
   grafo ( char file[]) {
-   R=read(file);
-   M=madj(R.size());
+   vector<point> Aux=read(file);
+   M.geometric(Aux);
+  }
+
+  grafo ( vector<point> P) {
+   M.geometric(P);
+  }
+
+  void print( int s=0) {
+   M.print(s);
   }
 
   num degre(vertex v) {
@@ -64,13 +49,6 @@ class grafo {
    M.V[i][j]=false; M.V[j][i]=false;
   }
 
-  void planar( void) {
-   for( num i=0; i<R.size(); i++) {
-    for( num j=0; j<R.size(); j++) {
-     M.E[i][j]=dist(R[i],R[j]);
-    }
-   }
-  }
 
   bool in_loop( vertex, vertex, vertex, vector<bool>&);
 
@@ -172,16 +150,45 @@ void grafo::KRUSKAL(void)
  }
 }
 
+//#include <boost/numeric/ublas/matrix.hpp>
+//#include <boost/numeric/ublas/io.hpp>
+
+
 void grafo::CHRISTOFIDES(void) {
 
- madj AUX;
  // Aplica o KRUSKAL para determinar a minima espassão em árvore
+ KRUSKAL();
 
  // encontrar vertices com grau impar
+ vector<point> odd_degre;
+ for( num i=0; i<size(); i++) {
+  if( degre(i)%2==1) {
+   odd_degre.push_back(R[i]);
+  }
+ }
+
  // encontrar o "perfect matching" com peso mínimo dos vértices impares
- // 
+ // obs: usar o mesmo passo do KRUSKAL
+ madj Aux(odd_degre);
+ vector<bool> visited(size());
+ for( num k=0; k<odd_degree.size(); k++) {
+  double aux=INF;
+  vertex v=0, w=0;
+  for( num i=0; i<odd_degre.size(); i++)
+   for( num j=0; j<odd_degre.size(); j++) {
+    if( !Aux.connected(i,j) & getw(i,j) < aux) {
+     v=i; w=j; aux=getw(i,j);
+    }
+   }
+  if(aux==INF) break; 
+  if( mark[v] & mark[w]) continue;
+  
 
 
+ }
+
+
+ // Selecionar um circuito de Euler
 
 }
 
@@ -190,15 +197,11 @@ void grafo::CHRISTOFIDES(void) {
 
 //}
 
-
-
-
 int main()
 {
 // grafo X(5);
  char file[]="points.dat";
  grafo X(file);
- X.planar();
 
 // vector<bool> mark(X.size());
 
@@ -210,13 +213,22 @@ int main()
 // cout << X.in_loop(0, 0, 0, mark) << endl;
 
 // X.print(0);
- X.KRUSKAL(); 
+// X.KRUSKAL(); 
 // X.insert(5,9);
 //  cout << X.getw(1,3) << endl;
-  X.print(0);
- for( num k=0; k<X.size(); k++)
-  if( X.degre(k)%2==1)
-   cout << X.degre(k) << endl;
+//  X.print(0);
+// for( num k=0; k<X.size(); k++)
+//  if( X.degre(k)%2==1)
+//   cout << X.degre(k) << endl;
+
+
+// using namespace boost::numeric::ublas;
+//    matrix<double> m (3, 3);
+//    for (unsigned i = 0; i < m.size1 (); ++ i)
+//        for (unsigned j = 0; j < m.size2 (); ++ j)
+//            m (i, j) = 3 * i + j;
+//    std::cout << m << std::endl;
+
  return 0;
 }
 
