@@ -8,8 +8,8 @@ int main(){
 // print_route(R);
 // Dado um arquivo com uma lista de pontos
 // devemos remover os possiveis cruzamentos nesta rota
-
- opt2(&R);
+ for( int k=0; k<10; k++)
+  opt2(&R);
 // print_route(R);
 
  char o[]="route.dat";

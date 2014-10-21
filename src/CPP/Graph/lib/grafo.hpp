@@ -1,4 +1,4 @@
-#include "madj.cpp"
+#include "madj.hpp"
 #include <queue>
 
 // inicializar grafo
@@ -254,6 +254,7 @@ void grafo::CHRISTOFIDES(void) {
 
 
 //}
+/*
 int main()
 {
 // grafo X(5);
@@ -297,4 +298,4 @@ int main()
  system("gnuplot -p -e "
  return 0;
 }
-
+*/

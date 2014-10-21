@@ -9,5 +9,8 @@ class digraph: public madj, public ladj, public arcs
  protected:
  public:
 
+ digraph( num n) {
+  madj(n);
+ }
 
 }

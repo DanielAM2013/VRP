@@ -1,51 +1,65 @@
 //#include "basic.hpp"
+#include <iostream>
+#include <list>
 
-typedef struct Arc {
- vertex orig;
- vertex dest;
-} arc;
+using namespace std; 
+typedef unsigned int num;
 
+template< class A, class B>
+struct Association {
+ A orig;
+ B dest;
+};
+
+
+template< class A, class B>
 class arcs
 {
- public:
- std::list<arc> vect;
- num dim;
+ private:
+  typedef struct Association<A,B> arc;
+  std::list<arc> vect;
+ protected:
 
- arcs( num D=0) {
-  dim=D;
- }
+ public:
+
+// Construtores
+//  arcs( num D=0) {
+//   vect=list<arc>(D);
+//  }
+
 
 // Primeira questão
- num indeg( vertex v) {
+ num indeg( B v) {
   num aux=0;
-  for( std::list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
+  for( list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
    if( i->dest==v) aux++;
   }
   return aux;
  }
 
- num outdeg( vertex v) {
+ num outdeg( A v) {
   num aux=0;
-  for( std::list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
+  for( list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
    if( i->orig==v) aux++;
   }
   return aux;
  }
 
- void insert_arc( vertex o, vertex d) {
+ void associate( A o, B d) {
   arc aux;
   aux.orig=o;
   aux.dest=d;
   vect.push_back(aux);
-  if( o>=dim) dim=o+1;
-  if( d>=dim) dim=d+1;
  }
 
-// Segunda questão
- void insert( vertex o, vertex d) {
-  insert_arc( o, d);
-  insert_arc( d, o);
+ void disassociate( A o, B d) {
+  for( list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
+   if( i->orig==o & i->dest==d)
+    vect.erase(++i);
+  }
  }
+
+/*
 
  void remove_arc( vertex o, vertex d) {
   for( std::list<arc>::iterator i=vect.begin(); i!=vect.end(); i++) {
@@ -148,23 +162,24 @@ class arcs
    cache.pop();
   }
  }
-
+*/
 };
 
-/*
+
 int main()
 {
- arcs x;
+ struct Association<double, int> x;
+
 // Teste: Segunda questão
- x.insert_arc(0,1);
- x.insert_arc(1,2);
- x.insert_arc(2,3);
- x.insert_arc(3,4);
- x.insert_arc(4,5);
- x.insert_arc(5,6);
- x.insert_arc(6,7);
- x.insert_arc(7,8);
- x.insert_arc(8,9);
+// x.insert_arc(0,1);
+// x.insert_arc(1,2);
+// x.insert_arc(2,3);
+// x.insert_arc(3,4);
+// x.insert_arc(4,5);
+// x.insert_arc(5,6);
+// x.insert_arc(6,7);
+// x.insert_arc(7,8);
+// x.insert_arc(8,9);
 // x.insert_arc(9,0);
 
 // Teste: Primeira questão
@@ -175,22 +190,23 @@ int main()
 // x.remove_arc(0,1);
 
 // Teste: Sexta questão
- if( x.hasloop()) std::cout << "ok";
+// if( x.hasloop()) std::cout << "ok";
 
 // Teste: Sétima questão
 
 // Teste: Oitava questão
 
- std::cout << x.dim << std::endl;
+// std::cout << x.dim << std::endl;
 
 
 
 // Teste: BFS
- x.BFS(0);
+// x.BFS(0);
 
 
 
 // x.print();
  return 0;
 }
-*/
+
+

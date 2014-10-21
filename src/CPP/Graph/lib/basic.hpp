@@ -17,6 +17,21 @@ typedef unsigned int vertex;
 typedef double weight;
 typedef std::complex<double> point;
 
+void print(double x) {
+ cout << x;
+}
+
+// Imprimir um vetor de point's
+template < class A>
+void print( vector<A> V) {
+
+ for( num k=0; k<V.size(); k++) {
+  cout << " ";
+  print<A>(V[k]);
+ }
+
+ cout << endl;
+}
 
 // Ler um arquivo e retornar um vector de point
 vector<point> read( char file[]) {
@@ -29,10 +44,14 @@ vector<point> read( char file[]) {
  return Aux;
 }
 
-
-
-
-
+// Ler um vetor de pontos e retornar um arquivo
+void write( vector<point> X, char file[]) {
+ ofstream data( file, ofstream::out);
+// point aux;
+ for( num k=0; k<X.size(); k++) {
+  data << X[k].real() << " " << X[k].imag() << endl;
+ }
+}
 
 /*
 class edge
