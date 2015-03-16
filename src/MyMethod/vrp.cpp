@@ -1,6 +1,10 @@
 #include "vrp.hpp"
 #include <sstream>
 
+/* Esta versão do programa utiliza listas encadeadas para representar as listas de rotas
+
+*/
+
 route read_file(char file[]) {
 
  std::ifstream data(file, std::ifstream::in);

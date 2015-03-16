@@ -26,11 +26,6 @@ double cust_route(route X) {
 
 double cust( train X) {
  double aux=0;
-/*
- for( int i=0; i<X.size(); i++) 
-  aux+=cust_route(X[i]); 
- return aux;
-*/
 
  double k=2;
  for( int i=0; i<X.size(); i++) 
@@ -38,21 +33,7 @@ double cust( train X) {
 
  return pow(aux,1/k);
 
-/*
- double d[2]={0,cust_route(X[0])};
- for( int i=1; i<X.size(); i++) {
-  d[0]=cust_route(X[i]);
-
-//  std::cout << d[0] << std::endl;
-  if(d[0]>d[1]) {
-   d[1]=d[0];
-  }
- }
-// std::cout << d[1] << std::endl;
- aux=pow(pow(aux,2)+pow(d[1],2),0.5);
-*/
 }
-
 
 double tsp(route *R) {
  double d[3];
@@ -89,4 +70,3 @@ double tsp(route *R) {
  }
  return d[2];
 }
-

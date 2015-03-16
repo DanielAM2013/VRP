@@ -1,8 +1,3 @@
-\documentclass[a4paper, 12pt]{article}
-\input{.format/preambulo.tex}
-
-\begin{document}
-
 \section{Algoritmo Formiga}
 
  O primeiro sistema formiga para VRP foi desenhado muito recentemente por {\color{red} referência},
@@ -24,8 +19,8 @@ veículos e atualização de trilha, O Algoritmo AS é explicado aqui.
 trilha são repetidos para um número de iterações. Considerando a disposição inicial das formigas
 artificiais foi encotrado que o número de formigas poderia ser igual em cada cliente no inicio da
 iteração. O 2-opt-heuritica ( é explicada esplorando todas as permutações obtidas pela mudança de
-duas cidades) é usando para minimizar a rota de veículos geredas pelas formigas artificiais,
-consideravelmente melhorar a qualidade da solução. Além disso para esse avançar na pesquisa local
+duas cidades) é usando para minimizar a rota de veículos geradas pelas formigas artificiais,
+consideravelmente melhora a qualidade da solução. Além disso para esse avançar na pesquisa local
 tambem introduzimos uma listade de cadidatos para seleção de clientes os quais são determinados na
 fase de inicialização do algoritmo. Para cada localição $d_{ij}$ ordenamos $V-\{v_i\}$. de acordo
 com a distância crescente $d_{ij}$ para obter a lista de candidatos. A proposição de AS para CVRP
@@ -269,7 +264,7 @@ eficientes. Na figura abaixo podemos veo o pseudocodigo de um simples GA.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=10cm]{.images/ga-pseudocode.png}
+\includegraphics[width=10cm]{fig/ga-pseudocode.png}
 \end{figure}
 
  Para resolver o VRP com GAs, é usual representar cada indivíduo por apenas um cromossomo, o qual é
@@ -398,7 +393,7 @@ duas novas soluções melhores na 14 sentença padrão de comparação de VRP.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=5cm]{.images/RochatTaillard95.png}
+\includegraphics[width=5cm]{fig/RochatTaillard95.png}
 \end{figure}
 
 
@@ -418,4 +413,3 @@ computacional carnudo e afinação propriamente seus muitos parametros podem ser
 
 
 
-\end{document}

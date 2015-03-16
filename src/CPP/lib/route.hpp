@@ -21,7 +21,7 @@ route::iterator prev( route::iterator i, int n=1) {
 }
 
 // Lê uma rota: arquivo com uma lista de par de double ordenados
-route read_route(char file[]) {
+route read (char file[]) {
 
  std::ifstream data(file, std::ifstream::in);
  

@@ -1,4 +1,4 @@
-#include "tsp.h"
+#include "../../lib/tsp.h"
 
 int main()
 {

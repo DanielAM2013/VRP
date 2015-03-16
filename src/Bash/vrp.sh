@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 
 rm *.test
 g++ vrp.cpp -o ../bin/vrp

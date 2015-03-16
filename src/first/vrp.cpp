@@ -12,15 +12,14 @@ route read_file(char file[]) {
   first.push_back(aux);
  }
 
- route *aux=new route;
- aux->subroute=*R;
+ route *Aux=new route;
+ Aux->subroute=*R;
  
  // Enviar um veículo para cada ponto
  for( ponto *i=R->next; i!=NULL; i=i->next) {
-  aux=aux->next=new route;
-  aux->subroute=*i;
+  Aux=Aux->next=new route;
+  Aux->subroute=*i;
  }
-}
 }
 
 void print_train(train T) 

@@ -1,105 +1,84 @@
-#include "madj.cpp"
-#include <queue>
+#include "vrp.hpp"
 
-// inicializar grafo
+grafo::grafo ( num n) {
+ M=madj(n);
+}
 
-class grafo {
- private:
-  madj M;
-// Como o número de vértice é finito podemos associar a cada vértice um valor sobre um conjunto,
-// basta definir os elementos desse conjunto como a variável point;
-  vector<point> R;
+grafo::grafo ( char file[]) {
+ R=vector<point>(read(file));
+ M.geometric(R);
+}
 
- public:
-  grafo ( num n) {
-   M=madj(n);
-  }
+grafo::grafo ( vector<point> P) {
+ R=vector<point>(P);
+ M.geometric(P);
+}
 
-  grafo ( char file[]) {
-   R=vector<point>(read(file));
-   M.geometric(R);
-  }
+void grafo::print( int s=0) {
+ M.print(s);
+}
 
-  grafo ( vector<point> P) {
-   R=vector<point>(P);
-   M.geometric(P);
-  }
+vertex grafo::enu( point x) {
+ for( num k=0; k<R.size(); k++)
+  if( x==R[k]) return k;
+}
 
-  void print( int s=0) {
-   M.print(s);
-  }
+num grafo::degre(vertex v) {
+ num aux=0;
+ for( num k=0; k<size(); k++) 
+  aux+=connected(v,k);
+ return aux;
+}
 
-  vertex enu( point x) {
-   for( num k=0; k<R.size(); k++)
-    if( x==R[k]) return k;
-  }
+weight grafo::dist( point x, point y) {
+ return abs(x-y);
+}
 
-  num degre(vertex v) {
-   num aux=0;
-   for( num k=0; k<size(); k++) 
-    aux+=connected(v,k);
-   return aux;
-  }
+void grafo::connect( vertex i, vertex j) {
+ M.V[i][j]=M.V[j][i]=true;
+}
 
-  weight dist( point x, point y) {
-   return abs(x-y);
-  }
+void grafo::insert( vertex i, vertex j) {
+ M.V[i][j]=M.V[j][i]=true;
+}
 
-  void connect( vertex i, vertex j) {
-   M.V[i][j]=M.V[j][i]=true;
-  }
+void grafo::insert( vertex i,  vertex j, weight w) {
+ M.V[i][j]=true; M.V[j][i]=true;
+ M.E[i][j]=M.E[j][i]=w;
+}
 
-  void insert( vertex i, vertex j) {
-   M.V[i][j]=M.V[j][i]=true;
-  }
+void grafo::remove( vertex i, vertex j) {
+ M.V[i][j]=false; M.V[j][i]=false;
+}
 
-  void insert( vertex i,  vertex j, weight w) {
-   M.V[i][j]=true; M.V[j][i]=true;
-   M.E[i][j]=M.E[j][i]=w;
-  }
+bool grafo::connected( vertex i, vertex j ) {
+ return M.V[i][j];
+}
 
-  void remove( vertex i, vertex j) {
-   M.V[i][j]=false; M.V[j][i]=false;
-  }
+num grafo::size( void) {
+ return M.dim;
+}
 
-  bool in_loop( vertex, vertex, vertex, vector<bool>&);
+weight grafo::getw( vertex i, vertex j) {
+ return M.E[i][j];
+}
 
-  void KRUSKAL( void);
+point grafo::node( vertex i) {
+ return R[i];
+}
 
-  bool connected( vertex i, vertex j ) {
-   return M.V[i][j];
-  }
-
-  num size( void) {
-   return M.dim;
-  }
-
-  weight getw( vertex i, vertex j) {
-   return M.E[i][j];
-  }
-
-  point node( vertex i) {
-   return R[i];
-  }
-
-  void CHRISTOFIDES(void);
-  void PERFECT_MATCHING(void);
- 
-  void save( char file[]) {
-   ofstream saida( file);
-
-   for( num k=0; k<size()-1; k++) {
-    for( num t=k+1; t<size(); t++) {
-     if( connected(k,t)) {
-      saida << node(k).real() << " " << node(k).imag() << endl;
-      saida << node(t).real() << " " << node(t).imag() << endl;
-      saida  << endl;
-     }
-    }
+void grafo::save( char file[]) {
+ ofstream saida( file);
+ for( num k=0; k<size()-1; k++) {
+  for( num t=k+1; t<size(); t++) {
+   if( connected(k,t)) {
+    saida << node(k).real() << " " << node(k).imag() << endl;
+    saida << node(t).real() << " " << node(t).imag() << endl;
+    saida  << endl;
    }
   }
-
-};
+ }
+}
 
 bool grafo::in_loop(vertex i, vertex origin, vertex prev, vector<bool>& visited) {
  visited[i]=true;
@@ -183,10 +162,6 @@ void grafo::KRUSKAL(void)
  }
 }
 
-//#include <boost/numeric/ublas/matrix.hpp>
-//#include <boost/numeric/ublas/io.hpp>
-
-
 void grafo::CHRISTOFIDES(void) {
 
  // Aplica o KRUSKAL para determinar a minima espassão em árvore
@@ -248,19 +223,17 @@ void grafo::CHRISTOFIDES(void) {
 
 }
 
-
-
 //void grafo::PERFECT_MATCHING(void) {
 
 
 //}
-int main()
-{
+//int main()
+//{
 // grafo X(5);
- char file[]="points.dat";
- grafo X(file);
+// char file[]="points.dat";
+// grafo X(file);
 
- vector<bool> mark(X.size());
+// vector<bool> mark(X.size());
 
 // X.insert(3,7);
 // cout << X.in_loop(3, 3, 3, mark) << endl;
@@ -270,14 +243,14 @@ int main()
 
 // cout << X.enu(X.node(15)) << " " << X.node(15) << endl;
 
- X.KRUSKAL(); 
+// X.KRUSKAL(); 
 // X.CHRISTOFIDES();
 // for( num k=0; k<X.size(); k++) {
 //  if(X.in_loop(k, k, k, mark)) cout << k << endl;
 // }
 
- char out[]="output.dat";
- X.save(out);
+// char out[]="output.dat";
+// X.save(out);
 
 // X.print(0);
 // X.insert(5,9);
@@ -294,7 +267,7 @@ int main()
 //        for (unsigned j = 0; j < m.size2 (); ++ j)
 //            m (i, j) = 3 * i + j;
 //    std::cout << m << std::endl;
- system("gnuplot -p -e "
- return 0;
-}
+// system("gnuplot -p -e "
+// return 0;
+//}
 

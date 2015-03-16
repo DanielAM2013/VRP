@@ -5,10 +5,11 @@
 #include <unistd.h>
 #include <vector>
 
-//#include <boost/tuple/tuple.hpp>
-//#include <gnuplot-iostream.h>
-
 using namespace std;
+
+/*! ponto:= lista encadeada de numeros complexos
+   Representação de rota por lista encadeada
+*/
 
 typedef struct Ponto {
   complex<double> coord;
@@ -16,6 +17,11 @@ typedef struct Ponto {
   struct Ponto* next;
   struct Ponto* prev;
 } ponto;
+
+/*!
+   Nome: route
+   Descrição: Representação de uma lista ordenada de rotas.
+*/
 
 typedef struct Route {
  ponto subroute; 
@@ -51,7 +57,6 @@ void print_list_duple(ponto* P)
  }
 }
 
-
 ponto* read_file_points(char s[]) {
 
  ifstream data(s, ifstream::in);
@@ -82,8 +87,6 @@ ponto* read_file_points(char s[]) {
 
  return P;
 }
-// Calcula a distância de um ponto a uma rota
-// 
 
 double dist_route(ponto* route, complex<double> x, ponto** out) {
  
@@ -148,7 +151,6 @@ void del(ponto** P, complex<double> DEL) {
  }
 }
 
-// Ponto cujo
 double point_closer(ponto* route, ponto **P, ponto **out, ponto** nov)
 {
 
@@ -185,13 +187,7 @@ void salve_file(ponto* route, char name_file[])
  ofstream out(name_file, ofstream::out);
 
  Aux=route;
-/*
- if(Aux==NULL) return;
- do {
-  out << Aux->coord.real() << " " << Aux->coord.imag() << endl;
-  Aux=Aux->next;
- } while(Aux!=route);
-*/
+
  while(Aux!=NULL) {
   out << Aux->coord.real() << " " << Aux->coord.imag() << endl;
   Aux=Aux->next;
@@ -213,23 +209,6 @@ void gnuplot(ponto* route)
 
 double create_route(ponto** route, ponto** P)
 {
-/*
- Gnuplot gp;
-
- char saida[10]="saida.txt", entrada[10]="dados.txt";
- vector<boost::tuple<double, double> > data, ent;
-
- 
- ifstream out(saida), in(entrada);
-
- gp << "set xrange [-1:10]; set yrange [-1:10]\n";
- gp << "set term gif animate\n";
- gp << "set output 'test.gif'\n";
- double aux[2];
- while(in >> aux[0] >> aux[1]) {
-  ent.push_back(boost::make_tuple(aux[0],aux[1]));
- }
-*/
 
  double perc=0;
  ponto* Aux[3];
@@ -237,29 +216,13 @@ double create_route(ponto** route, ponto** P)
  (*route)->coord=(*P)->coord;
  (*route)->prev=*route;
  (*route)->next=*route;
-/*
- data.push_back(boost::make_tuple((*route)->coord.real(),(*route)->coord.imag()));
- gp << "plot '-' with linespoint ls 1\n";
- gp.send1d(data);
- gp << "plot '-' with points ls 2\n";
- gp.send1d(ent);
-*/
+
 
  del(P,(*P)->coord);
 
  while(*P) {
 
   perc+=point_closer((*route), P, &Aux[0], &Aux[1]);
-/*
-  aux[0]=Aux[1]->coord.real();
-  aux[1]=Aux[1]->coord.imag();
-
-  data.push_back(boost::make_tuple(aux[0],aux[1]));
-  gp << "plot '-' with linespoint ls 1\n";
-  gp.send1d(data);
-  gp << "plot '-' with points ls 2\n";
-  gp.send1d(ent);
-*/
 
   Aux[2]=new ponto;
   Aux[2]->coord=Aux[1]->coord;
@@ -270,7 +233,6 @@ double create_route(ponto** route, ponto** P)
 
   del(P,Aux[1]->coord);
  }
-// gp << "set output\n";
 
  return perc;
 }
