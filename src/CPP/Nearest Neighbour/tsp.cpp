@@ -1,16 +1,19 @@
-#include "../lib/vrp.hpp"
+#include "../lib/route.hpp"
 
-double tsp(route *R) {
+double tsp(route *R, int unsigned k) {
  double d[3];
  d[2]=0;
 
  route::iterator closer[2];
+ route::iterator x=next(R->begin(),k);
+ swap(R->begin(),x);
 
  for( route::iterator last=R->begin(); last+1!=R->end(); last++) {
   d[1]=1e+30;
   for( route::iterator i=last+1; i!=R->end(); i++) {
    for( route::iterator j=R->begin(); j!=last; j++) {
 
+//    d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1));
     d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
     if(d[0]<d[1]) {
      d[1]=d[0];
@@ -19,6 +22,7 @@ double tsp(route *R) {
     }
    }
 
+//   d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin());
    d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
    if(d[0]<d[1]) {
     d[1]=d[0];
@@ -41,7 +45,7 @@ double tspR( route *R, int& n)
  route Aux(*R);
  route::iterator last=R->begin();
  for( route::iterator i=Aux.begin(); i!=Aux.end(); i++) {
-  tspR(Aux, n-1);
+//  tspR(Aux, n-1);
  }
 }
 
@@ -58,7 +62,19 @@ int main()
   Tsp.push_back(aux);
  }
 
- std::cout << tsp(&Tsp) << std::endl;
+ std::cout << tsp(&Tsp,0);
+// route AUX;
+// double Aux=1e+30;
+// for( int i=0; i<200; i++) {
+//  double x=tsp(&Tsp,i);
+//  if( Aux > x) {
+//   aux=x;
+//   AUX=route(Tsp);
+//  }
+// }
+ 
+ char out[]="output.dat";
+ save_route(&Tsp, out);
 
  return 0;
 }

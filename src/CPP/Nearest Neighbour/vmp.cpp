@@ -4,10 +4,10 @@
 #include <iterator>
 #include <complex>
 #include <algorithm>
-<<<<<<< HEAD:src/Vizinho mais proximo/vmp.cpp
-=======
+
 #include <iterator>
->>>>>>> c819fe210855439f70c6672ee298ab9c21031ea1:src/CPP/Nearest Neighbour/vmp.cpp
+
+using namespace std;
 
 /*
  P: conjunto de pontos dados inicialmente
@@ -131,25 +131,18 @@ int main()
  }
 
 // std::cout << *(T.end()) << std::endl;
-<<<<<<< HEAD:src/Vizinho mais proximo/vmp.cpp
 // std::cout << vmp(&T, &S, 1);
  point aux(101,102);
  T.insert(T.end(), aux);
  
- std::cout << *(std::next(T.begin(), 1));
 // for( std::list<point>::iterator i=T.begin(); i!=T.end(); i++) {
 //  std::cout << *i << "-" << *(std::next(i,1))<< " ";
 // }
-=======
 
 // std::cout << vmp(&T, &S, 1);
 // point aux(1,2);
 // T.insert(T.end(), aux);
  
- for( std::list<point>::iterator i=T.begin(); i!=T.end(); i++) {
-  std::cout << *std::next(i,1) << " ";
- }
->>>>>>> c819fe210855439f70c6672ee298ab9c21031ea1:src/CPP/Nearest Neighbour/vmp.cpp
 
  return 0;
 }

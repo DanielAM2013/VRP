@@ -1,7 +1,5 @@
 #include "../lib/grafo.hpp"
 
-int Teste=200;
-
 double sign( point A, point B) {
  return (A.real()*B.imag()-A.imag()*B.real());
 }
@@ -90,7 +88,7 @@ vector<point> bordo_convexo( vector<point> X ) {
  }
 
  // Passo indutivo
- for( num k=2; k<Teste; k++) {
+ for( num k=2; k<AUX.size(); k++) {
    // Determinar o ponto tangente positivo
    if( In(fecho, AUX[k])) continue;
    num v=positive( fecho, AUX[k]), w=negative( fecho, AUX[k]);
@@ -108,41 +106,33 @@ vector<point> bordo_convexo( vector<point> X ) {
  return fecho;
 }
 
+
 int main()
 {
  char file[]="points.dat";
  vector<point> X=read(file);
  vector<point> Aux=bordo_convexo(X);
 
- cout << "-----" << endl;
+ vector<double> area;
+ for( num k=0; k<Aux.size()-1; k++) {
+  area.push_back(abs(sign(Aux[k]-X[0],Aux[k+1]-X[0])));
+ }
+ area.push_back(abs(sign(Aux[Aux.size()-1]-X[0],Aux[0]-X[0])));
 
-
- for( num k=0; k<Aux.size(); k++)
-  cout << Aux[k];
+ for( num k=0; k<area.size(); k++)
+  cout << area[k] << endl;
  cout << endl;
+
  Aux.insert(Aux.end(), Aux[0]);
+ Aux.insert(Aux.end(), X[0]);
 
-// cout << In( Aux, X[16]) << X[16] << endl; 
 
-// num v=positive( Aux, X[16]), w=negative( Aux, X[16]);
-// apagar( Aux, v, w);
- 
-// Aux.insert(Aux.begin()+v+1, X[16]);
 
-// for( num k=0; k<Aux.size(); k++)
-//  cout << Aux[k];
-// cout << endl;
+
+
 
  char out[]="output.dat";
  write(Aux,out);
-
-
-
-// cout << negative( Aux, X[4]) << " " << positive( Aux, X[4]) << " " << X[4] << endl;
-// cout << sign(Aux[Aux.size()-1]-Aux[Aux.size()-2], X[4]-Aux[Aux.size()-2]) << endl;
-// cout << sign( Aux[0]-Aux[Aux.size()-1], X[4]-Aux[Aux.size()-1]) << endl;
-
-// cout << In(Aux, X[4]) << endl;
 
  return 0;
 }
