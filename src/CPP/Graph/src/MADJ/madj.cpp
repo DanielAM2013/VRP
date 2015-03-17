@@ -1,7 +1,22 @@
 #include "../../lib/madj.hpp"
 
+vector<point> madj::getN () {
+ return this->N;
+}
+
+vector<vector<weight> > madj::getE () {
+ return this->E;
+}
+
+vector<vector<bool> > madj::getV () {
+ return this->V;
+}
+
 madj::madj ( const madj& A) {
- N(A
+ N=vector<point> (A.N);
+ E=vector<vector<weight> >(A.E);
+ V=vector<vector<bool> > (A.V); 
+ dim=N.size();
 }
 
 madj::madj (num m=0) {

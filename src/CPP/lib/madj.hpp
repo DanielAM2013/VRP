@@ -1,3 +1,6 @@
+#ifndef INCLUDE_MADJ
+#define INCLUDE_MADJ
+
 #include "route.hpp"
 
 #define INF (1e+30)
@@ -11,14 +14,16 @@ class madj
   vector<vector<weight> > E;
   vector<vector<bool> > V;
   num dim;
- protected:
   
  public:
 
- madj( num);
- madj( vector<point>);
+ vector<point> getN () ;
+ vector<vector<weight> > getE () ;
+ vector<vector<bool> > getV () ;
 
- route 
+ madj ( num) ;
+ madj ( const madj& ) ;
+ madj ( vector<point>) ;
 
  void insert_arc ( vertex, vertex, weight) ;
  void remote_arc ( vertex, vertex) ; 
@@ -31,3 +36,4 @@ class madj
 
  friend class grafo;
 };
+#endif

@@ -1,5 +1,8 @@
-#include "base.hpp"
+#ifndef INCLUDE_ROUTE
+#define INCLUDE_ROUTE
 
+#include "base.hpp"
+/*
 // Avança "n" posições numa lista encadeada
 route::iterator next( route::iterator i, int n=1) {
 
@@ -19,9 +22,10 @@ route::iterator prev( route::iterator i, int n=1) {
 
  return aux;
 }
-
+*/
 // Lê uma rota: arquivo com uma lista de par de double ordenados
-route read (char file[]) {
+
+route readr (char file[]) {
 
  std::ifstream data(file, std::ifstream::in);
  
@@ -35,6 +39,7 @@ route read (char file[]) {
  return first;
 }
 
+/*
 // Salva uma rota: arquivo com uma lista de par de double ordenados
 void save_route(route* R, char name_file[])
 {
@@ -111,6 +116,9 @@ void print_route( route R) {
 
 }
 
+*/
 
+
+#endif
 
 

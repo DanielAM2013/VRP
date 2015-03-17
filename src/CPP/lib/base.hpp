@@ -13,5 +13,3 @@ typedef unsigned vertex;
 typedef std::complex<double> point;
 typedef std::vector<point> route;
 typedef std::vector<route> train;
-typedef std::list<double> List;
-
