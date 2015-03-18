@@ -1,4 +1,4 @@
-VRPH is a library of heuristics for quickly generating 
+VPH is a library of heuristics for quickly generating 
 solutions to Vehicle Routing Problems.  VRPH was 
 developed by Chris Groer as part of his dissertation at 
 the University of Maryland, College Park.  This code is 

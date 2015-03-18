@@ -1,7 +1,34 @@
+#ifndef INCLUDE_MADJ
+#define INCLUDE_MADJ
+
+//#include "route.hpp"
 #ifndef INCLUDE_ROUTE
 #define INCLUDE_ROUTE
 
-#include "base.hpp"
+//#include "base.hpp"
+
+
+#ifndef __BASE__
+#define __BASE__
+
+#include <iostream>
+#include <fstream>
+#include <complex>
+#include <algorithm>
+#include <iterator>
+#include <list>
+#include <vector>
+
+typedef double weight;
+typedef unsigned num;
+typedef unsigned vertex;
+
+typedef std::complex<double> point;
+typedef std::vector<point> route;
+typedef std::vector<route> train;
+
+#endif
+
 /*
 // Avança "n" posições numa lista encadeada
 route::iterator next( route::iterator i, int n=1) {
@@ -122,3 +149,44 @@ void print_route( route R) {
 #endif
 
 
+
+
+
+
+
+
+
+#define INF (1e+30)
+using namespace std;
+
+class madj
+{
+ private:
+
+  vector<point> N;
+  vector<vector<weight> > E;
+  vector<vector<bool> > V;
+  num dim;
+  
+ public:
+
+ vector<point> getN () ;
+ vector<vector<weight> > getE () ;
+ vector<vector<bool> > getV () ;
+
+ madj ( num) ;
+ madj ( const madj& ) ;
+ madj ( vector<point>) ;
+
+ void insert_arc ( vertex, vertex, weight) ;
+ void remote_arc ( vertex, vertex) ; 
+ void print (int choise) ;
+ double dist ( point x, point y) ;
+ void geometric ( vector<point>) ;
+ num in_degree ( vertex v) ;
+ num out_degree ( vertex v) ;
+ bool connected ( vertex, vertex) ;
+
+ friend class grafo;
+};
+#endif

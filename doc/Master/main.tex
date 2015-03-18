@@ -5,6 +5,57 @@
 
 \begin{document}
 
+
+\chapter{Definição do Problema}
+
+\section{Problema do Caixeiro Viajante (TSP)}
+
+	Um problema computacional bastante conhecido é o do caixeiro viajante: dado um conjunto de
+cidades, que devem ser percorridas por um caixeiro, qual a rota que minimiza a distância a
+percorrer?
+	Um modo direto de resolução deste problema é analisar todas as possibilidades possiveis e
+encontrar a com menor distância. Esta abordagem não é a mais aconselhavel uma vez que o número de
+operações requeridas para tal cresce exponencialmente com o número de cidades a percorrer.
+
+	Por este motivo se desenvolveu ao longo de varios anos métodos menos custosos para obter ou pelo
+menos se aproximar da solução. Listaremos agora as estratégias mais comuns utilizadas
+
+\begin{enumerate}
+\item Vizinho mais próximo
+\item Dois ótimo
+\end{enumerate}
+
+
+\section{Problema de roteamento de veículos}
+
+	Uma extensão clara do problema do caixeiro viajante é o problema de roteamento de veículos: dado
+um conjunto de entregas para clientes, que podem ser atendidos por mais que um veículo, qual o
+melhor conjunto de rotas que miniza a distância total percorrida?
+
+	A seguir especificaremos o problema matematicamente.
+
+	Dado $C$ ( conjunto de clientes) tal que $C \subset \mathbb{R}^2$. O algoritmo $Alg(k,C)$
+retorna o conjunto $f_i \in \mathbb{N}_i\times C$ de funções ( rotas) tal que $\sum_{i=1}^k\#
+\mathbb{N}_i = \#C$ e $\cap_{i=1}^k \mathbb{N}_i= \emptyset$
+
+	Existem algumas variações do problema de roteamento de veículos que serão listadas abaixo
+\begin{enumerate}
+\item Com carga (VRPC)
+\item Com limite de tempo (VRPTW)
+\item Com limite de veículos
+\end{enumerate}
+
+
+	Nosso problema é basicamente um VRP que busca minimizar o número de veículos utilizados e a
+distância percorrida.
+
+
+
+	Dado um conjunto de pontos em um plano devesse determinar a ordem a percorrer estes pontos de
+modo a minimizar o custo do percurso.
+
+
+
 \chapter{Algoritmos de Poupança}
 \input{../const/document.tex}
 
