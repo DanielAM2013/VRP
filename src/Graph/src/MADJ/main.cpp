@@ -1,4 +1,4 @@
-#include "madj.hpp"
+#include "../../lib/madj.hpp"
 
 //#include <iostream>
 //using namespace std;

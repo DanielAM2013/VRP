@@ -1,5 +1,5 @@
-#ifndef INCLUDE_ROUTE
-#define INCLUDE_ROUTE
+#ifndef _ROUTE_
+#define _ROUTE_
 
 #include "base.hpp"
 /*

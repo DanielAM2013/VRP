@@ -1,4 +1,4 @@
-#include "madj.hpp"
+#include "../../lib/madj.hpp"
 
 vector<point> madj::getN () {
  return this->N;
