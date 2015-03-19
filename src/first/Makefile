@@ -1,0 +1,2 @@
+all: vrp tsp
+clean: 

@@ -1,0 +1,20 @@
+ Esta conjunto de códigos visa criar uma estrutura de grafos para a elaboração de algoritmos.
+
+ Há basicamente três formas de se representar computacionalmente um grafo
+ 1) Lista de arcos
+ 2) Lista de adjacência
+ 3) Matriz de adjacência
+
+ Essas estruturas podem ser criadas de forma independente de forma que uma possa ser usada com subestrutura da
+outra em um dado momento.
+
+
+
+
+
+
+
+
+
+
+

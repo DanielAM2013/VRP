@@ -1,8 +1,6 @@
 1/10/2014
- 
 
  Inicializei uma reorganização do projeto, haja vista os atuais paradigmas desenvolvidos.
-  
 
  next:
  + criar função que leia um train( conjunto enumerado de rotas)
