@@ -1,5 +1,5 @@
-#ifndef __BASE__
-#define __BASE__
+#ifndef _BASE_
+#define _BASE_
 
 #include <iostream>
 #include <fstream>

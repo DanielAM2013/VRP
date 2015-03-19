@@ -1,12 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <list>
-#include <new>
-#include <complex>
-
-typedef std::complex<double> point;
-typedef std::list<point> Route;
-typedef std::list<Route> Subroute;
+#include "base.hpp"
 
 int main()
 {

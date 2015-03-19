@@ -1,9 +1,10 @@
-#include "madj.cpp"
-#include <queue>
+#ifndef _VRP_
+#define _VRP_
 
-class grafo {
+template < class graph >
+class vrp {
  private:
-  madj M;
+  graph G;
   vector<point> R;
  
  public:
@@ -27,3 +28,4 @@ class grafo {
 };
 
 
+#endif

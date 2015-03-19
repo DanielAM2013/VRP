@@ -1,15 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <complex>
-#include <algorithm>
+#include "../lib/base.hpp"
 
-typedef std::complex<double> point;
-typedef std::vector<point> route;
-typedef std::vector<route> subroute;
-typedef std::vector<double> list;
-
-int main()
+int
+main ( int argc, char* argc[])
 {
 // Ler Arquivo
  std::ifstream data("points.dat", std::ifstream::in);

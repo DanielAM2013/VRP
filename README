@@ -21,11 +21,53 @@ um fonte que possa gerar um executável que demonstre sua funcionalidade.
  Não será permitida a mescla de códigos com seus arquivos de entrada e/ou saída. Para isso serão
 criadas pasta com o nome "input" e "output" para colocar as entradas e saídas.
 
-
-
-
 	Existem varias formas de implementação de grafos. Dentro das formas possiveis de representação
 existem varias formas programas estes objetos. 
+
+	Utilizaremos neste projeto a forma vetorial uma vez que esta utiliza construções interna da
+linguagem C++ para resolver problemas de manipulação de dados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

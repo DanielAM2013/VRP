@@ -1,5 +1,5 @@
-#ifndef INCLUDE_MADJ
-#define INCLUDE_MADJ
+#ifndef _MADJ_
+#define _MADJ_
 
 #include "route.hpp"
 

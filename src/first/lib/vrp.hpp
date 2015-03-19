@@ -1,13 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <complex>
-#include <algorithm>
-
-typedef std::complex<double> point;
-typedef std::vector<point> route;
-typedef std::vector<route> train;
-typedef std::vector<double> list;
+#include "base.hpp"
 
 bool operator<(std::complex<double> X, std::complex<double> Y) {
  if(std::arg(X)<std::arg(Y)) return true;
