@@ -1,0 +1,76 @@
+\section{Problemática}
+
+
+	Dado um conjunto de pontos no plano determinar a melhor distribuição destes
+em rotas.
+
+	O problema pode ser dividido em dois subproblemas:
+\begin{enumerate}
+\item Determinar a rota mínima, em um subconjunto.
+\item Determinar a melhor distribuição dos pontos por cada veículos,
+\end{enumerate}
+
+	Os dois subproblemas citados estão intrinsicamente conectados. O primeiro
+problema já é bem conhecido na literatura e não será tratado inicialmente.
+Passando para o segundo problema, devido a complexidade de trata-lo de forma
+genérica, inicialmente consideraremos que os subconjuntos de pontos como valores
+reais ( pois uma rota nestes pontos é mensurável). 
+
+
+\section{Balanceamento}
+
+	Dada uma lista circular de números reais e um natural $k$ determinar a
+melhor destribuição de modo que o desvio padrão das somas dos subconjuntos seja
+mínima.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=5cm]{circ1.png}
+\caption{Representação pictórica do problema}
+\label{circ1}
+\end{figure}
+
+	Na figura \ref{circ1} os subcirculos sobre o bordo do circulo maior
+representa objetos quaisquer sobre os quais poder atribuir um valor real. O
+problema de balancear estes pontos consiste em determinar subconjuntos que
+possua valores proxímos uns dos outros. 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=5cm]{circ2.png}
+\caption{Representação pictórica do problema}
+\label{circ2}
+\end{figure}
+
+	Na figura \ref{circ2} temos a representação para uma possível solução para o
+problema apresentado na figura \ref{circ1}, porem existe outra possibilidade de
+solução {\color{red} MELHORAR}.
+
+
+	Tomando-se uma lista circular genérica com $n$ elementos existem 
+\[\frac{n!}{k!(n-k)!}\]
+	possibilidades de o dividir em $k$ subconjuntos adjacentes. O custo
+computacional de verificar todas as combinações é $O(n^k)$, o que não é
+atraente. Mesmo dividindo o trabalho por $n$ threads o esforço computacional não
+melhoraria muito - $O(n^{k-1})$
+
+	Na atual etapa do desenvolvimento podemos contar com a utilização de GPUs
+para paralelizar o esforço computacional, porém o problema não pode contar ainda
+com uma solução exata. Um possivel algoritmo que paraleliza o problema acima é
+torma $n$ threads que calculem sucessivamente o acrescimo do objeto seguinte ao
+subconjunto inicial até que este atinja a média esperada.
+
+	O problema com o algoritmo acima é que a únião de um conjunto de pontos
+adjacêntes não é a soma dos percursos separados.
+
+
+
+
+
+
+
+
+
+
+
+
