@@ -17,19 +17,19 @@ class madj
   
  public:
 
- vector<point> getN () ;
+ route getN () ;
  vector<vector<weight> > getE () ;
  vector<vector<bool> > getV () ;
 
  madj ( num) ;
  madj ( const madj& ) ;
- madj ( vector<point>) ;
+ madj ( route) ;
 
  void insert_arc ( vertex, vertex, weight) ;
  void remote_arc ( vertex, vertex) ; 
  void print (int choise) ;
  double dist ( point x, point y) ;
- void geometric ( vector<point>) ;
+ void geometric ( route) ;
  num in_degree ( vertex v) ;
  num out_degree ( vertex v) ;
  bool connected ( vertex, vertex) ;

@@ -2,7 +2,7 @@
 #define INCLUDE_ROUTE
 
 #include "base.hpp"
-/*
+
 // Avança "n" posições numa lista encadeada
 route::iterator next( route::iterator i, int n=1) {
 
@@ -22,7 +22,7 @@ route::iterator prev( route::iterator i, int n=1) {
 
  return aux;
 }
-*/
+
 // Lê uma rota: arquivo com uma lista de par de double ordenados
 
 route read_route (char file[]) {

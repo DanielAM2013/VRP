@@ -42,7 +42,8 @@ int main()
 
  s.sort();
 
- for (std::list<double>::iterator i=s.begin(); i!=s.end(); ++i) std::cout << *i << std::endl;
+ for (std::list<double>::iterator i=s.begin(); i!=s.end(); ++i) 
+	std::cout << *i << std::endl;
 
 // Step 2: Iniciar do topo da lista de economias, executando o seguinte. Dada a economia sij,
 // determine se há duas rotas, uma contendo arco ou aresta (0,j) e a outra contendo o arco ou aresta
@@ -53,7 +54,6 @@ int main()
  // Mesclar rotas
  for(Subroute::iterator I=Sb.end(); I!=Sb.begin(); --I) {
   
-
  }
 
  return 0;

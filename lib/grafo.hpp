@@ -16,12 +16,12 @@ class grafo {
   }
 
   grafo ( char file[]) {
-   R=vector<point>(read(file));
+   R=route(read(file));
    M.geometric(R);
   }
 
-  grafo ( vector<point> P) {
-   R=vector<point>(P);
+  grafo ( route P) {
+   R=route(P);
    M.geometric(P);
   }
 

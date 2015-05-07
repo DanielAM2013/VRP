@@ -5,11 +5,7 @@ LIB=lib
 
 all: $(BIN)/main
 
-
-
 $(OBJ)/%.o: 
-
-
 
 $(BIN)/main: $(SRC)/main.cpp
 	g++ $? -o $@

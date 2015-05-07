@@ -1,13 +1,91 @@
-\documentclass[a4paper, 12pt]{book}
+\documentclass[a4paper, 12pt]{article}
 
 \usepackage{preamble}
-
+\usepackage{pgfplots}
 \begin{document}
 
 \input{src/capa.tex}
 \newpage
+
+
+\section{Objetivos}
+
+	Este projeto visa a criação e emprego de algoritmos capazes de coordenas de
+forma eficiênte um conjunto de VANT's.
+
+	Os principais problemas existentes são
+\begin{description}
+	\item[TSP] Problema do caixeiro viajante:
+
+	Dado um conjunto de pontos pre-estabelecidos determinar a melhor rota que,
+partindo de um destes, percorra todos os pontos apenas uma vez e volte a origem.
+
+	\item[VRP] Problema de roteamento de veículos:
+
+	Dado um conjunto de pontos pre-estabelecidos determinar o melhor conjunto de
+rotas que, partindo de um mesmo ponto, percorram todos os pontos apenas uma vez
+por qualquer veículo e volte a origem.
+\end{description}
+
+	A dificuldade para a resolução dos problemas acima não esta em descobrir um
+método de resolução para uma determinada instância ( conjunto de pontos ), mas
+em descobrir o procedimento que, em tempo hábil, determine uma solução
+satisfatória.
+
+
+\underline{Exemplo:}
+	Considere um conjunto de pontos mapeados na Figura \ref{test}, a Figura
+\ref{roteado} apresenta uma possivel solução para o TSP desta instância.
+
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={$x$},
+	ylabel={$y$}
+]
+\addplot+[only marks] table {arg/points.dat};
+\addplot+[only marks] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos de verificação}
+\label{test}
+\end{figure}
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={$x$},
+	ylabel={$y$}
+]
+\addplot table {arg/output.dat};
+\addplot+[only marks] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo vizinho mais próximo}
+\label{roteado}
+\end{figure}
+
+\section{Estado atual}
+
+	No atual estado de desenvolvimento já foram implementadas soluções simples
+para execução em CPUs.
+
+\section{Comentários}
+
+	O estado posterior de implementação será em GPUs, pois estas tem uma
+capacidade de processamento superior para certos algoritmos.
+
+
+\section{Evidências}
+
 %\input{lib/master.tex}
-\input{lib/2phase.tex}
-\input{lib/aprox_tsp.tex}
+%\input{lib/2phase.tex}
+%\input{lib/aprox_tsp.tex}
 
 \end{document}

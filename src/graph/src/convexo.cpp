@@ -67,12 +67,12 @@ void apagar( vector<point>& V,  num P, num N) {
 
 
 // Dado um conjunto de pontos "points.dat" determinar quais pontos pertencem ao bordo convexo
-vector<point> bordo_convexo( vector<point> X ) {
+route bordo_convexo( route X ) {
  // Tomar três pontos quaisquer do conjunto
  // Aplicar analisar o sinal do produto vetorial da diferença do primeiro para o segundo e do
  // primenrio pra o terceiro
- vector<point> fecho;
- vector<point> AUX(X);
+ route fecho;
+ route AUX(X);
 
  fecho.push_back(AUX[0]);
  fecho.push_back(AUX[1]);
@@ -110,10 +110,10 @@ vector<point> bordo_convexo( vector<point> X ) {
 int main()
 {
  char file[]="points.dat";
- vector<point> X=read(file);
- vector<point> Aux=bordo_convexo(X);
+ route X=read(file);
+ route Aux=bordo_convexo(X);
 
- vector<double> area;
+ std::vector<double> area;
  for( num k=0; k<Aux.size()-1; k++) {
   area.push_back(abs(sign(Aux[k]-X[0],Aux[k+1]-X[0])));
  }
@@ -126,13 +126,8 @@ int main()
  Aux.insert(Aux.end(), Aux[0]);
  Aux.insert(Aux.end(), X[0]);
 
-
-
-
-
-
- char out[]="output.dat";
- write(Aux,out);
+// char out[]="output.dat";
+// write(Aux,out);
 
  return 0;
 }

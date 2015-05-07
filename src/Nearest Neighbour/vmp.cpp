@@ -139,7 +139,7 @@ int main()
 //  std::cout << *i << "-" << *(std::next(i,1))<< " ";
 // }
 
-// std::cout << vmp(&T, &S, 1);
+ std::cout << vmp(&T, &S, 1);
 // point aux(1,2);
 // T.insert(T.end(), aux);
  

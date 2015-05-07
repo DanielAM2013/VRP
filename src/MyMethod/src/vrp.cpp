@@ -1,4 +1,4 @@
-#include "../lib/vrp.hpp"
+#include "vrp.hpp"
 
 route read_file(char file[]) {
 
