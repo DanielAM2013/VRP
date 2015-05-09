@@ -2,6 +2,9 @@
 
 \usepackage{preamble}
 \usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
 \begin{document}
 
 \input{src/capa.tex}
@@ -70,11 +73,8 @@ satisfatória.
 \label{roteado}
 \end{figure}
 
-
-
-
-
-
+	A solução apresentada não é a melhor existente porem foi obtida em uma
+fração do tempo necessário para a obtenção da \emph{solução ótima}.
 
 
 \section{Estado atual}
@@ -82,16 +82,158 @@ satisfatória.
 	No atual estado de desenvolvimento já foram implementadas soluções simples
 para execução em CPUs.
 
+
+\subsection{Vizinho mais próximo}
+
+	Uma das heurísticas mais clássicas para obter-se uma aproximação para o TSP
+consiste no algoritmo do vizinho mais próximo, o qual e descrito abaixo.
+
+% R <- A_0
+% while not_empty(A)
+% [p,q]=point_closer(R,A)
+% add p to B in q
+% remove(p,B);
+% end while
+
+
+
+\begin{algorithmic}
+ \State $S \leftarrow 0$
+ \While{ Se A é não vazio }
+  \State $ [p,q] \leftarrow$ pontos mais próximos entre $R$ e $A$,
+respectivamente.
+  \State adicionar $p$ a $B$ em $q$
+ \EndWhile
+\end{algorithmic}
+
+	Para descobrir os pontos mais próximos entre $R$ e $A$ deve-se utiliza o
+seguinte algoritmo
+
+\begin{algorithmic}
+	\For{$i$ em $A$}
+		\For{$j$ em $B$}
+			\State $d_2 \leftarrow $ distância entre $A_i$ e $B_j$
+			\If{$d_2 < d_1$}
+				\State $d_1 \leftarrow d_2$
+				\State $\textrm{indice}_1 \leftarrow i$
+				\State $\textrm{indice}_2 \leftarrow j$
+			\EndIf
+		\EndFor
+	\EndFor
+\end{algorithmic}
+
+	O algoritmo acima tem um custo computacional de $n\times m$, onde $n$ é o
+número de termos em $A$ e $m$ é o número de termos em $B$. No algoritmo inicial
+teremos que utilizar o algoritmo o algoritmo de \emph{pontos mais próximos} até
+que o conjunto $A$ seja vazio. A cada passo pelo menos um ponto será retirado de
+$A$ e adicionado a $B$ o que significa que termos $n$ passos. Além disso no
+passo inicial $B$ tem apenas um ponto enquanto $A$ tem $n-1$. No $k$-esimo passo
+$B$ terá $k$ pontos enquanto $A$ terá $n-k$ pontos, logo o algoritmo de
+\emph{pontos mais próximos} terá um custo de $k\times(n-k)$ operações, logo o
+algoritmo completo executará $\sum_{k=1}^{n} k\times (n-k)$ operações que é
+igual à $\frac{n\times(n+1)\times(2n+1)}{3}$ dizemos neste caso que o algoritmo
+é de ordem $O(n^3)$ pois seu fator dominante para grandes números será $n^3$
+
+
+\subsection{Clarke e Wright}
+
+	Um dos algoritmos mais simples para obtenção de uma aproximação do
+\emph{VRP} é o algoritmo de Clarke e Wright, que consiste em adicionar rotas de
+veículos adjacêntes caso isto diminua seu custo.
+
+
+	Iniciando-se com um conjunto $A$ de pontos. Tomando-se o deposito como
+origem do sistema, ordena-se $A$ radialmente, ou seja, pontos em uma mesma reta
+que estão mais próximo da origim do sistema são considerados menores e pontos
+como mesma distância da origem com ângulo maior são considerados maiores.
+Tomando-se cada ponto em $A'$ como uma rota unitária, aplica-se para cada par de
+rotas adjacêntes uma união simulada, caso a nova rota geral tenha custo melhor
+que a rota atual. Este processo contínua até que não haja melhoria na rota
+atual.
+
+	O calculo do custo do algoritmo pode ser realizado imaginado-se os pontos
+como faixas em um circulo. Cada barra será o começo de uma rota e o inicío da
+seguinte, portanto dados $n$ pontos e $k$ veículos devemos ter
+	\[C_k^n = \frac{n\times\ldots\times(n-k+1)}{k!}\] 
+	rotas possíveis. Devemos ainda adicionar ao custo computacional acima o
+calculo da rota ótima para cada subrota.
+
+{\newcommand{\prox}[1]{\textrm{proximo}(#1)}
+\newcommand{\tsp}[1]{\textrm{tsp}(#1)}
+\newcommand{\cust}[1]{\textrm{custo}(#1)}
+\begin{algorithm}[H]
+\caption{Clarke \& Wright}
+\begin{algorithmic}
+	\State $A \leftarrow $ ler de um arquivo
+	\State $A' \leftarrow$ ordenar $A$
+	\State $B \leftarrow$ alocar cada elemento de A em um veículo
+	\State $d_1,d_0 \leftarrow $ custo da frota $B$
+	\State $C \leftarrow B'$
+	\While{críterio princial}
+		\For{$i \in [0,\#B]\cap \mathbb{Z}$}
+			\State $B' \leftarrow B-\{B(i)\}-\{\prox{B(i)}\}\cup\tsp{\{B(i)\}\cup\{\prox{B(i)}\}}$ 
+			\State $d_2 \leftarrow \cust{B'}$
+			\If{$d_2 < d_1$}
+				\State $d_1 \leftarrow d_2$
+				\State $C \leftarrow B'$
+			\EndIf
+		\EndFor
+		\If{$d_1 < d_0$}
+			\State $d_0 \leftarrow d_1$
+			\State $B \leftarrow C$
+		\EndIf
+	\EndWhile
+\end{algorithmic}
+\end{algorithm}
+}
+
+	No pior caso teremos o conjunto será formado apenas por um veículo, logo o
+custo computacional de obtenção desta resposta é $O(n^4\times N)$, onde $N$ dependendo do
+crítério utilizado para alocação de veículos nas rotas. Obviamente isto será
+determinado em função do percurso desta rota. O resultado do algoritmo acima é
+mostrado na figura abaixo.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={$x$},
+	ylabel={$y$}
+]
+\addplot table {arg/output2.dat};
+\addplot+[only marks] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo Clarke \& Wright}
+\label{roteado}
+\end{figure}
+
+
+	O critério empregado para a distribuição dos veículos foi a minimização do
+custo quadrático, ou seja, que a soma dos quadrados dos custos de cada rota
+fosse mínimo. 
+
+Obs: o algoritmo em sí pode ser melhorado aplicando um realocamento de pontos já
+pertencentes a uma rota adjacêntes.
+
+
+\subsection{Convexo}
+
+	Para tentar diminuir o custo de obtenção de uma aproximação para o
+\emph{TSP}
+
 \section{Comentários}
 
 	O estado posterior de implementação será em GPUs, pois estas tem uma
-capacidade de processamento superior para certos algoritmos.
+capacidade de processamento superior para certos algoritmos. Já foram
+implementados alguns resultados relevântes nesta área, porem não serão
+apresentados neste relatório.
 
 
 \section{Evidências}
 
-%\input{lib/master.tex}
-%\input{lib/2phase.tex}
-%\input{lib/aprox_tsp.tex}
+%\inputverbatim{}
 
 \end{document}
