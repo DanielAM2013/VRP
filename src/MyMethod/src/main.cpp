@@ -8,16 +8,6 @@ int main()
 
  int N=first.size();
 
-/*
- for( route::iterator i=first.begin(); i!=first.end(); i++)
-  std::cout << *i << std::endl;
-
- std::cout << tsp(&first) << std::endl;
-
- for( route::iterator i=first.begin(); i!=first.end(); i++)
-  std::cout << *i << std::endl;
-*/
-
  point aux=*first.begin();
 
  for( route::iterator i=first.begin(); i!=first.end(); i++) {

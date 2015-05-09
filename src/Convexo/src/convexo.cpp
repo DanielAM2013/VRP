@@ -1,70 +1,65 @@
-//#include "../lib/grafo.hpp"
-
+#include <fstream>
 #include <complex>
 #include <vector>
 
-using namespace std;
 typedef std::complex<double> point;
-typedef unsigned num;
-typedef unsigned vertex;
+typedef std::vector<point> route;
+typedef unsigned uint;
 
 double sign( point A, point B) {
  return (A.real()*B.imag()-A.imag()*B.real());
 }
 
-bool In( vector<point> V, point X) {
+bool In( route V, point X) {
 
- for( num k=0; k<V.size()-1; k++) {
-  if( sign(V[k+1]-V[k], X-V[k]) > 0) {
+ uint n=V.size();
+ for ( uint k=0; k<n-1; k++)
+  if ( sign(V[k+1]-V[k], X-V[k]) > 0)
    return false;
-  }
- }
 
- if(sign( V[0]-V[V.size()-1], X-V[V.size()-1]) > 0) return false;
+ if(sign( V[0]-V[n-1], X-V[n-1]) > 0)
+   return false;
 
  return true;
 }
 
+uint positive( route V, point X) {
 
-num positive( vector<point> V, point X) {
- num P=0;
+ uint n=V.size();
+ uint P=0;
 
- for( num k=1; k<V.size()-1; k++)
-  if( sign(V[k]-V[k-1], X-V[k-1]) <0 & sign(V[k+1]-V[k], X-V[k])>=0)
+ for( uint k=1; k<n-1; k++)
+  if( sign(V[k]-V[k-1], X-V[k-1]) <0 && sign(V[k+1]-V[k], X-V[k])>=0)
    P=k;
 
- if( sign(V[V.size()-1]-V[V.size()-2], X-V[V.size()-2]) <0 & sign( V[0]-V[V.size()-1],
-X-V[V.size()-1])>= 0)
-  P=V.size()-1;
+ if( sign(V[n-1]-V[n-2], X-V[n-2]) <0 && sign( V[0]-V[n-1], X-V[n-1])>= 0)
+  P=n-1;
  
  return P;
 }
 
-num negative( vector<point> V, point X) {
- num P=0;
- for( num k=1; k<V.size()-1; k++) {
-//  cout << sign(V[k]-V[k-1], X-V[k-1]) << " " <<  sign(V[k+1]-V[k], X-V[k]) << endl;
-  if( sign(V[k]-V[k-1], X-V[k-1]) > 0 & sign(V[k+1]-V[k], X-V[k]) <= 0) {
-   P=k;
-  }
- }
-// cout << sign(V[V.size()-1]-V[V.size()-2], X-V[V.size()-2]) << " " << sign( V[0]-V[V.size()-1],
-//X-V[V.size()-1]) << endl;
+uint negative( route V, point X) {
 
- if( sign(V[V.size()-1]-V[V.size()-2], X-V[V.size()-2]) >0 & sign( V[0]-V[V.size()-1],
-X-V[V.size()-1]) <= 0) {
-  P=V.size()-1;
- }
+ uint n=V.size();
+ uint P=0;
+
+ for( uint k=1; k<V.size()-1; k++) 
+  if( sign(V[k]-V[k-1], X-V[k-1]) > 0 && sign(V[k+1]-V[k], X-V[k]) <= 0)
+   P=k;
+  
+ if( sign(V[n-1]-V[n-2], X-V[n-2]) >0 & sign( V[0]-V[n-1], X-V[n-1]) <= 0)
+  P=n-1;
+
  return P;
 }
 
 
-void apagar( vector<point>& V,  num P, num N) {
+void apagar( route& V, uint P, uint N) {
+
  if( N==P+1) return;
  if( N>=V.size()) return;
  
  if( P+1<N ) {
-  // caso 1: k<t
   V.erase(V.begin()+P+1, V.begin()+N);
  }
  else {
@@ -73,54 +68,38 @@ void apagar( vector<point>& V,  num P, num N) {
  }
 }
 
+route bordo_convexo( route X ) {
 
-// Dado um conjunto de pontos "points.dat" determinar quais pontos pertencem ao bordo convexo
-vector<point> bordo_convexo( vector<point> X ) {
- // Tomar três pontos quaisquer do conjunto
- // Aplicar analisar o sinal do produto vetorial da diferença do primeiro para o segundo e do
- // primenrio pra o terceiro
- vector<point> fecho;
- vector<point> AUX(X);
+ route fecho;
+ route AUX(X);
 
  fecho.push_back(AUX[0]);
  fecho.push_back(AUX[1]);
 
  AUX.erase(AUX.begin(), AUX.begin()+2);
 
- // Passo inicial
- for( num k=2; k<AUX.size(); k++)
+ for( uint k=2; k<AUX.size(); k++)
   if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0]) >0) {
    fecho.push_back(AUX[k]);
    AUX.erase(AUX.begin()+k);
-  break;
- }
+   break;
+  }
 
- // Passo indutivo
- for( num k=2; k<AUX.size(); k++) {
-   // Determinar o ponto tangente positivo
+ for( uint k=2; k<AUX.size(); k++) {
    if( In(fecho, AUX[k])) continue;
-   num v=positive( fecho, AUX[k]), w=negative( fecho, AUX[k]);
+   uint v=positive( fecho, AUX[k]), w=negative( fecho, AUX[k]);
    apagar(fecho, v, w);
-   if( w>v) {
-//    cout << "-" << v << " " << w << endl;
+   if( w>v)
     fecho.insert(fecho.begin()+v+1, AUX[k]);
-   }
-   else {
-//    cout << "+" << v << " " << w << endl;
+   else
     fecho.insert(fecho.begin(), AUX[k]);
-   }
   }
 
  return fecho;
 }
 
-
-typedef std::vector<point> route;
-
-#include <fstream>
-
 route read(char* filename){
-	std::ifstream in( filename, ios::in);
+	std::ifstream in( filename);
 
 	route R;
 	point aux;
@@ -131,13 +110,12 @@ route read(char* filename){
 	return R;
 }
 
-
 void write( route A, char* filename) {
 
-	std::ofstream out( filename, ios::out);
+	std::ofstream out( filename);
 
 
-	for ( unsigned i=0; i<A.size(); i++) {
+	for ( uint i=0; i<A.size(); i++) {
 		out << A[i].real() << " " << A[i].imag() << std::endl;
 	}
 	out << A[0].real() << " " << A[0].imag() << std::endl;
@@ -150,23 +128,7 @@ int main(int argc, char** argv)
 {
  route X=read(argv[1]);
  route Aux=bordo_convexo(X);
-
-// vector<double> area;
-// for( num k=0; k<Aux.size()-1; k++) {
-//  area.push_back(abs(sign(Aux[k]-X[0],Aux[k+1]-X[0])));
-// }
-// area.push_back(abs(sign(Aux[Aux.size()-1]-X[0],Aux[0]-X[0])));
-
-// for( num k=0; k<area.size(); k++)
-//  cout << area[k] << endl;
-// cout << endl;
-
-// Aux.insert(Aux.end(), Aux[0]);
-// Aux.insert(Aux.end(), X[0]);
-
-
-// char out[]="output.dat";
-  write(Aux,argv[2]);
+ write(Aux,argv[2]);
 
  return 0;
 }

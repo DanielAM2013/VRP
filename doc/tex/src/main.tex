@@ -2,6 +2,7 @@
 
 \usepackage{preamble}
 \usepackage{pgfplots}
+\usepackage{verbatim}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
@@ -224,6 +225,24 @@ pertencentes a uma rota adjacêntes.
 	Para tentar diminuir o custo de obtenção de uma aproximação para o
 \emph{TSP}
 
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel={$x$},
+	ylabel={$y$}
+]
+\addplot+[only marks] table {arg/points.dat};
+\addplot+[only marks] coordinates {
+	(5.06721,3.94673) [2]
+};
+\addplot table {arg/output3.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo Clarke \& Wright}
+\label{roteado}
+\end{figure}
+
 \section{Comentários}
 
 	O estado posterior de implementação será em GPUs, pois estas tem uma
@@ -234,6 +253,14 @@ apresentados neste relatório.
 
 \section{Evidências}
 
-%\inputverbatim{}
+	A seguir é apresentado o código de construção do algoritmo para o feixo
+convexo de um conjunto de pontos 
+
+
+{\small
+\verbatiminput{../../src/Convexo/src/convexo.cpp}
+}
+
+
 
 \end{document}
