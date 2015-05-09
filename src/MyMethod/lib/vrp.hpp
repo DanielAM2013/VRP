@@ -1,53 +1,15 @@
-#include "base.hpp"
-#include <iterator>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <complex>
 #include <algorithm>
 
-route read_file(char file[]) {
+typedef std::complex<double> point;
+typedef std::vector<point> route;
+typedef std::vector<route> train;
+typedef std::vector<double> list;
 
- std::ifstream data(file, std::ifstream::in);
- 
- route first;
- point aux;
-
- while( data >> aux.real() >> aux.imag()) {
-  first.push_back(aux);
- }
-
- route *aux=new route;
- aux->subroute=*R;
- 
- // Enviar um veículo para cada ponto
- for( ponto *i=R->next; i!=NULL; i=i->next) {
-  aux=aux->next=new route;
-  aux->subroute=*i;
- }
-
-}
-/*
-void print_train(train T) 
-{
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   std::cout << *j << " ";
-  std::cout << std::endl;
- }
-}
-*/
-void save_train( train T) {
- unsigned int k=0;
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-  std::stringstream s;
-  s << k << ".test";
-  std::ofstream  out(s.str().c_str());
-
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   out << j->real() << " " << j->imag() << std::endl;
-  out.close();
-  k++;
- }
-}
-
-bool operator<(point X, point Y) {
+bool operator<(std::complex<double> X, std::complex<double> Y) {
  if(std::arg(X)<std::arg(Y)) return true;
  if(std::arg(X)==std::arg(Y) & std::abs(X) < std::abs(Y)) return true;
  return false;
@@ -64,17 +26,35 @@ double cust_route(route X) {
 
 double cust( train X) {
  double aux=0;
+/*
+ for( int i=0; i<X.size(); i++) 
+  aux+=cust_route(X[i]); 
+ return aux;
+*/
 
- double k=2;
+ double k=1.4;
  for( int i=0; i<X.size(); i++) 
   aux+=pow(cust_route(X[i]),k); 
 
  return pow(aux,1/k);
 
+/*
+ double d[2]={0,cust_route(X[0])};
+ for( int i=1; i<X.size(); i++) {
+  d[0]=cust_route(X[i]);
+
+//  std::cout << d[0] << std::endl;
+  if(d[0]>d[1]) {
+   d[1]=d[0];
+  }
+ }
+// std::cout << d[1] << std::endl;
+ aux=pow(pow(aux,2)+pow(d[1],2),0.5);
+*/
 }
 
-double tsp ( route *R) {
 
+double tsp(route *R) {
  double d[3];
  d[2]=0;
 
@@ -109,3 +89,4 @@ double tsp ( route *R) {
  }
  return d[2];
 }
+

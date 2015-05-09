@@ -1,24 +1,22 @@
-LIB=lib
+
+ARG=arg
 BIN=bin
-OBJ=obj
+LIB=lib
 SRC=src
 OUT=out
-
-CC=g++
+BIN=bin
+EXT=ext
 CFLAGS=-I $(LIB)
 
-all: 
-	mkdir -p $(BIN) $(OUT)
-	$(CC) $(SRC)/main.cpp -o $(BIN)/main $(CFLAGS)
+all:
+	mkdir -p $(OUT) $(BIN)
+	g++ $(SRC)/vrp.cpp -o $(BIN)/vrp $(CFLAGS)
+
+test:
+	$(BIN)/vrp $(ARG)/points.dat $(OUT)/output.dat
 
 edit:
-	vim $(SRC)/main.cpp
+	vim $(SRC)/vrp.cpp
 
 clean:
 	rm -rf $(OUT) $(BIN)
-
-
-
-
-
-
