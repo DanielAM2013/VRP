@@ -2,7 +2,7 @@ BIN=bin
 OBJ=obj
 LIB=lib
 SRC=src
-INP=inp
+INP=arg
 OUT=out
 
 CC=g++
@@ -10,7 +10,6 @@ CC=g++
 
 all: $(BIN)/main $(INP)/points.dat
 	$^ $(OUT)/output.dat
-
 
 $(OBJ)/main.o: $(SRC)/main.cpp
 	$(CC) -c $? -o $@
