@@ -1,4 +1,4 @@
-#include "../lib/k-opt.hpp"
+#include <k-opt.hpp>
 
 int main( int argv, char* argc[]){
  

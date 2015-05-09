@@ -1,21 +1,20 @@
 BIN=bin
-OBJ=obj
 LIB=lib
 SRC=src
 INP=arg
 OUT=out
 
 CC=g++
+CFLAGS=-I $(LIB)
 
+all:
+	mkdir -p $(BIN) $(OUT)
 
-all: $(BIN)/main $(INP)/points.dat
+test: $(BIN)/main $(INP)/points.dat
 	$^ $(OUT)/output.dat
 
-$(OBJ)/main.o: $(SRC)/main.cpp
-	$(CC) -c $? -o $@
-
-$(BIN)/main: $(OBJ)/main.o
-	$(CC) $? -o $@
+$(BIN)/%: $(SRC)/%.cpp
+	$(CC) $? -o $@ $(CFLAGS)
 
 clean: 
-	rm -f $(BIN)/* $(OBJ)/* $(OUT)/*
+	rm -rf $(BIN) $(OUT)
