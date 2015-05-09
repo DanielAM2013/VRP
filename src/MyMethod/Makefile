@@ -1,4 +1,3 @@
-
 ARG=arg
 BIN=bin
 LIB=lib
