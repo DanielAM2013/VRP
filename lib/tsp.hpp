@@ -2,6 +2,7 @@ double tsp(route *R) {
  double d[3];
  d[2]=0;
 
+ uint n=R->size();
  route::iterator closer[2];
 
  for( route::iterator last=R->begin(); last+1!=R->end(); last++) {

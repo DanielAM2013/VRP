@@ -1,9 +1,12 @@
 #ifndef INCLUDE_ROUTE
 #define INCLUDE_ROUTE
 
-#include "base.hpp"
+#include <base.hpp>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
 
-// Avança "n" posições numa lista encadeada
+//! Avança "n" posições numa lista encadeada
 route::iterator next( route::iterator i, int n=1) {
 
  route::iterator aux=i;
@@ -13,7 +16,7 @@ route::iterator next( route::iterator i, int n=1) {
  return aux;
 }
 
-// Recua "n" (default 1) numa lista duplamente encadeada
+//! Recua "n" (default 1) numa lista duplamente encadeada
 route::iterator prev( route::iterator i, int n=1) {
 
  route::iterator aux=i;
@@ -24,10 +27,9 @@ route::iterator prev( route::iterator i, int n=1) {
 }
 
 // Lê uma rota: arquivo com uma lista de par de double ordenados
+route read_route (char* file) {
 
-route read_route (char file[]) {
-
- std::ifstream data(file, std::ifstream::in);
+ std::ifstream data( file, std::ios::in);
  
  route first;
  point aux;
@@ -35,20 +37,25 @@ route read_route (char file[]) {
  while( data >> aux.real() >> aux.imag()) {
   first.push_back(aux);
  }
+ data.close();
 
  return first;
 }
 
 
-// Salva uma rota: arquivo com uma lista de par de double ordenados
-void save_route(route* R, char name_file[])
+//! Salva uma rota: arquivo com uma lista de par de double ordenados
+void save_route( route R, char* filename)
 {
 
- std::ofstream out(name_file);
+ std::ofstream out(filename, std::ios::out);
 
- for( route::iterator x=R->begin(); x!=R->end(); x++) {
-  out << x->real() << " " << x->imag() << std::endl;
+ uint n=R.size();
+ for( uint i=0; i<n; i++) {
+  out << R[i].real() << " " << R[i].imag() << std::endl;
  }
+ out << R[0].real() << " " << R[1].imag() << std::endl;
+
+ out.close();
 }
 
 // Ordenação parcial do plano
@@ -61,28 +68,29 @@ bool operator<(std::complex<double> X, std::complex<double> Y) {
 // Ordenar pontos da rota
 void order( route *R) {
 
- point aux = *(R->begin());
+ point aux = (*R)[0];
 
- for( route::iterator i=R->begin(); i!=R->end(); i++) {
-  *i-=aux;
+ uint n=R->size();
+ for( uint i=0; i<n; i++) {
+  (*R)[i]-=aux;
  }
 
  std::sort(next(R->begin()), R->end(), operator<);
 
- for( route::iterator i=R->begin(); i!=R->end(); i++) {
-  *i+=aux;
+ for( uint i=0; i<n; i++) {
+  (*R)[i]+=aux;
  }
 }
 
 
-// Custo da rota
+//! Cust of route
 double cust_route(route X) {
+
  double aux=0;
-
- for( route::iterator i=X.begin(); next(i)!=X.end(); i++) 
-  aux+=std::abs(*i-*next(i));
-
- aux+=std::abs(*prev(X.end())-*X.begin());
+ uint n=X.size();
+ for( uint i=0; i<n-1; i++) 
+  aux+=std::abs(X[i]-X[i+1]);
+ aux+=std::abs(X[n]-X[0]);
 
  return aux;
 }
@@ -102,16 +110,15 @@ bool cross( point xi, point xf, point yi, point yf) {
 
 // Inverte a ordem dos elementos entre os interadores
 void rotate( route::iterator x, route::iterator y) {
-
- for( route::iterator i=x, j=y; i!=j & prev(i)!=j; i++, j--)
+ for( route::iterator i=x, j=y; i!=j && prev(i)!=j; i++, j--)
   swap(i,j);
 }
 
 void print_route( route R) {
 
- for( route::iterator i=R.begin(); i!=R.end(); i++)
-  std::cout << *i << " ";
-
+ uint n=R.size();
+ for( uint i=0; i<n; i++)
+  std::cout << R[i] << " ";
  std::cout << std::endl;
 
 }

@@ -4,18 +4,20 @@ LIB=lib
 SRC=src
 OUT=out
 BIN=bin
-EXT=ext
 CFLAGS=-I $(LIB)
+
+target=main
 
 all:
 	mkdir -p $(OUT) $(BIN)
-	g++ $(SRC)/vrp.cpp -o $(BIN)/vrp $(CFLAGS)
+	g++ $(SRC)/$(target).cpp -o $(BIN)/$(target) $(CFLAGS)
+	for i in $(shell seq 1 3); do \
+		$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; \
+	done; 
 
-test:
-	$(BIN)/vrp $(ARG)/points.dat $(OUT)/output.dat
-
+		#$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; 
 edit:
-	vim $(SRC)/vrp.cpp
+	vim $(SRC)/$(target).cpp
 
 clean:
 	rm -rf $(OUT) $(BIN)

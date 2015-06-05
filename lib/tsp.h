@@ -237,7 +237,7 @@ double create_route(ponto** route, ponto** P)
  return perc;
 }
 
-double tsp(ponto *R) {
+double tsp0(ponto *R) {
 
  double d[3];
  d[2]=0;
@@ -285,3 +285,10 @@ double tsp(ponto *R) {
  }
  return d[2];
 }
+
+
+
+
+
+
+

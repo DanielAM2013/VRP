@@ -5,6 +5,10 @@
 \usepackage{verbatim}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{caption}
+\usepackage{subcaption}
+
+%\pgfplotsset{width=8cm, compat=1.9}
 
 \begin{document}
 
@@ -36,80 +40,69 @@ método de resolução para uma determinada instância ( conjunto de pontos ), m
 em descobrir o procedimento que, em tempo hábil, determine uma solução
 satisfatória.
 
-\underline{Exemplo:}
-	Considere um conjunto de pontos mapeados na Figura \ref{test}, a Figura
-\ref{roteado} apresenta uma possivel solução para o TSP desta instância.
+\section{Desenvolvimento}
 
+	Para a avalização dos resultados obtidos utilizaremos um conjunto de pontos
+mapeados nas figuras \ref{test1}, \ref{test2} e \ref{test3}, mostradas abaixo.
 
 \begin{figure}[!ht]
 \centering
-\begin{tikzpicture}
-\begin{axis}[
-	xlabel={$x$},
-	ylabel={$y$}
-]
-\addplot+[only marks] table {arg/points.dat};
-\addplot+[only marks] coordinates {
-	(5.06721,3.94673) [2]
-};
-\end{axis}
-\end{tikzpicture}
-\caption{Pontos de verificação}
-\label{test}
-\end{figure}
-\begin{figure}[!ht]
+\foreach \x in {1,2,3}{ 
+\begin{subfigure}{0.48\textwidth}
 \centering
+\caption{Beachmark \x}
 \begin{tikzpicture}
 \begin{axis}[
-	xlabel={$x$},
-	ylabel={$y$}
+	width=7cm 
 ]
-\addplot table {arg/output.dat};
-\addplot+[only marks] coordinates {
-	(5.06721,3.94673) [2]
-};
+	\addplot+[only marks,blue] table {arg/points\x.dat};
+	\addplot+[only marks] coordinates {
+		(5.06721,3.94673) [2]
+	};
 \end{axis}
 \end{tikzpicture}
-\caption{Pontos roteados pelo vizinho mais próximo}
-\label{roteado}
+\label{test\x}
+\end{subfigure}
+}
 \end{figure}
 
+\newpage
+
+	Nas seções seguintes serão apresentadas as soluções gráficas bem como o
+algoritmo e o código realizados para obtenção das mesmas.
 	A solução apresentada não é a melhor existente porem foi obtida em uma
 fração do tempo necessário para a obtenção da \emph{solução ótima}.
-
-
-\section{Estado atual}
-
-	No atual estado de desenvolvimento já foram implementadas soluções simples
-para execução em CPUs.
 
 
 \subsection{Vizinho mais próximo}
 
 	Uma das heurísticas mais clássicas para obter-se uma aproximação para o TSP
-consiste no algoritmo do vizinho mais próximo, o qual e descrito abaixo.
+consiste no algoritmo do vizinho mais próximo. Inicialmente o conjunto é
+delocado ao conjunto $R$ a origem dos pontos, em seguida encontra-se, em $A$ o
+ponto mais próximo a $R$, que contêm apenas a origem, e aloca-se este no ponto
+de $R$ mais próximo a $A$. Este passo é repetido até que $A$ esteja vazio. O
+algoritmo esta descrito abaixo.
 
-% R <- A_0
-% while not_empty(A)
-% [p,q]=point_closer(R,A)
-% add p to B in q
-% remove(p,B);
-% end while
-
-
-
+\begin{algorithm}[H]
+\caption{VIZINHO\_MAIS\_PROXIMO($A$)}
 \begin{algorithmic}
- \State $S \leftarrow 0$
+ \State $R \leftarrow A_0$
+ \State $A \leftarrow A-{A_0}$
  \While{ Se A é não vazio }
-  \State $ [p,q] \leftarrow$ pontos mais próximos entre $R$ e $A$,
-respectivamente.
-  \State adicionar $p$ a $B$ em $q$
+  \State $ [p,q] \leftarrow$ PONTO\_PROXIMO($R$,$A$)
+  \State DESLOCAR($p$, $R$, $q$)
  \EndWhile
 \end{algorithmic}
+\end{algorithm}
+	onde PONTO\_PROXIMO retorna o par de pontos mais próximo, um pertencendo a
+$A$ e outro pertencendo a $R$, e DESLOCAR aloca espaço para o ponto $p$ em $B$
+na posição seguinte a $q$.
 
 	Para descobrir os pontos mais próximos entre $R$ e $A$ deve-se utiliza o
 seguinte algoritmo
 
+\begin{algorithm}[H]
+\caption{PONTO\_PROXIMO($R$,$A$)}
 \begin{algorithmic}
 	\For{$i$ em $A$}
 		\For{$j$ em $B$}
@@ -122,6 +115,7 @@ seguinte algoritmo
 		\EndFor
 	\EndFor
 \end{algorithmic}
+\end{algorithm}
 
 	O algoritmo acima tem um custo computacional de $n\times m$, onde $n$ é o
 número de termos em $A$ e $m$ é o número de termos em $B$. No algoritmo inicial
@@ -136,6 +130,133 @@ igual à $\frac{n\times(n+1)\times(2n+1)}{3}$ dizemos neste caso que o algoritmo
 é de ordem $O(n^3)$ pois seu fator dominante para grandes números será $n^3$
 
 
+%\begin{figure}[!ht]
+%\centering
+%\foreach \x in {1,2,3}{ 
+%\begin{subfigure}{\textwidth}
+%\centering
+%\begin{tikzpicture}
+%\begin{axis} [ width=8cm]
+%\addplot[mark size=0.1pt, blue] table {arg/nearest_neightbor\x.dat};
+%\addplot+[only marks] coordinates {
+%	(5.06721,3.94673) [2]
+%};
+%\end{axis}
+%\end{tikzpicture}
+%\caption{Pontos roteados pelo vizinho mais próximo (\x)}
+%\label{roteado\x}
+%\end{subfigure}
+%}
+%\end{figure}
+
+\newpage
+
+	A seguir é apresentado a parte principal do algoritmo do vizinho mais
+próximo
+
+{\small
+\begin{verbatim}
+double nearest_neighbor2(route *R) {                                                                                                                            
+ double d[3];                                                                                                                                                   
+ d[2]=0;                                                                                                                                                        
+                                                                                                                                                                
+ route::iterator closer[2];                                                                                                                                     
+                                                                                                                                                                
+ for( route::iterator last=R->begin(); last+1!=R->end(); last++) {                                                                                              
+  d[1]=1e+30;                                                                                                                                                   
+  for( route::iterator i=last+1; i!=R->end(); i++) {                                                                                                            
+   for( route::iterator j=R->begin(); j!=last; j++) {                                                                                                           
+                                                                                                                                                                
+    d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));                                                                                               
+    if(d[0]<d[1]) {                                                                                                                                             
+     d[1]=d[0];                                                                                                                                                 
+     closer[0]=i;                                                                                                                                               
+     closer[1]=j;                                                                                                                                               
+    }                                                                                                                                                           
+   }                                                                                                                                                            
+                                                                                                                                                                
+   d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());                                                                                
+   if(d[0]<d[1]) {                                                                                                                                              
+    d[1]=d[0];                                                                                                                                                  
+    closer[0]=i;                                                                                                                                                
+    closer[1]=last;                                                                                                                                             
+   }                                                                                                                                                            
+  }                                                                                                                                                             
+                                                                                                                                                                
+  d[2]+=d[1];                                                                                                                                                   
+                                                                                                                                                                
+  point aux=*closer[0];                                                                                                                                         
+  R->erase(closer[0]);                                                                                                                                          
+  R->insert(closer[1]+1, aux);                                                                                                                                  
+ }                                                                                                                                                              
+ return d[2];                                                                                                                                                   
+}  
+\end{verbatim}
+}
+
+\newpage
+
+\subsection{Dois ótimo: 2-opt}
+
+	Outra estratégia de aproximação é o \emph{Dois ótimo} ( \emph{two optimal}),
+no qual percorre-se o conjunto procurando-se possiveis cruzamentos de rotas e
+elimina-se estas.
+
+%\foreach \x in {1,2,3}{ 
+%\begin{figure}[!ht]
+%\centering
+%\begin{tikzpicture}
+%\begin{axis}[ width=8cm]
+%\addplot+[only marks, mark size=0.5pt,red] table {arg/k-opt\x.dat};
+%\addplot[mark size=0.3pt,blue] table {arg/k-opt\x.dat};
+%\addplot+[only marks, mark size=1pt, red] coordinates {
+%	(5.06721,3.94673) [2]
+%};
+%\end{axis}
+%\end{tikzpicture}
+%\caption{Pontos roteados pelo 2-opt (\x)}
+%\label{k-opt\x}
+%\end{figure}
+%}
+%
+\begin{description}
+ \item[Vantagens] Possui um custo computacional inferior ao do \emph{vizinho
+mais próximo}
+ \item[Desvantages] Para alguns casos são necessárias algumas iterações, o que
+no pior caso faz seu custo se equiparar ao do \emph{vizinho mais próximo}
+\end{description}
+
+
+{\small 
+\begin{verbatim}
+double opt2( route *R) {                                                                                                                                        
+                                                                                                                                                                
+ //! Tomar dois pares de pontos dijuntos                                                                                                                        
+ route::iterator aux[2];                                                                                                                                        
+ for( route::iterator i=R->begin(); next(i,2)!=R->end(); i++) {                                                                                                 
+  aux[0]=next(i);                                                                                                                                               
+  for( route::iterator j=next(aux[0]); next(j)!=R->end(); j++) {                                                                                                
+   aux[1]=next(j);                                                                                                                                              
+  //! verificar se a cruzamento de rotas                                                                                                                        
+  if( cross(*i, *aux[0], *j, *aux[1]))                                                                                                                          
+   rotate( aux[0], j);                                                                                                                                          
+  }                                                                                                                                                             
+  if(i==R->begin()) continue;                                                                                                                                   
+                                                                                                                                                                
+  //! executar para o último elemento                                                                                                                           
+  route::iterator j=prev(R->end());                                                                                                                             
+  aux[1]=R->begin();                                                                                                                                            
+                                                                                                                                                                
+  //! verificar se a cruzamento de rotas                                                                                                                        
+  if( cross(*i,*aux[0],*j,*aux[1]))                                                                                                                             
+   rotate( aux[0], j);                                                                                                                                          
+ }                                                                                                                                                              
+ return cust_route(*R);                                                                                                                                         
+                                                                                                                                                                
+} 
+\end{verbatim}
+}
+
 \subsection{Clarke e Wright}
 
 	Um dos algoritmos mais simples para obtenção de uma aproximação do
@@ -144,24 +265,25 @@ veículos adjacêntes caso isto diminua seu custo.
 
 
 	Iniciando-se com um conjunto $A$ de pontos. Tomando-se o deposito como
-origem do sistema, ordena-se $A$ radialmente, ou seja, pontos em uma mesma reta
-que estão mais próximo da origim do sistema são considerados menores e pontos
-como mesma distância da origem com ângulo maior são considerados maiores.
-Tomando-se cada ponto em $A'$ como uma rota unitária, aplica-se para cada par de
-rotas adjacêntes uma união simulada, caso a nova rota geral tenha custo melhor
-que a rota atual. Este processo contínua até que não haja melhoria na rota
-atual.
+origem do sistema, ordena-se $A$ radialmente obtendo-se $A'$ , ou seja, pontos
+em uma mesma reta que estão mais próximo da origim do sistema são considerados
+menores e pontos como mesma distância da origem com ângulo maior são
+considerados maiores.  Tomando-se cada ponto em $A'$ como uma rota unitária,
+aplica-se para cada par de rotas adjacêntes uma união simulada, caso a nova rota
+geral tenha custo melhor que a rota atual. Este processo contínua até que não
+haja melhoria na rota atual.
 
 	O calculo do custo do algoritmo pode ser realizado imaginado-se os pontos
 como faixas em um circulo. Cada barra será o começo de uma rota e o inicío da
 seguinte, portanto dados $n$ pontos e $k$ veículos devemos ter
 	\[C_k^n = \frac{n\times\ldots\times(n-k+1)}{k!}\] 
 	rotas possíveis. Devemos ainda adicionar ao custo computacional acima o
-calculo da rota ótima para cada subrota.
+calculo da rota ótima para cada subrota, o que é indicado abaixo pelo algoritmo
+do \emph{TSP}.
 
-{\newcommand{\prox}[1]{\textrm{proximo}(#1)}
-\newcommand{\tsp}[1]{\textrm{tsp}(#1)}
-\newcommand{\cust}[1]{\textrm{custo}(#1)}
+{\newcommand{\prox}[1]{\textrm{PROX}(#1)}
+\newcommand{\tsp}[1]{\textrm{TSP}(#1)}
+\newcommand{\cust}[1]{\textrm{CUSTO}(#1)}
 \begin{algorithm}[H]
 \caption{Clarke \& Wright}
 \begin{algorithmic}
@@ -172,7 +294,7 @@ calculo da rota ótima para cada subrota.
 	\State $C \leftarrow B'$
 	\While{críterio princial}
 		\For{$i \in [0,\#B]\cap \mathbb{Z}$}
-			\State $B' \leftarrow B-\{B(i)\}-\{\prox{B(i)}\}\cup\tsp{\{B(i)\}\cup\{\prox{B(i)}\}}$ 
+			\State $B' \leftarrow B-\{B(i)\cup\prox{B(i)}\}\cup\tsp{\{B(i)\}\cup\{\prox{B(i)}\}}$ 
 			\State $d_2 \leftarrow \cust{B'}$
 			\If{$d_2 < d_1$}
 				\State $d_1 \leftarrow d_2$
@@ -186,31 +308,40 @@ calculo da rota ótima para cada subrota.
 	\EndWhile
 \end{algorithmic}
 \end{algorithm}
+,
+	onde $\prox$ é o elemento seguinte a $B(i)$ na lista circular, $\tsp$ é o
+algorithmo utilizado para aproximar-se o TSP e $\cust$ é o custo utilizado na
+heurística vigente.
 }
 
 	No pior caso teremos o conjunto será formado apenas por um veículo, logo o
 custo computacional de obtenção desta resposta é $O(n^4\times N)$, onde $N$ dependendo do
 crítério utilizado para alocação de veículos nas rotas. Obviamente isto será
 determinado em função do percurso desta rota. O resultado do algoritmo acima é
-mostrado na figura abaixo.
+mostrado nas figuras \ref{clarke_wright1}, \ref{clarke_wright2}  e
+\ref{clarke_wright3} .
 
-\begin{figure}[!ht]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-	xlabel={$x$},
-	ylabel={$y$}
-]
-\addplot table {arg/output2.dat};
-\addplot+[only marks] coordinates {
-	(5.06721,3.94673) [2]
-};
-\end{axis}
-\end{tikzpicture}
-\caption{Pontos roteados pelo Clarke \& Wright}
-\label{roteado}
-\end{figure}
+%\begin{figure}[!ht]
+%\centering
+%\foreach \x in {1,2,3}{ 
+%\begin{subfigure}{\textwidth}
+%\centering
+%\begin{tikzpicture}
+%\begin{axis}[ width=8cm ]
+%\addplot+[only marks, mark size=0.5pt, red] table {arg/mymethod\x.dat};
+%\addplot[mark size=0.3pt, blue] table {arg/mymethod\x.dat};
+%\addplot+[only marks, red] coordinates {
+%	(5.06721,3.94673) [2]
+%};
+%\end{axis}
+%\end{tikzpicture}
+%\caption{Pontos roteados pelo Clarke \& Wright (\x)}
+%\label{clarke_wright\x}
+%\end{subfigure}
+%}
+%\end{figure}
 
+\newpage
 
 	O critério empregado para a distribuição dos veículos foi a minimização do
 custo quadrático, ou seja, que a soma dos quadrados dos custos de cada rota
@@ -220,60 +351,160 @@ Obs: o algoritmo em sí pode ser melhorado aplicando um realocamento de pontos j
 pertencentes a uma rota adjacêntes.
 
 
+{\small
+\begin{verbatim}
+double clarke_wright_tsp ( route* first,
+	 train* second, double (*TSP)(route*))
+{
+
+ int N=first->size();
+
+ point aux=(*first)[0];
+
+ // Ordenar
+ for( route::iterator i=first->begin(); i!=first->end(); i++) {
+  *i-=aux;
+ }
+
+ std::sort(first->begin()+1, first->end(), operator<);
+
+ for( route::iterator i=first->begin(); i!=first->end(); i++) {
+  *i+=aux;
+ }
+
+// Alocar
+ for( int i=1; i<N; i++) {
+  route aux;
+  aux.push_back((*first)[0]);
+  aux.push_back((*first)[i]);
+  second->push_back(aux);
+  aux.clear();
+ }
+
+ double d[3]={0,0,cust_heuristic(*second)};
+
+ train Aux, Aux1(*second);
+
+ for ( int k=0; k<N-1; k++)
+ {
+  d[2]=d[1];
+  Aux=train(*second);
+  *second=train(Aux1);
+  d[1]=cust_heuristic(Aux);
+  for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
+   // Mesclar roca com a seguinte numa variável auxiliar
+   i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
+   // Aplicar o tsp
+   (*TSP)(&*i);
+   // Inserir rotas mescladas no train Aux
+   Aux.erase(i+1);
+   // Avaliar roteamento
+   d[0]=cust_heuristic(Aux);
+   // Ordenar custo
+   if(d[0]<d[1]) {
+    d[1]=d[0];
+    Aux1=train(Aux);
+   }
+   Aux=train(*second);
+  }
+
+  Aux=train(*second);
+  
+  (Aux.end()-1)->insert((Aux.end()-1)->end(), 
+			(Aux.begin())->begin(), (Aux.begin())->end());
+
+  (*TSP)(&*(Aux.end()-1));
+  // Inserir rotas mescladas no train Aux
+  Aux.erase(Aux.begin());
+  // Avaliar roteamento
+  d[0]=cust_heuristic(Aux);
+ // Ordenar custo
+  if(d[0]<d[1]) {
+   d[1]=d[0];
+   Aux1=train(Aux);
+  }
+ }
+
+ return cust_train(*second);
+}
+\end{verbatim}
+}
+
+
+\newpage
+
+
 \subsection{Convexo}
 
 	Para tentar diminuir o custo de obtenção de uma aproximação para o
-\emph{TSP}
+\emph{VRP} utilizou-se como conjunto original o formado pelo feixo convexo dos
+pontos adquiridos ( vide Figura \ref{conv1}).
+
+	A seguir é mostrado o código principal do algoritmo do fecho convexo.
+
+{\small
+\begin{verbatim}
+route bordo_convexo( route X ) {                                                                                                                                
+                                                                                                                                                                
+ route fecho;                                                                                                                                                   
+ route AUX(X);                                                                                                                                                  
+                                                                                                                                                                
+ fecho.push_back(AUX[0]);                                                                                                                                       
+ fecho.push_back(AUX[1]);                                                                                                                                       
+                                                                                                                                                                
+ AUX.erase(AUX.begin(), AUX.begin()+2);                                                                                                                         
+                                                                                                                                                                
+ for( uint k=2; k<AUX.size(); k++)                                                                                                                              
+  if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0]) >0) {                                                                                                             
+   fecho.push_back(AUX[k]);                                                                                                                                     
+   AUX.erase(AUX.begin()+k);                                                                                                                                    
+   break;                                                                                                                                                       
+  }                                                                                                                                                             
+                                                                                                                                                                
+ for( uint k=2; k<AUX.size(); k++) {                                                                                                                            
+   if( In(fecho, AUX[k])) continue;                                                                                                                             
+   uint v=positive( fecho, AUX[k]), w=negative( fecho, AUX[k]);                                                                                                 
+   apagar(fecho, v, w);                                                                                                                                         
+   if( w>v)                                                                                                                                                     
+    fecho.insert(fecho.begin()+v+1, AUX[k]);                                                                                                                    
+   else                                                                                                                                                         
+    fecho.insert(fecho.begin(), AUX[k]);                                                                                                                        
+  }                                                                                                                                                             
+                                                                                                                                                                
+ return fecho;                                                                                                                                                  
+}
+\end{verbatim}
+}
+
+\newpage
 
 \begin{figure}[!ht]
 \centering
+\foreach \x in {1,2,3}{
+\begin{subfigure}{\textwidth}
+\centering
 \begin{tikzpicture}
-\begin{axis}[
-	xlabel={$x$},
-	ylabel={$y$}
-]
-\addplot+[only marks] table {arg/points.dat};
-\addplot+[only marks] coordinates {
+\begin{axis}[ width=8cm ]
+\addplot+[only marks, mark size=0.3pt, red] table {arg/points\x.dat};
+\addplot+[only marks, red] coordinates {
 	(5.06721,3.94673) [2]
 };
-\addplot table {arg/output3.dat};
+\addplot[mark size=0.1pt, blue] table {arg/convexo\x.dat};
 \end{axis}
 \end{tikzpicture}
-\caption{Pontos roteados pelo Clarke \& Wright}
-\label{roteado}
+\caption{Pontos roteados pelo fecho convexo e alocação radial (\x)}
+\label{conv\x}
+\end{subfigure}
+}
 \end{figure}
 
-\section{Comentários}
+\newpage
+
+\section{Conclusão}
 
 	O estado posterior de implementação será em GPUs, pois estas tem uma
 capacidade de processamento superior para certos algoritmos. Já foram
 implementados alguns resultados relevântes nesta área, porem não serão
-apresentados neste relatório.
-
-
-\section{Evidências}
-
-	A seguir é apresentado o código de construção do algoritmo para o feixo
-convexo de um conjunto de pontos 
-
-\subsection{Código do convexo}
-{\small
-\verbatiminput{../../src/Convexo/src/convexo.cpp}
-}
-\subsection{Código do convexo para GPU}
-
-\subsection{Código do VRP}
-{\small
-\verbatiminput{../../src/MyMethod/src/vrp.cpp}
-}
-\subsection{Códido do 2-OPT}
-{\small
-\verbatiminput{../../src/K-opt/src/main.cpp}
-}
-
-\subsection{Cógido do vizinho mais próximo}
-
-
-
+apresentados neste relatório devido a inexperiência com esta ferramenta.
 
 \end{document}

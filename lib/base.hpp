@@ -1,14 +1,10 @@
 #ifndef _BASE_
 #define _BASE_
 
-#include <iostream>
-#include <fstream>
 #include <complex>
-#include <algorithm>
-#include <iterator>
-#include <list>
 #include <vector>
 
+typedef unsigned uint;
 typedef double weight;
 typedef unsigned num;
 typedef unsigned vertex;

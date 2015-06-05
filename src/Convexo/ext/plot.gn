@@ -1,4 +1,0 @@
-set term postscript size 30,30
-set output 'out/vrp.eps'
-set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 2
-plot 'out/output.dat' using 1:2 with linespoints ls 3 title ''

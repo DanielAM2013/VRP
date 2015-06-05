@@ -25,4 +25,4 @@ edit: $(SRCS)
 	@vim -p$(shell echo "$?" | wc -w) $(SRCS);
 
 clean:
-	rm -r $(OUT)/*
+	rm -r $(OUT)

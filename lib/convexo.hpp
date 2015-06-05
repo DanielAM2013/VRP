@@ -1,19 +1,13 @@
 #ifndef __CONVEXO__
 #define __CONVEXO__
 
-#include <fstream>
-#include <complex>
-#include <vector>
-
-typedef std::complex<double> point;
-typedef std::vector<point> route;
-typedef unsigned uint;
+#include <route.hpp>
 
 double sign( point A, point B) {
  return (A.real()*B.imag()-A.imag()*B.real());
 }
 
-bool In( route V, point X) {
+bool In ( route V, point X) {
 
  uint n=V.size();
  for ( uint k=0; k<n-1; k++)
@@ -32,10 +26,12 @@ uint positive( route V, point X) {
  uint P=0;
 
  for( uint k=1; k<n-1; k++)
-  if( sign(V[k]-V[k-1], X-V[k-1]) <0 && sign(V[k+1]-V[k], X-V[k])>=0)
+  if( sign(V[k]-V[k-1], X-V[k-1]) <0 &&
+      sign(V[k+1]-V[k], X-V[k])>=0)
    P=k;
 
- if( sign(V[n-1]-V[n-2], X-V[n-2]) <0 && sign( V[0]-V[n-1], X-V[n-1])>= 0)
+ if( sign(V[n-1]-V[n-2], X-V[n-2]) < 0 && 
+     sign( V[0]-V[n-1], X-V[n-1])>= 0)
   P=n-1;
  
  return P;
@@ -55,7 +51,6 @@ uint negative( route V, point X) {
 
  return P;
 }
-
 
 void apagar( route& V, uint P, uint N) {
 
@@ -100,30 +95,4 @@ route bordo_convexo( route X ) {
 
  return fecho;
 }
-
-route read(char* filename){
-	std::ifstream in( filename);
-
-	route R;
-	point aux;
-
-	while ( in >> aux.real() >> aux.imag() ) {
-		R.push_back(aux);
-	}
-	return R;
-}
-
-void write( route A, char* filename) {
-
-	std::ofstream out( filename);
-
-
-	for ( uint i=0; i<A.size(); i++) {
-		out << A[i].real() << " " << A[i].imag() << std::endl;
-	}
-	out << A[0].real() << " " << A[0].imag() << std::endl;
-
-	out.close();
-}
-
 #endif
