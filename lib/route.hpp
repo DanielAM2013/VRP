@@ -53,7 +53,7 @@ void save_route( route R, char* filename)
  for( uint i=0; i<n; i++) {
   out << R[i].real() << " " << R[i].imag() << std::endl;
  }
- out << R[0].real() << " " << R[1].imag() << std::endl;
+ out << R[0].real() << " " << R[0].imag() << std::endl;
 
  out.close();
 }
@@ -122,6 +122,5 @@ void print_route( route R) {
  std::cout << std::endl;
 
 }
+
 #endif
-
-

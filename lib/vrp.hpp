@@ -29,7 +29,7 @@ void save_train( train T, char* filename) {
  out.close();
 }
 
-double cust_train( train X) {
+double cust_train( train X, double k) {
 
  double aux=0;
  for( int i=0; i<X.size(); i++) 
@@ -39,14 +39,13 @@ double cust_train( train X) {
 }
 
 
-double cust_heuristic( train X) {
+double cust_heuristic( train X, double k) {
  double aux=0;
 
- double k=2;
  for( int i=0; i<X.size(); i++) 
   aux+=pow(cust_route(X[i]),k); 
 
- return pow(aux,1/k);
+ return aux;
 }
 
 double nearest_neighbor2(route *R) {
@@ -85,11 +84,11 @@ double nearest_neighbor2(route *R) {
  return d[2];
 }
 
-double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
+double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), double (*CUST)( train, double))
 {
 
  int N=first->size();
-
+ double Power=2;
  point aux=(*first)[0];
 
  // Ordenar
@@ -112,7 +111,7 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
   aux.clear();
  }
 
- double d[3]={0,0,cust_heuristic(*second)};
+ double d[3]={0,0,(*CUST)(*second,Power)};
 
  train Aux, Aux1(*second);
 
@@ -121,7 +120,7 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
   d[2]=d[1];
   Aux=train(*second);
   *second=train(Aux1);
-  d[1]=cust_heuristic(Aux);
+  d[1]=(*CUST)(Aux, Power);
   for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
    // Mesclar roca com a seguinte numa variável auxiliar
    i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
@@ -130,7 +129,7 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
    // Inserir rotas mescladas no train Aux
    Aux.erase(i+1);
    // Avaliar roteamento
-   d[0]=cust_heuristic(Aux);
+   d[0]=(*CUST)(Aux,Power);
    // Ordenar custo
    if(d[0]<d[1]) {
     d[1]=d[0];
@@ -147,7 +146,7 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
   // Inserir rotas mescladas no train Aux
   Aux.erase(Aux.begin());
   // Avaliar roteamento
-  d[0]=cust_heuristic(Aux);
+  d[0]=(*CUST)(Aux,Power);
  // Ordenar custo
   if(d[0]<d[1]) {
    d[1]=d[0];
@@ -155,7 +154,5 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
   }
  }
 
- return cust_train(*second);
+ return (*CUST)(*second,Power);
 }
-
-

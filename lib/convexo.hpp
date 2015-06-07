@@ -74,12 +74,9 @@ route bordo_convexo( route X ) {
  fecho.push_back(AUX[0]);
  fecho.push_back(AUX[1]);
 
- AUX.erase(AUX.begin(), AUX.begin()+2);
-
  for( uint k=2; k<AUX.size(); k++)
-  if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0]) >0) {
+  if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0])>0 ) {
    fecho.push_back(AUX[k]);
-   AUX.erase(AUX.begin()+k);
    break;
   }
 
@@ -87,9 +84,9 @@ route bordo_convexo( route X ) {
    if( In(fecho, AUX[k])) continue;
    uint v=positive( fecho, AUX[k]), w=negative( fecho, AUX[k]);
    apagar(fecho, v, w);
-   if( w>v)
+   if( w>v ) {
     fecho.insert(fecho.begin()+v+1, AUX[k]);
-   else
+   } else
     fecho.insert(fecho.begin(), AUX[k]);
   }
 

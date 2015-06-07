@@ -15,7 +15,6 @@ all:
 		$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; \
 	done; 
 
-		#$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; 
 edit:
 	vim $(SRC)/$(target).cpp
 
