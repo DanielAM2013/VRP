@@ -91,7 +91,8 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
  double Power=2;
  point aux=(*first)[0];
 
- // Ordenar
+ //! Sort
+ //! sort points in counterclockwise mode with initial point like origin
  for( route::iterator i=first->begin(); i!=first->end(); i++) {
   *i-=aux;
  }
@@ -101,8 +102,10 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
  for( route::iterator i=first->begin(); i!=first->end(); i++) {
   *i+=aux;
  }
+ //! endSort
 
-// Alocar
+ //! Aloc 
+ // aloc one point by route
  for( int i=1; i<N; i++) {
   route aux;
   aux.push_back((*first)[0]);
@@ -110,48 +113,59 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
   second->push_back(aux);
   aux.clear();
  }
-
+ //! endAloc
+ //
  double d[3]={0,0,(*CUST)(*second,Power)};
 
  train Aux, Aux1(*second);
 
+ //! Check
+ // check all linear possibilities of merge adjacents routes
  for ( int k=0; k<N-1; k++)
  {
   d[2]=d[1];
+  // Train copy
   Aux=train(*second);
   *second=train(Aux1);
   d[1]=(*CUST)(Aux, Power);
+
+  //! Merge_and_Analysis
+  // merge adjacent routes and check if cust is less of last
+  // Begin -> End-1
   for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
-   // Mesclar roca com a seguinte numa variável auxiliar
+   //! Add_Route
+   // add next route in end of current route after first element( origin) and
+   // erase next route of this copy
    i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
-   // Aplicar o tsp
-   (*TSP)(&*i);
-   // Inserir rotas mescladas no train Aux
    Aux.erase(i+1);
-   // Avaliar roteamento
+   // End Add_Route
+   // ! Tsp
+   (*TSP)(&*i);
+   // End Tsp
+   // ! Analysis
+   // Check of this modificed copy have cust less of last copy
    d[0]=(*CUST)(Aux,Power);
-   // Ordenar custo
    if(d[0]<d[1]) {
     d[1]=d[0];
     Aux1=train(Aux);
    }
+   // End Analysis
+   // Restore original copy
    Aux=train(*second);
   }
-
+  
   Aux=train(*second);
   
   (Aux.end()-1)->insert((Aux.end()-1)->end(), (Aux.begin())->begin(), (Aux.begin())->end());
 
   (*TSP)(&*(Aux.end()-1));
-  // Inserir rotas mescladas no train Aux
   Aux.erase(Aux.begin());
-  // Avaliar roteamento
   d[0]=(*CUST)(Aux,Power);
- // Ordenar custo
   if(d[0]<d[1]) {
    d[1]=d[0];
    Aux1=train(Aux);
   }
+  // End Merge_and_Analysis
  }
 
  return (*CUST)(*second,Power);
