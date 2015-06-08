@@ -4,7 +4,7 @@ OCL=ocl
 ARG=arg
 OUT=out
 LIB=lib
-GIT=.git
+GIT=../.git
 
 target=tsp
 kernel=balance
