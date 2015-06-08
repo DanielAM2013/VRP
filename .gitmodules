@@ -1,0 +1,4 @@
+[submodule "gpu"]
+	path = gpu
+	url = /home/daniel/Documents/Programacao/OpenCL/VRP/
+	ignore = dirty
