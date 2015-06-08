@@ -6,7 +6,7 @@ OUT=out
 BIN=bin
 CFLAGS=-I $(LIB) -fpermissive
 
-target=main
+target=genetic
 
 all:
 	mkdir -p $(OUT) $(BIN)

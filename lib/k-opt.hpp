@@ -1,17 +1,17 @@
 #ifndef _KOPT_
 #define _KOPT_
 
-#include <route.hpp>
+#include <train.hpp>
 
 // Retira os cruzamentos de primeira ordem
 double opt2( route *R) {
 
  //! Tomar dois pares de pontos dijuntos
  route::iterator aux[2];
- for( route::iterator i=R->begin(); next(i,2)!=R->end(); i++) {
-  aux[0]=next(i);
-  for( route::iterator j=next(aux[0]); next(j)!=R->end(); j++) {
-   aux[1]=next(j);
+ for( route::iterator i=R->begin(); i+2!=R->end(); i++) {
+  aux[0]=i+1;
+  for( route::iterator j=aux[0]+1; j+1!=R->end(); j++) {
+   aux[1]=j+1;
   //! verificar se a cruzamento de rotas
   if( cross(*i, *aux[0], *j, *aux[1]))
    rotate( aux[0], j);
@@ -19,7 +19,7 @@ double opt2( route *R) {
   if(i==R->begin()) continue;
 
   //! executar para o último elemento 
-  route::iterator j=prev(R->end());
+  route::iterator j=R->end()-1;
   aux[1]=R->begin();
 
   //! verificar se a cruzamento de rotas
@@ -29,21 +29,27 @@ double opt2( route *R) {
  return cust_route(*R);
 }
 
-std::vector<route> genetic_opt2( route* R) {
+route genetic_opt2( route R) {
 
+
+	double d[2]={0,cust_route(R)};
 	//! initialization
-	uint n=R->size();
-	std::vector<route> Aux;
-	for ( uint i=0; i<n; i++) {
-		Aux.push_back(*R);
-		swap(Aux[i].begin(),Aux[i].begin()+i);
-		opt2(&Aux[i]);
-	}
+	uint n=R.size();
+	route Aux, Aux1(R);
 
-	//! selection
-	for ( uint i=0; i<n; i++) 
-		std::cout << cust_route(Aux[i]) << std::endl;
-	return Aux;
+	for ( uint j=0; j<n-1; j++) {
+		for ( uint i=j+1; i<n; i++) {
+			Aux=route(Aux1);
+			swap(Aux.begin()+j,Aux.begin()+i);
+			d[0]=cust_route(Aux);
+			if (d[0] < d[1]) {
+			 d[1]=d[0];
+			 Aux1=route(Aux);
+			}
+		}
+	}
+	}
+	return Aux1;
 }
 
 route simple_step( route R) {

@@ -11,11 +11,20 @@ target=main
 all:
 	mkdir -p $(OUT) $(BIN)
 	g++ $(SRC)/$(target).cpp -o $(BIN)/$(target) $(CFLAGS)
-	for i in $(shell seq 1 3); do \
+	for i in $(shell seq 1 1); do \
 		$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; \
 	done; 
 
-		#$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; 
+
+plot:
+	@gnuplot -e "set term postscript; set output '$(OUT)/plot.ps'; plot '$(OUT)/output1.dat' with linespoints"
+	@epstopdf $(OUT)/plot.ps --outfile=$(OUT)/plot.pdf
+	@pdftk $(OUT)/plot.pdf cat 1east output $(OUT)/output.pdf
+	@rm $(OUT)/plot.ps $(OUT)/plot.pdf
+
+view: plot
+	evince $(OUT)/output.pdf &
+
 edit:
 	vim $(SRC)/$(target).cpp
 

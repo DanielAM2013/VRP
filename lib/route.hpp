@@ -2,10 +2,12 @@
 #define INCLUDE_ROUTE
 
 #include <base.hpp>
+typedef std::vector<point> route;
+
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-
+/*
 //! Avança "n" posições numa lista encadeada
 route::iterator next( route::iterator i, int n=1) {
 
@@ -16,6 +18,7 @@ route::iterator next( route::iterator i, int n=1) {
  return aux;
 }
 
+
 //! Recua "n" (default 1) numa lista duplamente encadeada
 route::iterator prev( route::iterator i, int n=1) {
 
@@ -25,6 +28,7 @@ route::iterator prev( route::iterator i, int n=1) {
 
  return aux;
 }
+*/
 
 // Lê uma rota: arquivo com uma lista de par de double ordenados
 route read_route (char* file) {
@@ -65,7 +69,7 @@ bool operator<(std::complex<double> X, std::complex<double> Y) {
  return false;
 }
 
-// Ordenar pontos da rota
+//! Order points of route in counterclockwise
 void order( route *R) {
 
  point aux = (*R)[0];
@@ -75,7 +79,7 @@ void order( route *R) {
   (*R)[i]-=aux;
  }
 
- std::sort(next(R->begin()), R->end(), operator<);
+ std::sort(R->begin()+1, R->end(), operator<);
 
  for( uint i=0; i<n; i++) {
   (*R)[i]+=aux;
@@ -110,7 +114,7 @@ bool cross( point xi, point xf, point yi, point yf) {
 
 // Inverte a ordem dos elementos entre os interadores
 void rotate( route::iterator x, route::iterator y) {
- for( route::iterator i=x, j=y; i!=j && prev(i)!=j; i++, j--)
+ for( route::iterator i=x, j=y; i!=j && i-1!=j; i++, j--)
   swap(i,j);
 }
 

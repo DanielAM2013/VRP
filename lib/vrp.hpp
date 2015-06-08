@@ -1,35 +1,12 @@
-#include <route.hpp>
+#include <train.hpp>
 #include <algorithm>
 #include <sstream>
 
-void print_train(train T) 
-{
- std::cout << "---------------------------------------" << std::endl;
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   std::cout << *j << " ";
-  std::cout << std::endl;
- }
+double sign( point A, point B) {
+ return (A.real()*B.imag()-A.imag()*B.real());
 }
 
-void save_train( train T, char* filename) {
- unsigned int k=0;
- std::stringstream s;
- s << filename;
- std::ofstream  out(s.str().c_str());
-
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   out << j->real() << " " << j->imag() << std::endl;
-
-  out << (i->begin())->real() << " " << (i->begin())->imag() <<  std::endl
-	  << std::endl;
- }
- out.close();
-}
-
-double cust_train( train X, double k) {
+double cust_train( train X) {
 
  double aux=0;
  for( int i=0; i<X.size(); i++) 
@@ -48,6 +25,16 @@ double cust_heuristic( train X, double k) {
  return aux;
 }
 
+double cust_squared( train X) {
+ return cust_heuristic(X,4);
+}
+
+
+double cust_size( train X) {
+ return cust_train(X)+cust_squared(X)*std::abs(X.size()-4);
+}
+
+
 double nearest_neighbor2(route *R) {
  double d[3];
  d[2]=0;
@@ -59,6 +46,8 @@ double nearest_neighbor2(route *R) {
   for( route::iterator i=last+1; i!=R->end(); i++) {
    for( route::iterator j=R->begin(); j!=last; j++) {
 
+    if (sign(*j-*i,*j-*(j+1))<0) continue;
+
     d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
     if(d[0]<d[1]) {
      d[1]=d[0];
@@ -66,6 +55,8 @@ double nearest_neighbor2(route *R) {
      closer[1]=j;
     }
    }
+
+   if (sign(*last-*R->begin(),*last-*i)<0) continue;
 
    d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
    if(d[0]<d[1]) {
@@ -84,25 +75,14 @@ double nearest_neighbor2(route *R) {
  return d[2];
 }
 
-double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), double (*CUST)( train, double))
+
+double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), double (*CUST)( train))
 {
 
  int N=first->size();
- double Power=2;
  point aux=(*first)[0];
 
- //! Sort
- //! sort points in counterclockwise mode with initial point like origin
- for( route::iterator i=first->begin(); i!=first->end(); i++) {
-  *i-=aux;
- }
-
- std::sort(first->begin()+1, first->end(), operator<);
-
- for( route::iterator i=first->begin(); i!=first->end(); i++) {
-  *i+=aux;
- }
- //! endSort
+ order(first);
 
  //! Aloc 
  // aloc one point by route
@@ -115,7 +95,8 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
  }
  //! endAloc
  //
- double d[3]={0,0,(*CUST)(*second,Power)};
+
+ double d[3]={0,0,(*CUST)(*second)};
 
  train Aux, Aux1(*second);
 
@@ -127,7 +108,7 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
   // Train copy
   Aux=train(*second);
   *second=train(Aux1);
-  d[1]=(*CUST)(Aux, Power);
+  d[1]=(*CUST)(Aux);
 
   //! Merge_and_Analysis
   // merge adjacent routes and check if cust is less of last
@@ -137,14 +118,14 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
    // add next route in end of current route after first element( origin) and
    // erase next route of this copy
    i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
-   Aux.erase(i+1);
    // End Add_Route
    // ! Tsp
    (*TSP)(&*i);
+   Aux.erase(i+1);
    // End Tsp
    // ! Analysis
    // Check of this modificed copy have cust less of last copy
-   d[0]=(*CUST)(Aux,Power);
+   d[0]=(*CUST)(Aux);
    if(d[0]<d[1]) {
     d[1]=d[0];
     Aux1=train(Aux);
@@ -153,14 +134,14 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
    // Restore original copy
    Aux=train(*second);
   }
-  
-  Aux=train(*second);
-  
+
   (Aux.end()-1)->insert((Aux.end()-1)->end(), (Aux.begin())->begin(), (Aux.begin())->end());
 
   (*TSP)(&*(Aux.end()-1));
+
   Aux.erase(Aux.begin());
-  d[0]=(*CUST)(Aux,Power);
+
+  d[0]=(*CUST)(Aux);
   if(d[0]<d[1]) {
    d[1]=d[0];
    Aux1=train(Aux);
@@ -168,5 +149,5 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), d
   // End Merge_and_Analysis
  }
 
- return (*CUST)(*second,Power);
+ return (*CUST)(*second);
 }
