@@ -1,32 +1,9 @@
-#include <route.hpp>
+#include <train.hpp>
 #include <algorithm>
 #include <sstream>
 
-void print_train(train T) 
-{
- std::cout << "---------------------------------------" << std::endl;
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   std::cout << *j << " ";
-  std::cout << std::endl;
- }
-}
-
-void save_train( train T, char* filename) {
- unsigned int k=0;
- std::stringstream s;
- s << filename;
- std::ofstream  out(s.str().c_str());
-
- for( train::iterator i=T.begin(); i!=T.end(); i++) {
-
-  for( route::iterator j=i->begin(); j!=i->end(); j++)
-   out << j->real() << " " << j->imag() << std::endl;
-
-  out << (i->begin())->real() << " " << (i->begin())->imag() <<  std::endl
-	  << std::endl;
- }
- out.close();
+double sign( point A, point B) {
+ return (A.real()*B.imag()-A.imag()*B.real());
 }
 
 double cust_train( train X) {
@@ -39,15 +16,24 @@ double cust_train( train X) {
 }
 
 
-double cust_heuristic( train X) {
+double cust_heuristic( train X, double k) {
  double aux=0;
 
- double k=2;
  for( int i=0; i<X.size(); i++) 
   aux+=pow(cust_route(X[i]),k); 
 
- return pow(aux,1/k);
+ return aux;
 }
+
+double cust_squared( train X) {
+ return cust_heuristic(X,4);
+}
+
+
+double cust_size( train X) {
+ return cust_train(X)+cust_squared(X)*std::abs(X.size()-4);
+}
+
 
 double nearest_neighbor2(route *R) {
  double d[3];
@@ -60,6 +46,8 @@ double nearest_neighbor2(route *R) {
   for( route::iterator i=last+1; i!=R->end(); i++) {
    for( route::iterator j=R->begin(); j!=last; j++) {
 
+    if (sign(*j-*i,*j-*(j+1))<0) continue;
+
     d[0]=std::abs(*j-*i)+std::abs(*i-*(j+1))-std::abs(*j-*(j+1));
     if(d[0]<d[1]) {
      d[1]=d[0];
@@ -67,6 +55,8 @@ double nearest_neighbor2(route *R) {
      closer[1]=j;
     }
    }
+
+   if (sign(*last-*R->begin(),*last-*i)<0) continue;
 
    d[0]=std::abs(*last-*i)+std::abs(*i-*R->begin())-std::abs(*last-*R->begin());
    if(d[0]<d[1]) {
@@ -85,25 +75,17 @@ double nearest_neighbor2(route *R) {
  return d[2];
 }
 
-double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
+
+double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*), double (*CUST)( train))
 {
 
  int N=first->size();
-
  point aux=(*first)[0];
 
- // Ordenar
- for( route::iterator i=first->begin(); i!=first->end(); i++) {
-  *i-=aux;
- }
+ order(first);
 
- std::sort(first->begin()+1, first->end(), operator<);
-
- for( route::iterator i=first->begin(); i!=first->end(); i++) {
-  *i+=aux;
- }
-
-// Alocar
+ //! Aloc 
+ // aloc one point by route
  for( int i=1; i<N; i++) {
   route aux;
   aux.push_back((*first)[0]);
@@ -111,51 +93,61 @@ double clarke_wright_tsp ( route* first, train* second, double (*TSP)(route*))
   second->push_back(aux);
   aux.clear();
  }
+ //! endAloc
+ //
 
- double d[3]={0,0,cust_heuristic(*second)};
+ double d[3]={0,0,(*CUST)(*second)};
 
  train Aux, Aux1(*second);
 
+ //! Check
+ // check all linear possibilities of merge adjacents routes
  for ( int k=0; k<N-1; k++)
  {
   d[2]=d[1];
+  // Train copy
   Aux=train(*second);
   *second=train(Aux1);
-  d[1]=cust_heuristic(Aux);
+  d[1]=(*CUST)(Aux);
+
+  //! Merge_and_Analysis
+  // merge adjacent routes and check if cust is less of last
+  // Begin -> End-1
   for( train::iterator i=Aux.begin(); i+1!=Aux.end(); i++) {
-   // Mesclar roca com a seguinte numa variável auxiliar
+   //! Add_Route
+   // add next route in end of current route after first element( origin) and
+   // erase next route of this copy
    i->insert(i->end(), (i+1)->begin()+1, (i+1)->end());
-   // Aplicar o tsp
+   // End Add_Route
+   // ! Tsp
    (*TSP)(&*i);
-   // Inserir rotas mescladas no train Aux
    Aux.erase(i+1);
-   // Avaliar roteamento
-   d[0]=cust_heuristic(Aux);
-   // Ordenar custo
+   // End Tsp
+   // ! Analysis
+   // Check of this modificed copy have cust less of last copy
+   d[0]=(*CUST)(Aux);
    if(d[0]<d[1]) {
     d[1]=d[0];
     Aux1=train(Aux);
    }
+   // End Analysis
+   // Restore original copy
    Aux=train(*second);
   }
 
-  Aux=train(*second);
-  
   (Aux.end()-1)->insert((Aux.end()-1)->end(), (Aux.begin())->begin(), (Aux.begin())->end());
 
   (*TSP)(&*(Aux.end()-1));
-  // Inserir rotas mescladas no train Aux
+
   Aux.erase(Aux.begin());
-  // Avaliar roteamento
-  d[0]=cust_heuristic(Aux);
- // Ordenar custo
+
+  d[0]=(*CUST)(Aux);
   if(d[0]<d[1]) {
    d[1]=d[0];
    Aux1=train(Aux);
   }
+  // End Merge_and_Analysis
  }
 
- return cust_train(*second);
+ return (*CUST)(*second);
 }
-
-

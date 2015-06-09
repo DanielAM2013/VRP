@@ -1,5 +1,6 @@
 \documentclass[a4paper, 12pt]{article}
 
+\usepackage[portuguese]{babel}
 \usepackage{preamble}
 \usepackage{pgfplots}
 \usepackage{verbatim}
@@ -130,24 +131,24 @@ igual à $\frac{n\times(n+1)\times(2n+1)}{3}$ dizemos neste caso que o algoritmo
 é de ordem $O(n^3)$ pois seu fator dominante para grandes números será $n^3$
 
 
-%\begin{figure}[!ht]
-%\centering
-%\foreach \x in {1,2,3}{ 
-%\begin{subfigure}{\textwidth}
-%\centering
-%\begin{tikzpicture}
-%\begin{axis} [ width=8cm]
-%\addplot[mark size=0.1pt, blue] table {arg/nearest_neightbor\x.dat};
-%\addplot+[only marks] coordinates {
-%	(5.06721,3.94673) [2]
-%};
-%\end{axis}
-%\end{tikzpicture}
-%\caption{Pontos roteados pelo vizinho mais próximo (\x)}
-%\label{roteado\x}
-%\end{subfigure}
-%}
-%\end{figure}
+\begin{figure}[!ht]
+\centering
+\foreach \x in {1,2,3}{ 
+\begin{subfigure}{\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis} [ width=8cm]
+\addplot[mark size=0.1pt, blue] table {arg/nearest_neightbor\x.dat};
+\addplot+[only marks] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo vizinho mais próximo (\x)}
+\label{roteado\x}
+\end{subfigure}
+}
+\end{figure}
 
 \newpage
 
@@ -202,23 +203,23 @@ double nearest_neighbor2(route *R) {
 no qual percorre-se o conjunto procurando-se possiveis cruzamentos de rotas e
 elimina-se estas.
 
-%\foreach \x in {1,2,3}{ 
-%\begin{figure}[!ht]
-%\centering
-%\begin{tikzpicture}
-%\begin{axis}[ width=8cm]
-%\addplot+[only marks, mark size=0.5pt,red] table {arg/k-opt\x.dat};
-%\addplot[mark size=0.3pt,blue] table {arg/k-opt\x.dat};
-%\addplot+[only marks, mark size=1pt, red] coordinates {
-%	(5.06721,3.94673) [2]
-%};
-%\end{axis}
-%\end{tikzpicture}
-%\caption{Pontos roteados pelo 2-opt (\x)}
-%\label{k-opt\x}
-%\end{figure}
-%}
-%
+\foreach \x in {1,2,3}{ 
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ width=8cm]
+\addplot+[only marks, mark size=0.5pt,red] table {arg/k-opt\x.dat};
+\addplot[mark size=0.3pt,blue] table {arg/k-opt\x.dat};
+\addplot+[only marks, mark size=1pt, red] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo 2-opt (\x)}
+\label{k-opt\x}
+\end{figure}
+}
+
 \begin{description}
  \item[Vantagens] Possui um custo computacional inferior ao do \emph{vizinho
 mais próximo}
@@ -321,25 +322,25 @@ determinado em função do percurso desta rota. O resultado do algoritmo acima �
 mostrado nas figuras \ref{clarke_wright1}, \ref{clarke_wright2}  e
 \ref{clarke_wright3} .
 
-%\begin{figure}[!ht]
-%\centering
-%\foreach \x in {1,2,3}{ 
-%\begin{subfigure}{\textwidth}
-%\centering
-%\begin{tikzpicture}
-%\begin{axis}[ width=8cm ]
-%\addplot+[only marks, mark size=0.5pt, red] table {arg/mymethod\x.dat};
-%\addplot[mark size=0.3pt, blue] table {arg/mymethod\x.dat};
-%\addplot+[only marks, red] coordinates {
-%	(5.06721,3.94673) [2]
-%};
-%\end{axis}
-%\end{tikzpicture}
-%\caption{Pontos roteados pelo Clarke \& Wright (\x)}
-%\label{clarke_wright\x}
-%\end{subfigure}
-%}
-%\end{figure}
+\begin{figure}[!ht]
+\centering
+\foreach \x in {1,2,3}{ 
+\begin{subfigure}{\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[ width=8cm ]
+\addplot+[only marks, mark size=0.5pt, red] table {arg/mymethod\x.dat};
+\addplot[mark size=0.3pt, blue] table {arg/mymethod\x.dat};
+\addplot+[only marks, red] coordinates {
+	(5.06721,3.94673) [2]
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Pontos roteados pelo Clarke \& Wright (\x)}
+\label{clarke_wright\x}
+\end{subfigure}
+}
+\end{figure}
 
 \newpage
 

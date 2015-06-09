@@ -27,6 +27,21 @@ existem varias formas programas estes objetos.
 	Utilizaremos neste projeto a forma vetorial uma vez que esta utiliza construções interna da
 linguagem C++ para resolver problemas de manipulação de dados.
 
+Informações técnicas:
+
+	points:=complex<double>
+	route:=vector<points>
+	train:=vector<route>
+
+
+
+
+
+
+
+
+
+
 
 
 

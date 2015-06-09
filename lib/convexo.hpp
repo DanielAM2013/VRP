@@ -84,15 +84,17 @@ route bordo_convexo( route X ) {
  fecho.push_back(AUX[0]);
  fecho.push_back(AUX[1]);
 
+<<<<<<< HEAD
  //! this erase two first points
  AUX.erase(AUX.begin(), AUX.begin()+2);
 
 
  //! add point if that is in out of convex
+=======
+>>>>>>> 2cc8c75ef82d68e836f50dd8ad9109c868a9221a
  for( uint k=2; k<AUX.size(); k++)
-  if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0]) >0) {
+  if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0])>0 ) {
    fecho.push_back(AUX[k]);
-   AUX.erase(AUX.begin()+k);
    break;
   }
 
@@ -106,11 +108,15 @@ route bordo_convexo( route X ) {
 
    //! erase point between points v and w
    apagar(fecho, v, w);
+<<<<<<< HEAD
 
    //! add out point at v+1 position 
    if( w > v)
+=======
+   if( w>v ) {
+>>>>>>> 2cc8c75ef82d68e836f50dd8ad9109c868a9221a
     fecho.insert(fecho.begin()+v+1, AUX[k]);
-   else
+   } else
     fecho.insert(fecho.begin(), AUX[k]);
   }
 
