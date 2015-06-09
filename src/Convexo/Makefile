@@ -10,7 +10,7 @@ target=main
 
 all:
 	mkdir -p $(OUT) $(BIN)
-	g++ $(SRC)/$(target).cpp -o $(BIN)/$(target) $(CFLAGS)
+	g++ -g $(SRC)/$(target).cpp -o $(BIN)/$(target) $(CFLAGS)
 	for i in $(shell seq 1 3); do \
 		$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; \
 	done; 
@@ -18,6 +18,9 @@ all:
 		#$(BIN)/$(target) $(ARG)/points$$i.dat $(OUT)/output$$i.dat; 
 edit:
 	vim $(SRC)/$(target).cpp
+
+view: 
+	less $(OUT)
 
 clean:
 	rm -rf $(OUT) $(BIN)
