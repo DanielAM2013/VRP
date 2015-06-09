@@ -1950,41 +1950,41 @@
  1663              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 sdk.c
-     /tmp/ccOWySfX.s:41     .text:00000000 $a
-     /tmp/ccOWySfX.s:45     .text:00000000 SDK_mainloop
-     /tmp/ccOWySfX.s:65     .text:00000018 SDK_EXAMPLE_direct_individual_motor_commands
-     /tmp/ccOWySfX.s:232    .text:00000210 $d
+     /tmp/cc7YPJZm.s:41     .text:00000000 $a
+     /tmp/cc7YPJZm.s:45     .text:00000000 SDK_mainloop
+     /tmp/cc7YPJZm.s:65     .text:00000018 SDK_EXAMPLE_direct_individual_motor_commands
+     /tmp/cc7YPJZm.s:232    .text:00000210 $d
                             *COM*:00000004 WO_SDK
                             *COM*:0000008c RO_ALL_Data
                             *COM*:00000008 WO_Direct_Individual_Motor_Control
-     /tmp/ccOWySfX.s:241    .text:00000220 $a
-     /tmp/ccOWySfX.s:245    .text:00000220 SDK_EXAMPLE_direct_motor_commands_with_standard_output_mapping
-     /tmp/ccOWySfX.s:334    .text:00000328 $d
+     /tmp/cc7YPJZm.s:241    .text:00000220 $a
+     /tmp/cc7YPJZm.s:245    .text:00000220 SDK_EXAMPLE_direct_motor_commands_with_standard_output_mapping
+     /tmp/cc7YPJZm.s:334    .text:00000328 $d
                             *COM*:00000004 WO_Direct_Motor_Control
-     /tmp/ccOWySfX.s:340    .text:00000338 $a
-     /tmp/ccOWySfX.s:344    .text:00000338 SDK_EXAMPLE_attitude_commands
-     /tmp/ccOWySfX.s:381    .text:00000380 $d
+     /tmp/cc7YPJZm.s:340    .text:00000338 $a
+     /tmp/cc7YPJZm.s:344    .text:00000338 SDK_EXAMPLE_attitude_commands
+     /tmp/cc7YPJZm.s:381    .text:00000380 $d
                             *COM*:0000000c WO_CTRL_Input
-     /tmp/ccOWySfX.s:386    .bss:00000000 $d
-     /tmp/ccOWySfX.s:387    .bss:00000000 originLon.1521
-     /tmp/ccOWySfX.s:391    .bss:00000008 originLat.1520
-     /tmp/ccOWySfX.s:394    .bss:00000010 wpExampleState.1519
-     /tmp/ccOWySfX.s:402    .text:00000388 $a
-     /tmp/ccOWySfX.s:406    .text:00000388 SDK_EXAMPLE_gps_waypoint_control
-     /tmp/ccOWySfX.s:435    .text:000003c4 $d
-     /tmp/ccOWySfX.s:443    .text:000003d8 $a
-     /tmp/ccOWySfX.s:681    .text:000006d4 $d
+     /tmp/cc7YPJZm.s:386    .bss:00000000 $d
+     /tmp/cc7YPJZm.s:387    .bss:00000000 originLon.1521
+     /tmp/cc7YPJZm.s:391    .bss:00000008 originLat.1520
+     /tmp/cc7YPJZm.s:394    .bss:00000010 wpExampleState.1519
+     /tmp/cc7YPJZm.s:402    .text:00000388 $a
+     /tmp/cc7YPJZm.s:406    .text:00000388 SDK_EXAMPLE_gps_waypoint_control
+     /tmp/cc7YPJZm.s:435    .text:000003c4 $d
+     /tmp/cc7YPJZm.s:443    .text:000003d8 $a
+     /tmp/cc7YPJZm.s:681    .text:000006d4 $d
                             *COM*:00000010 RO_RC_Data
-     /tmp/ccOWySfX.s:699    .text:0000070c $a
-     /tmp/ccOWySfX.s:1152   .text:00000c98 $d
-     /tmp/ccOWySfX.s:1167   .text:00000cc8 $a
-     /tmp/ccOWySfX.s:1398   .bss:00000014 timeout.1751
-     /tmp/ccOWySfX.s:1406   .text:00000f50 SDK_EXAMPLE_turn_motors_on
-     /tmp/ccOWySfX.s:1513   .text:0000104c $d
-     /tmp/ccOWySfX.s:1523   .bss:00000018 timeout.1765
-     /tmp/ccOWySfX.s:1527   .text:00001058 $a
-     /tmp/ccOWySfX.s:1531   .text:00001058 SDK_EXAMPLE_turn_motors_off
-     /tmp/ccOWySfX.s:1637   .text:00001150 $d
+     /tmp/cc7YPJZm.s:699    .text:0000070c $a
+     /tmp/cc7YPJZm.s:1152   .text:00000c98 $d
+     /tmp/cc7YPJZm.s:1167   .text:00000cc8 $a
+     /tmp/cc7YPJZm.s:1398   .bss:00000014 timeout.1751
+     /tmp/cc7YPJZm.s:1406   .text:00000f50 SDK_EXAMPLE_turn_motors_on
+     /tmp/cc7YPJZm.s:1513   .text:0000104c $d
+     /tmp/cc7YPJZm.s:1523   .bss:00000018 timeout.1765
+     /tmp/cc7YPJZm.s:1527   .text:00001058 $a
+     /tmp/cc7YPJZm.s:1531   .text:00001058 SDK_EXAMPLE_turn_motors_off
+     /tmp/cc7YPJZm.s:1637   .text:00001150 $d
                             *COM*:00000004 GPS_timeout
                             *COM*:00000001 SYSTEM_initialized
 

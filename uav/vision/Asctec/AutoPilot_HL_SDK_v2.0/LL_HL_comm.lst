@@ -2005,37 +2005,37 @@
  1906              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 LL_HL_comm.c
-     /tmp/ccheLOfY.s:49     .bss:00000000 SSP_ack
-     /tmp/ccheLOfY.s:46     .bss:00000000 $d
-     /tmp/ccheLOfY.s:54     .bss:00000002 wpCtrlWpCmd
-     /tmp/ccheLOfY.s:59     .bss:00000003 wpCtrlWpCmdUpdated
-     /tmp/ccheLOfY.s:64     .bss:00000004 wpCtrlAckTrigger
-     /tmp/ccheLOfY.s:70     .bss:00000006 wpCtrlNavStatus
-     /tmp/ccheLOfY.s:76     .bss:00000008 wpCtrlDistToWp
-     /tmp/ccheLOfY.s:79     .text:00000000 $a
-     /tmp/ccheLOfY.s:83     .text:00000000 SSP_data_distribution_HL
-     /tmp/ccheLOfY.s:534    .text:00000550 $d
-     /tmp/ccheLOfY.s:545    .text:00000570 $a
-     /tmp/ccheLOfY.s:594    .text:000005dc $d
+     /tmp/cc8UM65K.s:49     .bss:00000000 SSP_ack
+     /tmp/cc8UM65K.s:46     .bss:00000000 $d
+     /tmp/cc8UM65K.s:54     .bss:00000002 wpCtrlWpCmd
+     /tmp/cc8UM65K.s:59     .bss:00000003 wpCtrlWpCmdUpdated
+     /tmp/cc8UM65K.s:64     .bss:00000004 wpCtrlAckTrigger
+     /tmp/cc8UM65K.s:70     .bss:00000006 wpCtrlNavStatus
+     /tmp/cc8UM65K.s:76     .bss:00000008 wpCtrlDistToWp
+     /tmp/cc8UM65K.s:79     .text:00000000 $a
+     /tmp/cc8UM65K.s:83     .text:00000000 SSP_data_distribution_HL
+     /tmp/cc8UM65K.s:534    .text:00000550 $d
+     /tmp/cc8UM65K.s:545    .text:00000570 $a
+     /tmp/cc8UM65K.s:594    .text:000005dc $d
                             *COM*:0000005c LL_1khz_attitude_data
                             *COM*:00000001 SYSTEM_initialized
-     /tmp/ccheLOfY.s:614    .bss:0000000a pageselect.1648
-     /tmp/ccheLOfY.s:618    .text:00000604 $a
-     /tmp/ccheLOfY.s:622    .text:00000604 HL2LL_write_cycle
-     /tmp/ccheLOfY.s:1423   .text:00000eb8 LL_write_ctrl_data
-     /tmp/ccheLOfY.s:1389   .text:00000e74 $d
+     /tmp/cc8UM65K.s:614    .bss:0000000a pageselect.1648
+     /tmp/cc8UM65K.s:618    .text:00000604 $a
+     /tmp/cc8UM65K.s:622    .text:00000604 HL2LL_write_cycle
+     /tmp/cc8UM65K.s:1423   .text:00000eb8 LL_write_ctrl_data
+     /tmp/cc8UM65K.s:1389   .text:00000e74 $d
                             *COM*:00000038 LL_1khz_control_input
                             *COM*:0000001c wpToLL
-     /tmp/ccheLOfY.s:1414   .bss:0000000c spi_chksum.1846
-     /tmp/ccheLOfY.s:1418   .text:00000eb8 $a
-     /tmp/ccheLOfY.s:1638   .text:00001118 $d
-     /tmp/ccheLOfY.s:1651   .bss:0000000e incoming_page.1897
-     /tmp/ccheLOfY.s:1655   .bss:00000010 SPI_rxptr.1896
-     /tmp/ccheLOfY.s:1658   .bss:00000014 SPI_rxcount.1895
-     /tmp/ccheLOfY.s:1661   .bss:00000015 SPI_syncstate.1894
-     /tmp/ccheLOfY.s:1665   .text:0000112c $a
-     /tmp/ccheLOfY.s:1670   .text:0000112c SSP_rx_handler_HL
-     /tmp/ccheLOfY.s:1875   .text:00001354 $d
+     /tmp/cc8UM65K.s:1414   .bss:0000000c spi_chksum.1846
+     /tmp/cc8UM65K.s:1418   .text:00000eb8 $a
+     /tmp/cc8UM65K.s:1638   .text:00001118 $d
+     /tmp/cc8UM65K.s:1651   .bss:0000000e incoming_page.1897
+     /tmp/cc8UM65K.s:1655   .bss:00000010 SPI_rxptr.1896
+     /tmp/cc8UM65K.s:1658   .bss:00000014 SPI_rxcount.1895
+     /tmp/cc8UM65K.s:1661   .bss:00000015 SPI_syncstate.1894
+     /tmp/cc8UM65K.s:1665   .text:0000112c $a
+     /tmp/cc8UM65K.s:1670   .text:0000112c SSP_rx_handler_HL
+     /tmp/cc8UM65K.s:1875   .text:00001354 $d
                             *COM*:00000004 GPS_timeout
 
 UNDEFINED SYMBOLS

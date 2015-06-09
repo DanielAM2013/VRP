@@ -549,23 +549,23 @@
  494              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 pelican_ptu.c
-     /tmp/ccnf2ZjJ.s:31     .text:00000000 $a
-     /tmp/ccnf2ZjJ.s:35     .text:00000000 PTU_init
-     /tmp/ccnf2ZjJ.s:116    .text:000000c8 $d
+     /tmp/ccJZpT52.s:31     .text:00000000 $a
+     /tmp/ccJZpT52.s:35     .text:00000000 PTU_init
+     /tmp/ccJZpT52.s:116    .text:000000c8 $d
                             *COM*:00000020 CAMERA_ptu
-     /tmp/ccnf2ZjJ.s:120    .bss:00000000 $d
-     /tmp/ccnf2ZjJ.s:121    .bss:00000000 cam_angle_pitch.1360
-     /tmp/ccnf2ZjJ.s:125    .bss:00000004 ptu_cnt.1357
-     /tmp/ccnf2ZjJ.s:129    .text:000000cc $a
-     /tmp/ccnf2ZjJ.s:133    .text:000000cc PTU_update
-     /tmp/ccnf2ZjJ.s:309    .text:000002c4 SERVO_pitch_move
-     /tmp/ccnf2ZjJ.s:400    .text:000003ac SERVO_roll_move
-     /tmp/ccnf2ZjJ.s:289    .text:000002b0 $d
+     /tmp/ccJZpT52.s:120    .bss:00000000 $d
+     /tmp/ccJZpT52.s:121    .bss:00000000 cam_angle_pitch.1360
+     /tmp/ccJZpT52.s:125    .bss:00000004 ptu_cnt.1357
+     /tmp/ccJZpT52.s:129    .text:000000cc $a
+     /tmp/ccJZpT52.s:133    .text:000000cc PTU_update
+     /tmp/ccJZpT52.s:309    .text:000002c4 SERVO_pitch_move
+     /tmp/ccJZpT52.s:400    .text:000003ac SERVO_roll_move
+     /tmp/ccJZpT52.s:289    .text:000002b0 $d
                             *COM*:0000000c CAMERA_Commands
-     /tmp/ccnf2ZjJ.s:304    .text:000002c4 $a
-     /tmp/ccnf2ZjJ.s:387    .text:000003a0 $d
-     /tmp/ccnf2ZjJ.s:395    .text:000003ac $a
-     /tmp/ccnf2ZjJ.s:476    .text:00000480 $d
+     /tmp/ccJZpT52.s:304    .text:000002c4 $a
+     /tmp/ccJZpT52.s:387    .text:000003a0 $d
+     /tmp/ccJZpT52.s:395    .text:000003ac $a
+     /tmp/ccJZpT52.s:476    .text:00000480 $d
                             *COM*:00000004 GPS_timeout
                             *COM*:00000001 SYSTEM_initialized
 

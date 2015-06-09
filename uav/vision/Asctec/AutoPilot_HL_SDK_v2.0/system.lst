@@ -841,25 +841,25 @@
  731              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 system.c
-     /tmp/cctxDIhf.s:37     .text:00000000 $a
-     /tmp/cctxDIhf.s:41     .text:00000000 init
-     /tmp/cctxDIhf.s:521    .text:0000040c pll_init
-     /tmp/cctxDIhf.s:555    .text:0000044c pll_feed
-     /tmp/cctxDIhf.s:195    .text:00000134 init_ports
-     /tmp/cctxDIhf.s:416    .text:00000338 init_spi
-     /tmp/cctxDIhf.s:448    .text:00000370 init_spi1
-     /tmp/cctxDIhf.s:268    .text:000001dc init_timer0
-     /tmp/cctxDIhf.s:341    .text:00000284 PWM_Init
-     /tmp/cctxDIhf.s:117    .text:00000088 init_interrupts
-     /tmp/cctxDIhf.s:185    .text:00000124 $d
-     /tmp/cctxDIhf.s:191    .text:00000134 $a
-     /tmp/cctxDIhf.s:260    .text:000001d4 $d
-     /tmp/cctxDIhf.s:264    .text:000001dc $a
-     /tmp/cctxDIhf.s:614    .text:000004ac peripheralClockFrequency
-     /tmp/cctxDIhf.s:334    .text:00000280 $d
-     /tmp/cctxDIhf.s:337    .text:00000284 $a
-     /tmp/cctxDIhf.s:589    .text:0000048c processorClockFrequency
-     /tmp/cctxDIhf.s:688    .text:00000544 delay
+     /tmp/ccJYB6s0.s:37     .text:00000000 $a
+     /tmp/ccJYB6s0.s:41     .text:00000000 init
+     /tmp/ccJYB6s0.s:521    .text:0000040c pll_init
+     /tmp/ccJYB6s0.s:555    .text:0000044c pll_feed
+     /tmp/ccJYB6s0.s:195    .text:00000134 init_ports
+     /tmp/ccJYB6s0.s:416    .text:00000338 init_spi
+     /tmp/ccJYB6s0.s:448    .text:00000370 init_spi1
+     /tmp/ccJYB6s0.s:268    .text:000001dc init_timer0
+     /tmp/ccJYB6s0.s:341    .text:00000284 PWM_Init
+     /tmp/ccJYB6s0.s:117    .text:00000088 init_interrupts
+     /tmp/ccJYB6s0.s:185    .text:00000124 $d
+     /tmp/ccJYB6s0.s:191    .text:00000134 $a
+     /tmp/ccJYB6s0.s:260    .text:000001d4 $d
+     /tmp/ccJYB6s0.s:264    .text:000001dc $a
+     /tmp/ccJYB6s0.s:614    .text:000004ac peripheralClockFrequency
+     /tmp/ccJYB6s0.s:334    .text:00000280 $d
+     /tmp/ccJYB6s0.s:337    .text:00000284 $a
+     /tmp/ccJYB6s0.s:589    .text:0000048c processorClockFrequency
+     /tmp/ccJYB6s0.s:688    .text:00000544 delay
                             *COM*:00000004 GPS_timeout
                             *COM*:00000001 SYSTEM_initialized
                             *COM*:00000004 SSP_trans_cnt

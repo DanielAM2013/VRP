@@ -552,23 +552,23 @@
  523              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 ssp.c
-     /tmp/ccZHBXVG.s:51     .bss:00000000 SSP_trans_cnt
-     /tmp/ccZHBXVG.s:48     .bss:00000000 $d
-     /tmp/ccZHBXVG.s:57     .data:00000000 data_sent_to_LL
-     /tmp/ccZHBXVG.s:62     .data:00000001 SSP_receiption_complete
-     /tmp/ccZHBXVG.s:67     .data:00000002 data_sent_to_HL
-     /tmp/ccZHBXVG.s:70     .text:00000000 $a
-     /tmp/ccZHBXVG.s:74     .text:00000000 SSPHandler
-     /tmp/ccZHBXVG.s:253    .text:000001c8 $d
+     /tmp/cch1BwkX.s:51     .bss:00000000 SSP_trans_cnt
+     /tmp/cch1BwkX.s:48     .bss:00000000 $d
+     /tmp/cch1BwkX.s:57     .data:00000000 data_sent_to_LL
+     /tmp/cch1BwkX.s:62     .data:00000001 SSP_receiption_complete
+     /tmp/cch1BwkX.s:67     .data:00000002 data_sent_to_HL
+     /tmp/cch1BwkX.s:70     .text:00000000 $a
+     /tmp/cch1BwkX.s:74     .text:00000000 SSPHandler
+     /tmp/cch1BwkX.s:253    .text:000001c8 $d
                             *COM*:00000004 CurrentTxIndex
                             *COM*:00000004 SPIWR_num_bytes
                             *COM*:00000080 SPIWRData
-     /tmp/ccZHBXVG.s:263    .text:000001d8 $a
-     /tmp/ccZHBXVG.s:267    .text:000001d8 LL_write_init
-     /tmp/ccZHBXVG.s:299    .text:00000214 $d
-     /tmp/ccZHBXVG.s:302    .text:00000218 $a
-     /tmp/ccZHBXVG.s:309    .text:00000218 LL_write
-     /tmp/ccZHBXVG.s:495    .text:00000414 $d
+     /tmp/cch1BwkX.s:263    .text:000001d8 $a
+     /tmp/cch1BwkX.s:267    .text:000001d8 LL_write_init
+     /tmp/cch1BwkX.s:299    .text:00000214 $d
+     /tmp/cch1BwkX.s:302    .text:00000218 $a
+     /tmp/cch1BwkX.s:309    .text:00000218 LL_write
+     /tmp/cch1BwkX.s:495    .text:00000414 $d
                             *COM*:00000004 GPS_timeout
                             *COM*:00000001 SYSTEM_initialized
                             *COM*:00000080 SPIRDData
