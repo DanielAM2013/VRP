@@ -455,17 +455,17 @@
  499              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/ccywNdAu.s:123    .text:00000000 $a
-     /tmp/ccywNdAu.s:131    .text:00000000 _read_r
-     /tmp/ccywNdAu.s:236    .text:000000e0 _write_r
-     /tmp/ccywNdAu.s:310    .text:0000017c _close_r
-     /tmp/ccywNdAu.s:341    .text:000001a8 _lseek_r
-     /tmp/ccywNdAu.s:373    .text:000001dc _fstat_r
-     /tmp/ccywNdAu.s:407    .text:00000218 isatty
-     /tmp/ccywNdAu.s:435    .text:00000240 _sbrk_r
-     /tmp/ccywNdAu.s:484    .text:000002ac $d
-     /tmp/ccywNdAu.s:493    .bss:00000000 heap_ptr
-     /tmp/ccywNdAu.s:492    .bss:00000000 $d
+     /tmp/ccHOz9ep.s:123    .text:00000000 $a
+     /tmp/ccHOz9ep.s:131    .text:00000000 _read_r
+     /tmp/ccHOz9ep.s:236    .text:000000e0 _write_r
+     /tmp/ccHOz9ep.s:310    .text:0000017c _close_r
+     /tmp/ccHOz9ep.s:341    .text:000001a8 _lseek_r
+     /tmp/ccHOz9ep.s:373    .text:000001dc _fstat_r
+     /tmp/ccHOz9ep.s:407    .text:00000218 isatty
+     /tmp/ccHOz9ep.s:435    .text:00000240 _sbrk_r
+     /tmp/ccHOz9ep.s:484    .text:000002ac $d
+     /tmp/ccHOz9ep.s:493    .bss:00000000 heap_ptr
+     /tmp/ccHOz9ep.s:492    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 UARTReadChar

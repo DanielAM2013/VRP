@@ -767,15 +767,15 @@
  485              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 adc.c
-     /tmp/ccaxpIxA.s:32     .bss:00000000 ADC0IntDone
-     /tmp/ccaxpIxA.s:29     .bss:00000000 $d
-     /tmp/ccaxpIxA.s:38     .bss:00000004 ADC1IntDone
-     /tmp/ccaxpIxA.s:42     .text:00000000 $a
-     /tmp/ccaxpIxA.s:47     .text:00000000 ADCInit
-     /tmp/ccaxpIxA.s:102    .text:00000088 ADC0Read
-     /tmp/ccaxpIxA.s:235    .text:000001c4 ADC1Read
-     /tmp/ccaxpIxA.s:349    .text:000002cc ADC0triggerSampling
-     /tmp/ccaxpIxA.s:384    .text:00000310 ADC0getSamplingResults
+     /tmp/ccqn53HM.s:32     .bss:00000000 ADC0IntDone
+     /tmp/ccqn53HM.s:29     .bss:00000000 $d
+     /tmp/ccqn53HM.s:38     .bss:00000004 ADC1IntDone
+     /tmp/ccqn53HM.s:42     .text:00000000 $a
+     /tmp/ccqn53HM.s:47     .text:00000000 ADCInit
+     /tmp/ccqn53HM.s:102    .text:00000088 ADC0Read
+     /tmp/ccqn53HM.s:235    .text:000001c4 ADC1Read
+     /tmp/ccqn53HM.s:349    .text:000002cc ADC0triggerSampling
+     /tmp/ccqn53HM.s:384    .text:00000310 ADC0getSamplingResults
                             *COM*:00000020 ADC0Value
                             *COM*:00000020 ADC1Value
                             *COM*:00000020 adcChannelValues

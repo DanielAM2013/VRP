@@ -887,28 +887,28 @@
  837              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccw5FMe3.s:68     .bss:00000000 int_cnt
-     /tmp/ccw5FMe3.s:65     .bss:00000000 $d
-     /tmp/ccw5FMe3.s:74     .bss:00000004 cnt
-     /tmp/ccw5FMe3.s:80     .bss:00000008 mainloop_cnt
-     /tmp/ccw5FMe3.s:85     .bss:0000000c mainloop_trigger
-     /tmp/ccw5FMe3.s:91     .bss:00000010 GPS_timeout
-     /tmp/ccw5FMe3.s:97     .bss:00000014 trigger_cnt
-     /tmp/ccw5FMe3.s:102    .bss:00000018 SYSTEM_initialized
-     /tmp/ccw5FMe3.s:108    .data:00000000 DataOutputsPerSecond
-     /tmp/ccw5FMe3.s:111    .text:00000000 $a
-     /tmp/ccw5FMe3.s:115    .text:00000000 timer0ISR
-     /tmp/ccw5FMe3.s:200    .text:000000d8 $d
+     /tmp/ccwObKcA.s:68     .bss:00000000 int_cnt
+     /tmp/ccwObKcA.s:65     .bss:00000000 $d
+     /tmp/ccwObKcA.s:74     .bss:00000004 cnt
+     /tmp/ccwObKcA.s:80     .bss:00000008 mainloop_cnt
+     /tmp/ccwObKcA.s:85     .bss:0000000c mainloop_trigger
+     /tmp/ccwObKcA.s:91     .bss:00000010 GPS_timeout
+     /tmp/ccwObKcA.s:97     .bss:00000014 trigger_cnt
+     /tmp/ccwObKcA.s:102    .bss:00000018 SYSTEM_initialized
+     /tmp/ccwObKcA.s:108    .data:00000000 DataOutputsPerSecond
+     /tmp/ccwObKcA.s:111    .text:00000000 $a
+     /tmp/ccwObKcA.s:115    .text:00000000 timer0ISR
+     /tmp/ccwObKcA.s:200    .text:000000d8 $d
                             *COM*:00000018 HL_Status
-     /tmp/ccw5FMe3.s:208    .bss:0000001c vbat1.1794
-     /tmp/ccw5FMe3.s:212    .text:000000e8 $a
-     /tmp/ccw5FMe3.s:216    .text:000000e8 main
-     /tmp/ccw5FMe3.s:434    .text:00000318 mainloop
-     /tmp/ccw5FMe3.s:404    .text:000002f4 $d
-     /tmp/ccw5FMe3.s:421    .data:00000001 led_state.1838
-     /tmp/ccw5FMe3.s:425    .bss:00000020 led_cnt.1837
-     /tmp/ccw5FMe3.s:430    .text:00000318 $a
-     /tmp/ccw5FMe3.s:791    .text:000006cc $d
+     /tmp/ccwObKcA.s:208    .bss:0000001c vbat1.1794
+     /tmp/ccwObKcA.s:212    .text:000000e8 $a
+     /tmp/ccwObKcA.s:216    .text:000000e8 main
+     /tmp/ccwObKcA.s:434    .text:00000318 mainloop
+     /tmp/ccwObKcA.s:404    .text:000002f4 $d
+     /tmp/ccwObKcA.s:421    .data:00000001 led_state.1838
+     /tmp/ccwObKcA.s:425    .bss:00000020 led_cnt.1837
+     /tmp/ccwObKcA.s:430    .text:00000318 $a
+     /tmp/ccwObKcA.s:791    .text:000006cc $d
                             *COM*:00000008 GPS_Time
                             *COM*:00000004 uart_cnt
                             *COM*:0000005c IMU_CalcData

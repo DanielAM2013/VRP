@@ -1552,20 +1552,20 @@
  1472              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 buzzer.c
-     /tmp/ccytd8L1.s:36     .bss:00000000 bat_warning_enabled.1427
-     /tmp/ccytd8L1.s:37     .bss:00000000 $d
-     /tmp/ccytd8L1.s:40     .bss:00000004 bat_warning.1426
-     /tmp/ccytd8L1.s:44     .bss:00000008 bat_cnt.1425
-     /tmp/ccytd8L1.s:48     .bss:0000000c buz_cnt.1424
-     /tmp/ccytd8L1.s:52     .bss:0000000e error_cnt_compass.1422
-     /tmp/ccytd8L1.s:56     .bss:00000010 error_cnt_mag_inc.1421
-     /tmp/ccytd8L1.s:60     .bss:00000012 error_cnt_mag_fs.1420
-     /tmp/ccytd8L1.s:64     .text:00000000 $a
-     /tmp/ccytd8L1.s:69     .text:00000000 buzzer_handler
-     /tmp/ccytd8L1.s:1425   .text:00001030 buzzer
-     /tmp/ccytd8L1.s:1382   .text:00000ff0 $d
+     /tmp/cc95IDlv.s:36     .bss:00000000 bat_warning_enabled.1427
+     /tmp/cc95IDlv.s:37     .bss:00000000 $d
+     /tmp/cc95IDlv.s:40     .bss:00000004 bat_warning.1426
+     /tmp/cc95IDlv.s:44     .bss:00000008 bat_cnt.1425
+     /tmp/cc95IDlv.s:48     .bss:0000000c buz_cnt.1424
+     /tmp/cc95IDlv.s:52     .bss:0000000e error_cnt_compass.1422
+     /tmp/cc95IDlv.s:56     .bss:00000010 error_cnt_mag_inc.1421
+     /tmp/cc95IDlv.s:60     .bss:00000012 error_cnt_mag_fs.1420
+     /tmp/cc95IDlv.s:64     .text:00000000 $a
+     /tmp/cc95IDlv.s:69     .text:00000000 buzzer_handler
+     /tmp/cc95IDlv.s:1425   .text:00001030 buzzer
+     /tmp/cc95IDlv.s:1382   .text:00000ff0 $d
                             *COM*:00000001 SYSTEM_initialized
-     /tmp/ccytd8L1.s:1396   .text:0000101c $a
+     /tmp/cc95IDlv.s:1396   .text:0000101c $a
                             *COM*:00000004 GPS_timeout
 
 UNDEFINED SYMBOLS

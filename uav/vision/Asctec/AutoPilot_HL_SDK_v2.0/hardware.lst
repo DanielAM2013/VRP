@@ -106,8 +106,8 @@
   94              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 hardware.c
-     /tmp/ccwq3Gx8.s:27     .text:00000000 $a
-     /tmp/ccwq3Gx8.s:33     .text:00000000 LED
+     /tmp/cc6YyvaN.s:27     .text:00000000 $a
+     /tmp/cc6YyvaN.s:33     .text:00000000 LED
                             *COM*:00000004 GPS_timeout
                             *COM*:00000001 SYSTEM_initialized
 

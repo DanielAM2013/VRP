@@ -172,11 +172,11 @@
  180              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 gpsmath.c
-     /tmp/ccHcFU9U.s:39     .bss:00000000 gpsDataOkTrigger
-     /tmp/ccHcFU9U.s:36     .bss:00000000 $d
-     /tmp/ccHcFU9U.s:45     .text:00000000 $a
-     /tmp/ccHcFU9U.s:55     .text:00000000 xy2latlon
-     /tmp/ccHcFU9U.s:165    .text:0000017c $d
+     /tmp/cc2415Ac.s:39     .bss:00000000 gpsDataOkTrigger
+     /tmp/cc2415Ac.s:36     .bss:00000000 $d
+     /tmp/cc2415Ac.s:45     .text:00000000 $a
+     /tmp/cc2415Ac.s:55     .text:00000000 xy2latlon
+     /tmp/cc2415Ac.s:165    .text:0000017c $d
                             *COM*:0000002c GPS_Data
                             *COM*:0000002c gps_data_temp
 

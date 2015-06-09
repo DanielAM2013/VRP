@@ -981,32 +981,32 @@
  857              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 i2c.c
-     /tmp/cc5j61cx.s:32     .bss:00000000 I2CMasterState
-     /tmp/cc5j61cx.s:29     .bss:00000000 $d
-     /tmp/cc5j61cx.s:38     .bss:00000004 I2CSlaveState
-     /tmp/cc5j61cx.s:44     .bss:00000008 I2CCount
-     /tmp/cc5j61cx.s:50     .bss:0000000c RdIndex
-     /tmp/cc5j61cx.s:56     .bss:00000010 WrIndex
-     /tmp/cc5j61cx.s:59     .text:00000000 $a
-     /tmp/cc5j61cx.s:63     .text:00000000 I2C0MasterHandler
-     /tmp/cc5j61cx.s:88     .text:00000034 $d
-     /tmp/cc5j61cx.s:172    .text:00000178 $a
-     /tmp/cc5j61cx.s:478    .text:00000480 $d
+     /tmp/ccS1uvJJ.s:32     .bss:00000000 I2CMasterState
+     /tmp/ccS1uvJJ.s:29     .bss:00000000 $d
+     /tmp/ccS1uvJJ.s:38     .bss:00000004 I2CSlaveState
+     /tmp/ccS1uvJJ.s:44     .bss:00000008 I2CCount
+     /tmp/ccS1uvJJ.s:50     .bss:0000000c RdIndex
+     /tmp/ccS1uvJJ.s:56     .bss:00000010 WrIndex
+     /tmp/ccS1uvJJ.s:59     .text:00000000 $a
+     /tmp/ccS1uvJJ.s:63     .text:00000000 I2C0MasterHandler
+     /tmp/ccS1uvJJ.s:88     .text:00000034 $d
+     /tmp/ccS1uvJJ.s:172    .text:00000178 $a
+     /tmp/ccS1uvJJ.s:478    .text:00000480 $d
                             *COM*:00000020 I2CMasterBuffer
                             *COM*:00000004 I2CCmd
                             *COM*:00000004 I2CWriteLength
                             *COM*:00000004 I2CReadLength
-     /tmp/cc5j61cx.s:490    .text:0000049c $a
-     /tmp/cc5j61cx.s:494    .text:0000049c I2C0_send_motordata
-     /tmp/cc5j61cx.s:767    .text:000006c0 I2CEngine
-     /tmp/cc5j61cx.s:564    .text:00000530 $d
-     /tmp/cc5j61cx.s:572    .text:00000548 $a
-     /tmp/cc5j61cx.s:576    .text:00000548 I2CStart
-     /tmp/cc5j61cx.s:651    .text:000005d8 $d
-     /tmp/cc5j61cx.s:658    .text:000005dc $a
-     /tmp/cc5j61cx.s:662    .text:000005dc I2CStop
-     /tmp/cc5j61cx.s:709    .text:00000638 I2CInit
-     /tmp/cc5j61cx.s:833    .text:00000744 $d
+     /tmp/ccS1uvJJ.s:490    .text:0000049c $a
+     /tmp/ccS1uvJJ.s:494    .text:0000049c I2C0_send_motordata
+     /tmp/ccS1uvJJ.s:767    .text:000006c0 I2CEngine
+     /tmp/ccS1uvJJ.s:564    .text:00000530 $d
+     /tmp/ccS1uvJJ.s:572    .text:00000548 $a
+     /tmp/ccS1uvJJ.s:576    .text:00000548 I2CStart
+     /tmp/ccS1uvJJ.s:651    .text:000005d8 $d
+     /tmp/ccS1uvJJ.s:658    .text:000005dc $a
+     /tmp/ccS1uvJJ.s:662    .text:000005dc I2CStop
+     /tmp/ccS1uvJJ.s:709    .text:00000638 I2CInit
+     /tmp/ccS1uvJJ.s:833    .text:00000744 $d
                             *COM*:00000004 I2CMode
                             *COM*:00000020 I2CSlaveBuffer
 

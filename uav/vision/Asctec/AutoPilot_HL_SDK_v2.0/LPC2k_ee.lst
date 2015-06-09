@@ -936,17 +936,17 @@
  737              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 LPC2k_ee.c
-     /tmp/cchBP227.s:26     .text:00000000 $a
-     /tmp/cchBP227.s:32     .text:00000000 ee_erase
-     /tmp/cchBP227.s:161    .text:00000138 $d
+     /tmp/ccYNsrQR.s:26     .text:00000000 $a
+     /tmp/ccYNsrQR.s:32     .text:00000000 ee_erase
+     /tmp/ccYNsrQR.s:161    .text:00000138 $d
                             *COM*:00000004 iap_entry
-     /tmp/cchBP227.s:169    .text:0000013c $a
-     /tmp/cchBP227.s:175    .text:0000013c ee_write
-     /tmp/cchBP227.s:584    .text:000004cc ee_locate
-     /tmp/cchBP227.s:386    .text:0000035c $d
-     /tmp/cchBP227.s:399    .text:00000360 $a
-     /tmp/cchBP227.s:405    .text:00000360 ee_read
-     /tmp/cchBP227.s:477    .text:000003f0 ee_readn
-     /tmp/cchBP227.s:529    .text:00000458 ee_count
+     /tmp/ccYNsrQR.s:169    .text:0000013c $a
+     /tmp/ccYNsrQR.s:175    .text:0000013c ee_write
+     /tmp/ccYNsrQR.s:584    .text:000004cc ee_locate
+     /tmp/ccYNsrQR.s:386    .text:0000035c $d
+     /tmp/ccYNsrQR.s:399    .text:00000360 $a
+     /tmp/ccYNsrQR.s:405    .text:00000360 ee_read
+     /tmp/ccYNsrQR.s:477    .text:000003f0 ee_readn
+     /tmp/ccYNsrQR.s:529    .text:00000458 ee_count
 
 NO UNDEFINED SYMBOLS

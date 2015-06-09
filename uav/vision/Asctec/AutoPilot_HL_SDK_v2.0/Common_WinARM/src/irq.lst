@@ -444,12 +444,12 @@
  370              		.ident	"GCC: (GNU) 4.1.1"
 DEFINED SYMBOLS
                             *ABS*:00000000 irq.c
-     /tmp/ccgWxbny.s:21     .text:00000000 $a
-     /tmp/ccgWxbny.s:24     .text:00000000 DefaultVICHandler
-     /tmp/ccgWxbny.s:49     .text:00000020 init_VIC
-     /tmp/ccgWxbny.s:132    .text:000000e0 $d
-     /tmp/ccgWxbny.s:140    .text:000000e4 $a
-     /tmp/ccgWxbny.s:146    .text:000000e4 install_irq
-     /tmp/ccgWxbny.s:259    .text:000001d8 uninstall_irq
+     /tmp/ccM55LKI.s:21     .text:00000000 $a
+     /tmp/ccM55LKI.s:24     .text:00000000 DefaultVICHandler
+     /tmp/ccM55LKI.s:49     .text:00000020 init_VIC
+     /tmp/ccM55LKI.s:132    .text:000000e0 $d
+     /tmp/ccM55LKI.s:140    .text:000000e4 $a
+     /tmp/ccM55LKI.s:146    .text:000000e4 install_irq
+     /tmp/ccM55LKI.s:259    .text:000001d8 uninstall_irq
 
 NO UNDEFINED SYMBOLS
