@@ -11,7 +11,7 @@ target=main
 all: compilation test
 
 test:
-	$(BIN)/$(target)
+	$(BIN)/$(target) $(ARG)/input.dat;
 
 compilation:
 	mkdir -p $(OUT) $(BIN)
