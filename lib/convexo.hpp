@@ -51,11 +51,11 @@ uint negative( route V, point X) {
  uint n=V.size();
  uint P=0;
 
- for( uint k=1; k<V.size()-1; k++) 
-  if( sign(V[k]-V[k-1], X-V[k-1]) > 0 && sign(V[k+1]-V[k], X-V[k]) <= 0)
+ for( uint k=1; k<n-1; k++) 
+  if( sign(V[k]-V[k-1], X-V[k-1]) >= 0 && sign(V[k+1]-V[k], X-V[k]) < 0)
    P=k;
   
- if( sign(V[n-1]-V[n-2], X-V[n-2]) >0 & sign( V[0]-V[n-1], X-V[n-1]) <= 0)
+ if( sign(V[n-1]-V[n-2], X-V[n-2]) >= 0 && sign( V[0]-V[n-1], X-V[n-1]) < 0)
   P=n-1;
 
  return P;
@@ -64,8 +64,7 @@ uint negative( route V, point X) {
 void apagar( route& V, uint P, uint N) {
 
  if( N==P+1) return;
- if( N>=V.size()) return;
- 
+
  if( P+1<N ) {
   V.erase(V.begin()+P+1, V.begin()+N);
  }
@@ -84,22 +83,19 @@ route bordo_convexo( route X ) {
  fecho.push_back(AUX[0]);
  fecho.push_back(AUX[1]);
 
-<<<<<<< HEAD
  //! this erase two first points
  AUX.erase(AUX.begin(), AUX.begin()+2);
 
 
  //! add point if that is in out of convex
-=======
->>>>>>> 2cc8c75ef82d68e836f50dd8ad9109c868a9221a
- for( uint k=2; k<AUX.size(); k++)
+ for( uint k=0; k<AUX.size(); k++)
   if( sign(AUX[k]-fecho[0],fecho[1]-fecho[0])>0 ) {
    fecho.push_back(AUX[k]);
    break;
   }
 
  //! add points if that is out of convex
- for( uint k=2; k<AUX.size(); k++) {
+ for( uint k=0; k<AUX.size(); k++) {
    //! check if point k is inside of convex
    if( In(fecho, AUX[k])) continue;
    //! this get the index v of last point from left and 
@@ -108,15 +104,11 @@ route bordo_convexo( route X ) {
 
    //! erase point between points v and w
    apagar(fecho, v, w);
-<<<<<<< HEAD
 
    //! add out point at v+1 position 
-   if( w > v)
-=======
-   if( w>v ) {
->>>>>>> 2cc8c75ef82d68e836f50dd8ad9109c868a9221a
+   if( w>v )
     fecho.insert(fecho.begin()+v+1, AUX[k]);
-   } else
+   else
     fecho.insert(fecho.begin(), AUX[k]);
   }
 
