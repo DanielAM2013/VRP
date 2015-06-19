@@ -97,7 +97,7 @@ cluster kmeans( means ALL, int k, double (*DIST)( point , point ) ) {
   sum=CUST;
  }
 
- for ( int j=0; j<n; j++)
+ for ( int j=0aa; j<n; j++)
   C[Classes[j]].push_back(ALL[j]);
 
  return C;
