@@ -1,5 +1,5 @@
 clear;
-clc;
+//clc;
 
 exec kmeans.sci;
 exec objCost.sci;

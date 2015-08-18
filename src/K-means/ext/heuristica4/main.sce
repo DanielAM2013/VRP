@@ -68,6 +68,10 @@ while erro>1e-10 | erro<-1e-10
 
 	tmp=cluster(idx_max).entries;
 	m=size(tmp,1);
+
+	area1=area_calc([ 0 0; tmp(m,:); tmp(m-1,:)]);
+	area2=area_calc([ 0 0; tmp(2,:); tmp(1,:)]);
+
 	test=dist(tmp(m,:),tmp(m-1,:)) > dist(tmp(2,:),tmp(1,:));
 
 	if	test
@@ -81,7 +85,7 @@ while erro>1e-10 | erro<-1e-10
 	cluster(idx_max).entries(pos,:)=[];
 	cluster(class).entries=[cluster(class).entries; tmp(pos,:)];
 
-	nargs=atan(cluster(class).entries(:,2),cluster(class).entries(:,1));
+	nargs=1000*atan(cluster(class).entries(:,2),cluster(class).entries(:,1));
 
 	[trash, sorted]=gsort(nargs,'g','i');
 
@@ -107,4 +111,9 @@ end
 		n=size(cluster(i).entries,1)
 		cluster(i).entries=cluster(i).entries+ones(n,1)*origin;
 	end
+
+
+
+
+
 
