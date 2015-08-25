@@ -1,18 +1,22 @@
 clear
 clf
 
-
-exec ../fun/balance_and_fix_oo3.sci;
-exec ../fun/area_calc.sci
-exec ../fun/kmeans.sci
-exec ../fun/pi22pi.sci
-exec ../fun/myconvex_hull.sci
-exec ../fun/myconvex_hull_rem.sci
-exec ../fun/plota_wpoo.sci
-//exec myconvex_fix_add.sci //refaz a casca convexa a partir da entrada de um ponto com angulo extremo aos existentes
+exec fun/objCost.sci;
+exec fun/ccw.sci;
+exec fun/idx_circular.sci;
+exec fun/myconvex_fix_add.sci;
+exec fun/myconvex_hull_fix.sci;
+exec fun/myconvex_hull_rem.sci;
+exec fun/balance_and_fix_oo3.sci;
+exec fun/area_calc.sci;
+exec fun/kmeans.sci;
+exec fun/pi22pi.sci;
+exec fun/myconvex_hull.sci;
+exec fun/myconvex_hull_rem.sci;
+exec fun/plota_wpoo.sci;
 
 	// data:= conjunto de pontos no plano
-	data=read('../dat/input.dat',-1,2);
+	data=read('dat/input.dat',-1,2);
 
 	deg=%pi/180;
 

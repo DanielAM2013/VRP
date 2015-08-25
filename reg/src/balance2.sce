@@ -26,10 +26,11 @@ exec fun/NormGrad.sci;
 
 	// Oidx:= indice da origem em data
 	Oidx=10;
-	Oidx=input('value Oidx:= ');
+//	Oidx=input('value Oidx:= ');
 
 	// k:= número de classes a dividir data
-	k=input('value k:= ');
+	k=4;
+//	k=input('value k:= ');
 
 	condiciona=2;
 

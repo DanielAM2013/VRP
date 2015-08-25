@@ -1,3 +1,9 @@
+// Input:
+//	x:= x coordenates of points
+//	y:= y coordenates of points
+//	dists:= displacemente of adjacents points
+//	indi:= index of points to calculate
+
 function [p_area1, p_area2]= area_calc(x, y, dists, indi)
 	// Get the number of vertices
 	n = length(x);

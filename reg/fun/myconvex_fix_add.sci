@@ -2,7 +2,7 @@ function [Ho, Bo]=myconvex_fix_add(Wnew, Hi, Bi, idx_new)
 
 	if idx_new == 2
 		Bo=Bi
-		Bo.idxW= Bo.idxW+1
+		Bo.idxW=Bo.idxW+1
 		Ho.idxW=[1 Hi.idxW+1]
 		Ho.n=Hi.n+1
 		points=Wnew.coord(Ho.idxW,:)

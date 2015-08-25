@@ -14,8 +14,7 @@ function [Ho, Bo]=myconvex_hull_fix(Wi,Hi,Bi,idxh)
 
 	IdxC=idx_circular;
 	//calcula o numero de pontos em B que serao testados
-	tmp=-Hi.idxW(IdxC(idxh,Hi.n));
-	tmp=tmp+Hi.idxW(IdxC(idxh+1,Hi.n));
+	tmp=Hi.idxW(IdxC(idxh+1,Hi.n))-Hi.idxW(IdxC(idxh,Hi.n));
 	n=IdxC(tmp,Wi.n)-1
 
 	//faz um teste basico, se depois que retira o ponto e reordena os pontos de
@@ -46,11 +45,8 @@ function [Ho, Bo]=myconvex_hull_fix(Wi,Hi,Bi,idxh)
 	for i = 3:n+3
 		// Find next valid point on convex hull.
 		pcross = ccw(P(idxH(m-1),1:2), P(idxH(m),1:2), P(i,1:2));
-		if pcross == 0
+		if pcross >= 0
 			//considera que se é colinear esta na hull
-			idxH = [idxH i];
-			m=m+1;
-		elseif pcross > 0
 			idxH = [idxH i];
 			m=m+1;
 		else

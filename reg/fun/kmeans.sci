@@ -46,7 +46,6 @@ function [classes, centers, sumd, D, err] = kmeans(data, k)
 		err  = sumd - objCost (data, classes, centers);
 		// update the current sum of distances
 		sumd = objCost (data, classes, centers);
-
 	end
 
 endfunction
