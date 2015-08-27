@@ -252,4 +252,4 @@ exec fun/NormGrad.sci;
         disp('Erro: número de VANTs inválido');
 		return;
 	end
-	plota_wpoo(W_opt, H_opt,k)
+//	plota_wpoo(W_opt, H_opt,k)

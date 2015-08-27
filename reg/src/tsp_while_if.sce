@@ -21,11 +21,7 @@
 			// val:= menor soma de distância e ângulo de pontos adjacêntes
 			[val, idx]=min(diffL);
 			minP = orderPdist(:,idx);
-			if idx > 0
-				HB(k).candist = [val; minP; HB(k).idxW(i)];
-			end
-			
-			//exec src/tsp_while_if_for.sce;
+			HB(k).candist = [val; minP; HB(k).idxW(i)];
 
 			for i=3:HB(k).n
 
@@ -34,12 +30,8 @@
 				i_adj = idx_circular(i+1,HB(k).n);
 				HBR=W(k).coord(HB(k).idxW(i_adj),1:2);
 
-				//pega como primeiro ponto visivel o ultimo ponto visivel pela
-				//direita do ponto anterior
-
                  i_v=visib(1,size(visib,2));
                  [visib] = visibP(HBC,HBL,HBR,P(k),i_v);
-                 //se i_v nao for visivel, procura um que seja
                  while size(visib,2) == 0
                      i_v=idx_circular(i_v+1,P(k).n);
                     [visib] = visibP(HBC,HBL,HBR,P(k),i_v);

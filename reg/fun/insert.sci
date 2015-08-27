@@ -1,18 +1,19 @@
-function v=insert(x,v,i)
+function u=insert(x,v,i)
 
 	n=max(size(v));
 
+	u=v;
+
 	if i<1 | i>n+1
 		disp('indice errado');
-		v=v;
 		return;
 	end
 
 	for k=n:-1:i
-		tmp=v(k,:);
-		v(k+1,:)=tmp;
+		tmp=v(:,k);
+		u(:,k+1)=tmp;
 	end
 
-	v(i,:)=x;
+	u(:,i)=x;
 
 endfunction

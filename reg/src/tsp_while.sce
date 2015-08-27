@@ -28,11 +28,12 @@
       
 		[P(k).out, P(k).in, P(k).dists, P(k).total]=param(P(k));
 
+if refine==1
 		Pin=P(k);
 		[Pout,ajusta]=refineP(Pin,W(k));
 		[Pout,ajusta]=refineP(Pout,W(k));
 		P(k)=Pout;
- 
+end 
 		indexBout = find(B(k).idxW == idx_newW);
 		B(k).idxW(indexBout) = [];
 		B(k).n = B(k).n-1;
@@ -46,20 +47,18 @@
 			third=W(k).coord(B(k).idxW(idx_circular(idx+1,3)),1:2);
 			turn_left =ccw(first,second,third);
 			if turn_left >= 0 
-				HB(k).idxW = [B(k).idxW(idx) B(k).idxW(idx_circular(idx+1,3)) B(k).idxW(idx_circular(idx-1,3))];
+				Idx=[ idx idx_circular(idx+1,3) idx_circular(idx-1,3)];
 			else
-				HB(k).idxW = [B(k).idxW(idx) B(k).idxW(idx_circular(idx-1,3)) B(k).idxW(idx_circular(idx+1,3))];
+				Idx=[ idx idx_circular(idx-1,3) idx_circular(idx+1,3)];
 			end
+			HB(k).idxW = B(k).idxW(Idx);
 			indHBW = HB(k).idxW;
-			R(k).idxW=[];
-			R(k).n=0;
+			// Obs: essa parte provavelmente não é necessária, uma vez que a
+			// ordem de colocação dos pontos só influenciaria o calculo da área
 		elseif B(k).n <= 2
- 			// para os casos em que B e HB são os mesmos
 			HB(k).n=B(k).n;
 			HB(k)=B(k);
 			indHBW = HB(k).idxW;
-			R(k).idxW=[];
-			R(k).n=0;
 		else
 			//Encontra a casca convexa dos pontos internos
 			points=[W(k).coord(B(k).idxW,1:2) [1:B(k).n]'];
@@ -68,8 +67,6 @@
 
 			indHBW=B(k).idxW(points(indHB',3)');
 			HB(k).n=nHB;
-			R(k).idxW=B(k).idxW(points(not_indHB',3));
-			R(k).n=size(R(k).idxW,2);
 		end
 
 		if HB(k).n > 0

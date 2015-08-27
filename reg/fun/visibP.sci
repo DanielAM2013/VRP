@@ -31,42 +31,6 @@ function [visib] = visibP(HBC,HBL,HBR,P,i_v)
 
 	//verifica a visibilidade dos pontos à esquerda do pivot (isso pode
 	//melhorar, pois so preciso olhar os pontos 1 vez)
-
-//	for j = i_v-1:-1:i_v-P(1).n+1
-//		next = idx_circular(j, P(1).n);
-//		Pj=P(1).coord(next,1:2);
-//		Ao=P(1).out(next);
-//		Ai=P(1).in(next);
-
-//		turn_right = ccw(HBC,HBR,Pj);
-//		turn_left = ccw(HBC,HBL,Pj);
- 
-//		if turn_left >= 0 | turn_right <= 0 then
-//			visib = [[next;Ai;Ao] visib];
-//		else
-//			next = idx_circular(next+1,P(1).n);
-//			break;
-//		end
-//	end
-	//verifica a visibilidade dos pontos à direita do pivot (isso pode melhorar,
-	//pois so preciso olhar os pontos 1 vez)
-
-//	for j = i_v+1:i_v+P(1).n-1
-//		next = idx_circular(j, P(1).n);
-//		Pj=P(1).coord(next,1:2);
-//		Ao=P(1).out(next);
-//		Ai=P(1).in(next);
-
-//		turn_right=ccw(HBC,HBR,Pj);
-//		turn_left=ccw(HBC,HBL,Pj);
-//		if turn_right <= 0 | turn_left >= 0 then
-//			visib = [visib [next; Ai; Ao]];
-//		else
-//			break;
-//		end
-//	end
-
-	visib=[];
 	for j=i_v+1:i_v+P.n-1
 		next = idx_circular(j, P.n);
 		Pj=P.coord(next,1:2);
@@ -77,7 +41,7 @@ function [visib] = visibP(HBC,HBL,HBR,P,i_v)
 		if turn_right <= 0 | turn_left >= 0 
 			visib = [ visib [next; Ai; Ao]];
 		elseif turn_right >=0 | turn_left <= 0
-			visib = [ visib [next; Ai; Ao]];
+			visib = [ [next; Ai; Ao] visib];
 		end
 	end
 endfunction

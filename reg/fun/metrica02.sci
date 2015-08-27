@@ -1,4 +1,4 @@
-function [diffL3i,diffL4i,orderPdisti]=metrica02(P, visib, HBC)
+function [diffL3,diffL4,orderPdist]=metrica02(P, visib, HBC)
 
 	// a:=HBC-Pj; b:=Pj+1-HBC;
 
@@ -7,24 +7,13 @@ function [diffL3i,diffL4i,orderPdisti]=metrica02(P, visib, HBC)
 
 	n=size(visib,2);
 
-	diffL3i = zeros(1,n-1);
-	diffL4i = zeros(1,n-1);
-	orderPdisti = zeros(4,n-1);
+	diffL3 = zeros(1,n);
+	diffL4 = zeros(1,n);
+	orderPdist = zeros(4,n);
 
-	sel=1;
-
-	for j=1:n-1
-		a=HBC-P.coord(visib(1,j),1:2); 
-		b=P.coord(visib(1,j+1),1:2)-HBC;
-		c=a+b;
-		pp =NormRad(P.out(visib(1,j+1))-P.in(visib(1,j+1))+P.out(visib(1,j))-P.in(visib(1,j)));
-		ang_in = atan(a(2), a(1));
-		ang_out =  atan(b(2),b(1));
-		php=NormRad(ang_in-P.in(visib(1,j)))+NormRad(ang_out-ang_in)+NormRad(P.out(visib(1,j+1))-ang_out);
-
-		diffL3i(j) =  norm(a)+norm(b)-norm(a+b);
-		diffL4i(j) =  abs(php-pp);
-		orderPdisti(:,j) = [visib(1,j); visib(1,j+1); ang_in; ang_out];
+	for j=1:n
+		[diffL3(j), diffL4(j), tmp]=metrica(P, visib, HBC,j);
+		orderPdist(:,j)=tmp;
 	end
 
 endfunction

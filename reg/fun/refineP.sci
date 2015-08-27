@@ -206,4 +206,4 @@ function [Pout,ajusta] = refineP(Pin,W)
       Pin.dists = dists
    end
    
-   Pout=Pin    
+   Pout=Pin  
