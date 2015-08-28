@@ -11,20 +11,26 @@
 		timer();
 		for i=1:k
 			points=W(i).coord(:,1:2);
-			plot(points(:,1),points(:,2),'xr');
 			[cluster(i).cvx, cluster(i).idx]=convexo(points,sel);
-//			n_cvx=size(cluster(i).cvx.ind);
-//			for j=1:n_cvx
-//				idx_plot=[cluster(i).cvx(j).ind cluster(i).cvx(j).ind(1)];
-//				set_plot=points(idx_plot,:);
-//				plot(set_plot(:,1),set_plot(:,2));
-//			end
-//			idx_plot=[cluster(i).idx  cluster(i).idx(1)];
-//			set_plot=points(idx_plot,:);
-//			plot(set_plot(:,1),set_plot(:,2),'rx-');
 			eval=eval+perimeter(points(cluster(i).idx,:));
 		end
 		timer()
+
+		for i=1:k
+			points=W(i).coord(:,1:2);
+			plot(points(:,1),points(:,2),'xr');
+			n_cvx=size(cluster(i).cvx.ind);
+			for j=1:n_cvx
+				idx_plot=[cluster(i).cvx(j).ind cluster(i).cvx(j).ind(1)];
+				set_plot=points(idx_plot,:);
+				plot(set_plot(:,1),set_plot(:,2));
+			end
+			idx_plot=[cluster(i).idx  cluster(i).idx(1)];
+			set_plot=points(idx_plot,:);
+			plot(set_plot(:,1),set_plot(:,2),'rx-');
+		end
+
+
 		disp(eval);
 		x=sprintf('fig/vrp%d',sel+1);
 		xs2png(0,x);
@@ -50,9 +56,8 @@ for refine=0:1
 
 
 	W=Wold; H=Hold; B=Bold;
-	timer();
 	idx_fig=1+(refine+1)/10;
-
+	timer();
 	N=size(Areas_opt,1);
 
 // Para cada rota será calculado o convexo de seu conjunto interior, em seguida
@@ -97,12 +102,12 @@ for refine=0:1
 	end
 	disp(tmp);
 
-//	clf;
-//	plota_wpoo(W, H,k)
-//	for k=1:size(Areas_opt,1)
-//	    plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'r') 
-//    	plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'bx')
-//	end
+	clf;
+	plota_wpoo(W, H,k)
+	for k=1:size(Areas_opt,1)
+	    plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'r') 
+    	plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'bx')
+	end
 
 	x=sprintf('fig/vrp%d_%d.png',idx_fig, modulo(10*idx_fig,10));
 	xs2png(0,x);
