@@ -1,109 +1,5 @@
-clear;	
 
-exec fun/idx_circular.sci;
-exec fun/area_calc.sci;
-exec fun/ccw.sci;
-exec fun/insert.sci;
-exec fun/myconvex_hull.sci;
-exec fun/myconvex_fix_add.sci;
-exec fun/myconvex_hull_fix.sci;
-exec fun/myconvex_hull_rem.sci;
-exec fun/balance_and_fix_oo3.sci;
-exec fun/balance_and_fix_oo4.sci;
-exec fun/objCost.sci;
-exec fun/kmeans.sci;
-exec fun/pi22pi.sci;
-exec fun/plota_wpoo.sci;
-exec fun/wp_cond.sci;
-exec fun/NormGrad.sci;
-
-	data=read('dat/input.dat',-1,2);
-
-	deg=%pi/180;
-
-	// Oidx:= indice da origem em data
-	Oidx=10;
-
-	// k:= número de classes a dividir data
-	k=4;
-
-	condiciona=2;
-
-	// O:= origem de data
-	O=data(Oidx,:);
-
-	data(Oidx,:)=[];
-
-	// n:= número de pontos em data sem a origem
-	n=size(data,1);
-
-	// wp:= data deslocado de O
-	wp=data-ones(n,1)*O;
-
-//-----------------------------------------------------------------------------
-//! Tratamento dos pontos iniciais
-
-	// norm_wp:= norma dos vetores de wp
-	for i=1:n
-		norm_wp(i)=norm(wp(i,1:2),2);
-	end
-
-	// min_norm:= menor norma de norm_wp
-	min_norm=min(norm_wp);
-
-	// Reescala para que as normas sejam maiores que a unidade
-	wp=wp/min_norm;
-
-	// calcula o angulo rho sempre entre 0 e 360 em graus
-	rho_wp = pi22pi(atan(wp(:,2), wp(:,1)))/deg;
-
-	wp = [wp rho_wp norm_wp/min_norm];
-
-	//ordena wp_full a partir do angulo menor para o maior que deve ser sempre
-	//menor ou igual a 360. Isso forca que as classes estejam agrupadas
-	[trash, ord_rho]=gsort(wp(:,3),'g','i');
-	wp=wp(ord_rho,:);
-
-	//melhor condiciona os pontos fazendo duas coisas: agrupando os angulos
-	//muito proximos em apenas um, sendo que o angulo resultante o relacionado
-	//com o mais distante, mantendo os dois pontos. Caso a diferenca de
-	//distancia esteja dentro da cobertura da camera, entao o ponto resultante
-	//um novo ponto que é a media de todos. Um novo angulo é entao calculado.
-
-	wp = [wp [1:n]'];
-//-----------------------------------------------------------------------------
-//!----------------------------------------------------------------------------
-	// operador merge: faz o merge entre dois pontos proximos. Esta operacao
-	// substitui dois pontos de passagem pela media deles. A distancia afast_max
-	// é a metade ma menor distancia da projetcao de uma camera no solo.
-
-	afast_max = 3;
-	if condiciona == 1 
-		[wp, n]=wp_cond(wp, n, afast_max);
-	end
-//-----------------------------------------------------------------------------
-//!----------------------------------------------------------------------------
-	//Calcula o espacamento entre os pontos para que o angulo zero seja o de
-	//maior espacamento com o seu vizinho anterior
-	gaps=zeros(n,1);
-	gaps(1)=modulo(360+wp(1,3)-wp(n,3),360);
-	for i=2:n
-        gaps(i)=wp(i,3)-wp(i-1,3);
-	end
-
-	// localiza o maior espaçamento e o coloca no início de todos os angulos
-	[max_gap, idxG]=max(gaps);
-	wp=[wp(idxG:n,:);wp(1:idxG-1,:)];
-//-----------------------------------------------------------------------------
-
-	//rotaciona todos os angulos para que o 1o seja 0
-	ref_rot=wp(1,3);
-	wp(:,3)=NormGrad(wp(:,3)-ref_rot*ones(n,1));
-
-	//So calcula classes, ordena, etc, se k>1
-	//chama a função kmeans
-	[classes, centers, sumd, D, err] = kmeans(wp(:,3), k);
-
+	exec src/balance2.sce;
 	exec fun/insert.sci;
 	exec fun/convex_merger.sci;
 	exec fun/perimeter.sci;
@@ -112,18 +8,102 @@ exec fun/NormGrad.sci;
 	for sel=0:1
 		clf;
 		eval=0;
-	for i=1:k
-		points=[ 0 0; wp(classes==i,1:2)];
-		[cluster(i).cvx, cluster(i).idx]=convexo(points,sel);
-		idx_plot=[cluster(i).cvx(1).ind cluster(i).cvx(1).ind(1)];
-		set_plot=points(idx_plot,:);
-		plot(set_plot(:,1),set_plot(:,2));
-		idx_plot=[cluster(i).idx  cluster(i).idx(1)];
-		set_plot=points(idx_plot,:);
-		plot(set_plot(:,1),set_plot(:,2),'rx-');
-		eval=eval+perimeter(points(cluster(i).idx,:));
-	end
+		timer();
+		for i=1:k
+			points=W(i).coord(:,1:2);
+			plot(points(:,1),points(:,2),'xr');
+			[cluster(i).cvx, cluster(i).idx]=convexo(points,sel);
+//			n_cvx=size(cluster(i).cvx.ind);
+//			for j=1:n_cvx
+//				idx_plot=[cluster(i).cvx(j).ind cluster(i).cvx(j).ind(1)];
+//				set_plot=points(idx_plot,:);
+//				plot(set_plot(:,1),set_plot(:,2));
+//			end
+//			idx_plot=[cluster(i).idx  cluster(i).idx(1)];
+//			set_plot=points(idx_plot,:);
+//			plot(set_plot(:,1),set_plot(:,2),'rx-');
+			eval=eval+perimeter(points(cluster(i).idx,:));
+		end
+		timer()
 		disp(eval);
 		x=sprintf('fig/vrp%d',sel+1);
 		xs2png(0,x);
 	end
+
+	W=W_opt; H=H_opt;
+	Wold=W; Hold=H; Bold=B;
+
+//refine=input('refine[0/1]? ');
+//idx_fig=input('fig number:= ');
+
+	
+exec fun/visibP.sci;
+exec fun/metrica.sci;
+exec fun/metrica_last.sci;
+exec fun/param.sci;
+exec fun/metrica02.sci;
+exec fun/NormRad.sci;
+exec fun/refineP.sci;
+
+
+for refine=0:1
+
+
+	W=Wold; H=Hold; B=Bold;
+	timer();
+	idx_fig=1+(refine+1)/10;
+
+	N=size(Areas_opt,1);
+
+// Para cada rota será calculado o convexo de seu conjunto interior, em seguida
+// estes pontos serão adicionados a rota, formada inicialmente pelos pontos do
+// convexo original
+	for k=1:N
+
+		B(k).idxW = [1 B(k).idxW];
+		B(k).n = B(k).n+1;
+
+		if size(B(k).idxW,2)~=B(k).n
+			abort
+		end
+		// HB:= conjunto dos pontos que pertencem ao convexo interno
+
+		points=[W(k).coord(B(k).idxW,1:2) [1:B(k).n]'];
+
+		[nHB, indHB,not_indHB]=myconvex_hull(points);
+
+		indHBW=B(k).idxW(points(indHB,3));
+
+		// HB:= indice do convexo de B
+		HB(k).idxW=gsort(indHBW,'g','i');
+		HB(k).n=nHB;
+ 
+		// Inicia o caminho
+
+		// P:= conjunto de pontos que formam a rota
+		P(k)=H(k);
+		P(k).coord=W(k).coord(H(k).idxW,1:2);
+
+		[P(k).out, P(k).in, P(k).dists, P(k).total]=param(P(k));
+
+		exec src/tsp_while.sce;
+
+	end
+
+	timer()
+	tmp=0;
+	for i=1:k
+		tmp=tmp+P(i).total;
+	end
+	disp(tmp);
+
+//	clf;
+//	plota_wpoo(W, H,k)
+//	for k=1:size(Areas_opt,1)
+//	    plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'r') 
+//    	plot([P(k).coord(:,1);P(k).coord(1,1)],[P(k).coord(:,2);P(k).coord(1,2)],'bx')
+//	end
+
+	x=sprintf('fig/vrp%d_%d.png',idx_fig, modulo(10*idx_fig,10));
+	xs2png(0,x);
+end

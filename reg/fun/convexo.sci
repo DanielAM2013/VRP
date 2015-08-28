@@ -26,7 +26,7 @@ function [cvx, idx]=convexo(points, sel)
 
 	N=size(ind_not,2);
 
-	while N>1
+	while N>0
 
 		i=i+1;
 		// Calcula o convexo do conjunto interior anterior
@@ -85,7 +85,7 @@ function [cvx, idx]=convexo(points, sel)
 //	plot(set_plot(:,1),set_plot(:,2),'rx-');
 
 //	xs2png(0,'fig/cvx1.png');
-	else
+	elseif sel==0
 		idx=cvx(n).ind;
 		for i=n-1:-1:1
 			idx=convex_merger(points,cvx(i).ind,idx);
@@ -99,5 +99,18 @@ function [cvx, idx]=convexo(points, sel)
 //	set_plot=[points(idx,:); points(idx(1),:)];
 //	plot(set_plot(:,1),set_plot(:,2),'rx-');
 //	xs2png(0,'fig/cvx2.png');
+	elseif sel==2
+		idx=cvx(n).ind;
+		p=1; q=0; 
+		for i=1:n-1
+			if modulo(i,2)==0
+				j=n-p;
+				p=p+1;
+			else
+				j=1+q;
+				q=q+1;
+			end
+			idx=convex_merger(points,cvx(j).ind,idx);
+		end
 	end
 endfunction

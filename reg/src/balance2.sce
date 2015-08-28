@@ -20,12 +20,13 @@ exec fun/NormGrad.sci;
 //! Aquisição de pontos
 
 	// data:= conjunto de pontos no plano
-	data=read('dat/input.dat',-1,2);
+	data=read('dat/X-n401-k29.dat',-1,2);
+//	data=read('dat/X-n1001-k43.dat',-1,2);
 
 	deg=%pi/180;
 
 	// Oidx:= indice da origem em data
-	Oidx=10;
+	Oidx=1;
 //	Oidx=input('value Oidx:= ');
 
 	// k:= número de classes a dividir data
@@ -62,7 +63,7 @@ exec fun/NormGrad.sci;
 	// calcula o angulo rho sempre entre 0 e 360 em graus
 	rho_wp = pi22pi(atan(wp(:,2), wp(:,1)))/deg;
 
-	wp = [wp rho_wp norm_wp/min_norm];
+	wp =[wp rho_wp norm_wp/min_norm];
 
 	//ordena wp_full a partir do angulo menor para o maior que deve ser sempre
 	//menor ou igual a 360. Isso forca que as classes estejam agrupadas
